@@ -475,37 +475,100 @@ body {
 
 /* Contact */
 .contact {
-    text-align: center;
     padding: 160px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
-.contact-text {
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 40px;
+.contact-container {
+    max-width: 800px;
+    margin-top: 60px;
 }
 
-.contact-email {
+.contact-title {
     font-size: clamp(32px, 6vw, 72px);
     font-weight: 700;
     color: #fff;
-    text-decoration: none;
-    display: inline-block;
     margin-bottom: 60px;
     letter-spacing: -2px;
-    transition: color 0.3s;
+    line-height: 1.1;
 }
 
-.contact-email:hover {
-    color: var(--accent-green);
+.contact-form {
+    display: grid;
+    gap: 32px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+}
+
+.form-input, .form-textarea {
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--accent-pink);
+    background: rgba(255,255,255,0.05);
+    box-shadow: 0 0 30px rgba(255,0,85,0.1);
+}
+
+.form-textarea {
+    min-height: 180px;
+    resize: vertical;
+}
+
+.submit-btn {
+    padding: 24px 48px;
+    background: #fff;
+    color: #000;
+    border: none;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: all 0.3s;
+    justify-self: flex-start;
+    margin-top: 20px;
+}
+
+.submit-btn:hover {
+    transform: translateY(-5px);
+    background: var(--accent-green);
+    box-shadow: 0 15px 40px rgba(0,255,136,0.3);
 }
 
 .social-links {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 40px;
+    margin-top: 80px;
 }
 
 .social-link {
@@ -611,5 +674,9 @@ body {
     .social-links {
         flex-direction: column;
         align-items: center;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
     }
 }

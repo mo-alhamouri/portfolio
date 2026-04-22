@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mo Alhamouri — Bold & Experimental Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0a;
+            --text: #fff;
+            --accent-pink: #ff0055;
+            --accent-green: #00ff88;
+            --accent-purple: #8800ff;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Animated gradient background */
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(255,0,85,0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0,255,136,0.25) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(136,0,255,0.15) 0%, transparent 50%);
+            animation: gradientMove 20s ease-in-out infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Noise texture overlay */
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.03;
+            z-index: -1;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        header {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 30px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10,10,10,0.5);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .logo-text {
+            font-size: 22px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
+        }
+
+        nav {
+            display: flex;
+            gap: 48px;
+        }
+
+        nav span {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 60px 60px;
+            position: relative;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(48px, 7vw, 96px);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -4px;
+            margin-bottom: 32px;
+        }
+
+        .hero-text h1 span {
+            display: block;
+        }
+
+        .hero-text h1 .line1 {
+            background: linear-gradient(135deg, #fff 0%, #ff0055 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text h1 .line2 {
+            background: linear-gradient(135deg, #00ff88 0%, #fff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text p {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.6);
+            max-width: 500px;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            max-width: 400px;
+            height: 400px;
+            object-fit: cover;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            border: 3px solid rgba(255,255,255,0.1);
+            box-shadow: 0 30px 60px rgba(255,0,85,0.2);
+        }
+
+        .floating-tag {
+            position: absolute;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.7);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .tag-1 { top: -20px; right: 20%; animation-delay: 0s; }
+        .tag-2 { bottom: 40px; left: -20px; animation-delay: -2s; }
+        .tag-3 { top: 40%; right: -40px; animation-delay: -4s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.4; transform: scaleY(1); }
+            50% { opacity: 1; transform: scaleY(0.5); }
+        }
+
+        section {
+            padding: 120px 60px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 80px;
+        }
+
+        .section-label {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .about-text {
+            font-size: 1.5rem;
+            line-height: 1.8;
+            color: rgba(255,255,255,0.7);
+        }
+
+        .about-text p {
+            margin-bottom: 32px;
+        }
+
+        .about-companies {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.5);
+            padding: 32px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            margin-top: 32px;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill {
+            padding: 16px 28px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.8);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .skill:nth-child(1) { border-color: rgba(255,0,85,0.3); }
+        .skill:nth-child(2) { border-color: rgba(0,255,136,0.3); }
+        .skill:nth-child(3) { border-color: rgba(136,0,255,0.3); }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .project-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255,0,85,0.3);
+            box-shadow: 0 30px 60px rgba(255,0,85,0.15);
+        }
+
+        .project-image {
+            aspect-ratio: 16 / 10;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-image img {
+            transform: scale(1.1);
+        }
+
+        .project-info {
+            padding: 32px;
+        }
+
+        .project-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .project-desc {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 12px;
+        }
+
+        .project-tag {
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 100px;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .timeline-item {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 60px;
+            padding: 40px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--accent-pink), var(--accent-green));
+        }
+
+        .timeline-date {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+        }
+
+        .timeline-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+
+        .timeline-company {
+            font-size: 16px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 16px;
+        }
+
+        .timeline-desc {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        .contact {
+            text-align: center;
+            padding: 160px 60px;
+        }
+
+        .contact h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 40px;
+        }
+
+        .contact-email {
+            font-size: clamp(32px, 6vw, 72px);
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+            display: inline-block;
+            margin-bottom: 60px;
+            letter-spacing: -2px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .social-link {
+            padding: 20px 40px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 100px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.6);
+            font-weight: 500;
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        footer p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.3);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* Decorative elements */
+        .deco-circle {
+            position: fixed;
+            border: 2px solid rgba(255,255,255,0.05);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .circle-1 { width: 400px; height: 400px; top: 10%; right: -100px; }
+        .circle-2 { width: 300px; height: 300px; bottom: 20%; left: -50px; border-color: rgba(255,0,85,0.1); }
+        .circle-3 { width: 200px; height: 200px; top: 50%; right: 10%; border-color: rgba(0,255,136,0.1); }
+
+        @media (max-width: 1024px) {
+            .hero-content,
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="noise"></div>
+
+    <div class="deco-circle circle-1"></div>
+    <div class="deco-circle circle-2"></div>
+    <div class="deco-circle circle-3"></div>
+
+    <header>
+        <div class="logo">
+            <img src="images/mo-logo.png" alt="Mo">
+            <span class="logo-text">Mo Alhamouri</span>
+        </div>
+        <nav>
+            <span>About</span>
+            <span>Work</span>
+            <span>Experience</span>
+            <span>Contact</span>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>
+                    <span class="line1">Lead Product</span>
+                    <span class="line2">Designer</span>
+                </h1>
+                <p>I design thoughtful, data-driven, and scalable user experiences for complex digital ecosystems. With over 8 years of experience spanning HealthTech, FinTech, Cybersecurity, and SaaS.</p>
+            </div>
+            <div class="hero-image">
+                <img src="images/mo-alhamouri.jpg" alt="Mo Alhamouri">
+                <div class="floating-tag tag-1">8+ Years Exp</div>
+                <div class="floating-tag tag-2">Based in Dubai</div>
+                <div class="floating-tag tag-3">UI/UX Expert</div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="section-header">
+            <span class="section-label">01 — About</span>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>I'm Mo — Lead Product Designer based in Dubai, UAE. I design thoughtful, data-driven, and scalable user experiences for complex digital ecosystems. With over 8 years of experience spanning HealthTech, FinTech, Cybersecurity, and SaaS, I specialize in simplifying complexity, leading cross-functional teams, and delivering measurable impact.</p>
+                <div class="about-companies">
+                    I've designed for companies including Hinge Health, McAfee, Verizon, First American, and Alcumus, driving product excellence and system scalability.
+                </div>
+            </div>
+            <div class="skills">
+                <span class="skill">UI Design</span>
+                <span class="skill">UX Research</span>
+                <span class="skill">Design Systems</span>
+                <span class="skill">Prototyping</span>
+                <span class="skill">HealthTech</span>
+                <span class="skill">FinTech</span>
+                <span class="skill">SaaS</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="work">
+        <div class="section-header">
+            <span class="section-label">02 — Design Projects</span>
+        </div>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://mir-s3-cdn-cf.behance.net/projects/404/3e4be6241670293.Y3JvcCwyMzkxLDE4NzAsMjMsOTQ.png" alt="AI Driven Designs">
+                </div>
+                <div class="project-info">
+                    <div class="project-title">AI Driven Designs — Compliance & Certification</div>
+                    <div class="project-desc">UI/UX design for AI-powered compliance and certification platform.</div>
+                    <div class="project-tags">
+                        <span class="project-tag">UI/UX</span>
+                        <span class="project-tag">AI</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://mir-s3-cdn-cf.behance.net/projects/404/a24e91241021703.Y3JvcCwzNTM1LDI3NjUsNDMsMA.png" alt="Document Management">
+                </div>
+                <div class="project-info">
+                    <div class="project-title">Automation — Document Management</div>
+                    <div class="project-desc">Enterprise document management system with automated workflows.</div>
+                    <div class="project-tags">
+                        <span class="project-tag">UI/UX</span>
+                        <span class="project-tag">Automation</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://mir-s3-cdn-cf.behance.net/projects/404/e4c31e240076625.Y3JvcCw5MjYsNzI0LDYsMA.png" alt="FinTech Dashboard">
+                </div>
+                <div class="project-info">
+                    <div class="project-title">Machine Learning — FinTech Dashboard</div>
+                    <div class="project-desc">AI-powered financial dashboard with predictive analytics.</div>
+                    <div class="project-tags">
+                        <span class="project-tag">UI/UX</span>
+                        <span class="project-tag">FinTech</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://mir-s3-cdn-cf.behance.net/projects/404/190ad8236630193.Y3JvcCwzODM5LDMwMDIsMCww.png" alt="Real Estate">
+                </div>
+                <div class="project-info">
+                    <div class="project-title">API — Commercial Real Estate</div>
+                    <div class="project-desc">Real estate platform with integrated API management system.</div>
+                    <div class="project-tags">
+                        <span class="project-tag">UI/UX</span>
+                        <span class="project-tag">Real Estate</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://mir-s3-cdn-cf.behance.net/projects/404/c4c040236630069.Y3JvcCwzMjc2LDI1NjIsMTIxLDY0.png" alt="HealthTech">
+                </div>
+                <div class="project-info">
+                    <div class="project-title">In-App Messaging — HealthTech</div>
+                    <div class="project-desc">Secure messaging platform for healthcare professionals.</div>
+                    <div class="project-tags">
+                        <span class="project-tag">UI/UX</span>
+                        <span class="project-tag">HealthTech</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-image">
+                    <img src="https://mir-s3-cdn-cf.behance.net/projects/404/be615f236630319.Y3JvcCwzNTM1LDI3NjUsMCww.png" alt="Design Systems">
+                </div>
+                <div class="project-info">
+                    <div class="project-title">Design Systems</div>
+                    <div class="project-desc">Comprehensive design system for scalable product development.</div>
+                    <div class="project-tags">
+                        <span class="project-tag">UI/UX</span>
+                        <span class="project-tag">Design System</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="experience">
+        <div class="section-header">
+            <span class="section-label">03 — Experience</span>
+        </div>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">Present</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">Founding Product Designer</div>
+                    <div class="timeline-company">Dubai, UAE</div>
+                    <div class="timeline-desc">Leading product design initiatives for early-stage startups and established companies.</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Previous</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">Senior / Lead Product Designer</div>
+                    <div class="timeline-company">Hinge Health, McAfee, Verizon, First American, Alcumus</div>
+                    <div class="timeline-desc">Designed for HealthTech, Cybersecurity, Telecom, and FinTech companies across US, Canada, and UAE.</div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">Education</div>
+                <div class="timeline-content">
+                    <div class="timeline-title">Bachelor of Arts — Creative Multimedia</div>
+                    <div class="timeline-company">Malaysia</div>
+                    <div class="timeline-desc">Foundation in design, multimedia, and digital experiences.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact">
+        <span class="section-label">04 — Contact</span>
+        <a class="contact-email">moh.alhamouri@gmail.com</a>
+        <div class="social-links">
+            <span class="social-link">Behance</span>
+            <span class="social-link">LinkedIn</span>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 Mo Alhamouri. All rights reserved.</p>
+    </footer>
+</body>
+</html>

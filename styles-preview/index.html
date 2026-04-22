@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Style Options Preview</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #f5f5f5;
+            padding: 60px 40px;
+            color: #1a1a1a;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 60px;
+            font-size: 16px;
+        }
+
+        .styles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .style-card {
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .style-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .preview-frame {
+            width: 100%;
+            height: 250px;
+            border: none;
+            display: block;
+        }
+
+        .style-info {
+            padding: 24px;
+        }
+
+        .style-name {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .style-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .style-tag {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 12px;
+            background: #f0f0f0;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .current-style {
+            border: 2px solid #00c853;
+        }
+
+        .current-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: #00c853;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .card-wrapper {
+            position: relative;
+        }
+
+        .note {
+            text-align: center;
+            margin-top: 60px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 12px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .note p {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>Choose Your Style</h1>
+    <p class="subtitle">Click on any style to preview it in full screen. Your current style is marked with ✓</p>
+
+    <div class="styles-grid">
+        <div class="card-wrapper">
+            <a href="minimal.html" class="style-card current-style">
+                <div class="current-badge">Current</div>
+                <iframe class="preview-frame" src="minimal.html" scrolling="no"></iframe>
+                <div class="style-info">
+                    <div class="style-name">Minimal & Clean</div>
+                    <div class="style-desc">Whitespace-focused, typography-driven design. Light with subtle shadows and elegant spacing.</div>
+                    <span class="style-tag">Your Current Choice</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="card-wrapper">
+            <a href="bold-experimental.html" class="style-card">
+                <iframe class="preview-frame" src="bold-experimental.html" scrolling="no"></iframe>
+                <div class="style-info">
+                    <div class="style-name">Bold & Experimental</div>
+                    <div class="style-desc">Vibrant gradients, animated backgrounds, oversized typography, and floating elements.</div>
+                    <span class="style-tag">High Impact</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="card-wrapper">
+            <a href="dark-modern.html" class="style-card">
+                <iframe class="preview-frame" src="dark-modern.html" scrolling="no"></iframe>
+                <div class="style-info">
+                    <div class="style-name">Dark & Modern</div>
+                    <div class="style-desc">Sleek dark theme with refined typography, subtle animations, and minimalist aesthetics.</div>
+                    <span class="style-tag">Contemporary</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="card-wrapper">
+            <a href="professional-polished.html" class="style-card">
+                <iframe class="preview-frame" src="professional-polished.html" scrolling="no"></iframe>
+                <div class="style-info">
+                    <div class="style-name">Professional & Polished</div>
+                    <div class="style-desc">Corporate-ready with structured cards, clear CTAs, and refined visual hierarchy.</div>
+                    <span class="style-tag">Business Ready</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div class="note">
+        <p>💡 <strong>Tip:</strong> These are quick mockups to give you a feel for each style. Once you choose, I'll apply the full transformation to your actual portfolio with all sections, your projects, and your content intact.</p>
+    </div>
+</body>
+</html>

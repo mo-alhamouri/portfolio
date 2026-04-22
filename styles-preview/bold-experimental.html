@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bold & Experimental Style Preview</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(255,0,85,0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0,255,136,0.3) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(136,0,255,0.2) 0%, transparent 50%);
+            animation: gradientMove 20s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        header {
+            padding: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #ff0055, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -2px;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+        }
+
+        nav a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: #00ff88;
+        }
+
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 10%;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 8vw;
+            font-weight: 700;
+            line-height: 0.9;
+            letter-spacing: -5px;
+            margin-bottom: 40px;
+        }
+
+        .hero h1 span {
+            display: block;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: rgba(255,255,255,0.6);
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        /* Floating shapes */
+        .shape {
+            position: absolute;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .shape-1 {
+            width: 300px; height: 300px;
+            top: 20%; right: 10%;
+            border-color: #ff0055;
+        }
+
+        .shape-2 {
+            width: 200px; height: 200px;
+            bottom: 20%; left: 5%;
+            border-color: #00ff88;
+            animation-delay: -2s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        .section-preview {
+            padding: 100px 10%;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .section-preview h2 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #ff0055;
+            margin-bottom: 40px;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .project-card {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(255,0,85,0.2), rgba(0,255,136,0.2));
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .style-label {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            border-radius: 100px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .style-label span {
+            font-size: 14px;
+            font-weight: 500;
+            color: #fff;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-gradient"></div>
+
+    <header>
+        <div class="logo">Mo Alhamouri</div>
+        <nav>
+            <a href="#">About</a>
+            <a href="#">Work</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <h1>
+            <span>Lead Product</span>
+            <span>Designer</span>
+        </h1>
+        <p>I design thoughtful, data-driven, and scalable user experiences for complex digital ecosystems.</p>
+    </section>
+
+    <section class="section-preview">
+        <h2>02 — Featured Work</h2>
+        <div class="projects-grid">
+            <div class="project-card"></div>
+            <div class="project-card"></div>
+            <div class="project-card"></div>
+        </div>
+    </section>
+
+    <div class="style-label">
+        <span>⚡ Bold & Experimental Style</span>
+    </div>
+</body>
+</html>

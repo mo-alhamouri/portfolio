@@ -1,0 +1,10 @@
+# Folders to ignore
+.DS_Store
+*.pdf
+*.png
+!images/**/*.png
+!images/**/*.jpg
+!images/**/*.jpeg
+node_modules/
+.gemini/
+.claude/

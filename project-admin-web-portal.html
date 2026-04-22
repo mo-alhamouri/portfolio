@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Web Portal | Mo Alhamouri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0a;
+            --text: #fff;
+            --accent-pink: #ff0055;
+            --accent-green: #00ff88;
+            --accent-purple: #8800ff;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(255,0,85,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0,255,136,0.15) 0%, transparent 50%);
+            animation: gradientMove 20s ease-in-out infinite;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.03;
+            z-index: -1;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 24px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10,10,10,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav a::before {
+            content: '←';
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .nav a:hover::before {
+            transform: translateX(-5px);
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 60px 60px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .project-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-pink);
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -3px;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.7);
+            width: 100%;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+        }
+
+        .meta-value {
+            font-size: 16px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .main-image {
+            margin-top: 60px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        section {
+            padding: 80px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-text {
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        section p {
+            font-size: 1.125rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .image-container {
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.02);
+            margin-bottom: 40px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .nav { padding: 20px 30px; }
+            .hero { padding: 100px 30px 40px; }
+            section { padding: 60px 30px; }
+            .two-col { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .footer-nav {
+            text-align: center;
+            padding: 100px 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .next-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .next-title {
+            font-size: clamp(24px, 4vw, 48px);
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            border-radius: 100px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="noise"></div>
+
+    <nav class="nav">
+        <a href="index.html">Back to Portfolio</a>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="project-label">Case Study — Admin Web Portal</span>
+            <h1>Mobile Responsive Admin Web Portal</h1>
+            <div class="hero-description">
+                <p><strong>Industry:</strong> FinTech, WealthTech</p>
+                <p>A financial technology company offering an AI-powered financial planning platform for advisors and financial institutions. The platform streamlines goal-based planning, scenario modeling, and client engagement to make financial advice more accessible and efficient.</p>
+            </div>
+
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">Lead Product Designer</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Platform</span>
+                    <span class="meta-value">Web (Mobile Responsive)</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Tools</span>
+                    <span class="meta-value">Figma, Prototype, UX Research</span>
+                </div>
+            </div>
+
+            <div class="main-image">
+                <img src="./images/project-ai/New Sliced Images/Admin Web Portal/Hero.png" alt="Admin Web Portal Hero">
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="two-col">
+            <div class="section-text">
+                <h2>Problem Statement</h2>
+                <p>How might we help the client to manage their web applications with ease using advance tools which are simple to use with very minimal technical background?</p>
+            </div>
+            <div class="section-text">
+                <h2>Role & Responsibilities</h2>
+                <p>As the Lead Product Designer, I directed the end-to-end design of an admin portal, collaborating with PMs, engineers, and client stakeholders. I conducted user interviews, performed benchmarking, and led ideation sessions to define system requirements. I created prototypes, facilitated design reviews, and oversaw handoff to engineering. The new portal streamlined operations, improved usability, and served as a key internal tool for financial advisors.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-text">
+            <h2>High-Fidelity Designs</h2>
+            <p>A much more simplified and straight to the point onboarding experience along with available support whenever it is needed.</p>
+        </div>
+        <div class="image-container">
+            <img src="./images/project-ai/New Sliced Images/Admin Web Portal/High_Fidelity_Designs.png" alt="High Fidelity Admin Designs">
+        </div>
+    </section>
+
+    <div class="footer-nav">
+        <span class="next-label">Next Project</span>
+        <h2 class="next-title">Rewards System</h2>
+        <a href="project-rewards-system.html" class="btn">View Case Study</a>
+    </div>
+
+    <script>
+        // Reveal on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

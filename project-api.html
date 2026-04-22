@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Platform for Commercial Real Estate | Mo Alhamouri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #0a0a0a;
+            --text: #fff;
+            --accent-pink: #ff0055;
+            --accent-green: #00ff88;
+            --accent-purple: #8800ff;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .bg-gradient {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(255,0,85,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(0,255,136,0.15) 0%, transparent 50%);
+            animation: gradientMove 20s ease-in-out infinite;
+            z-index: -2;
+            pointer-events: none;
+        }
+
+        @keyframes gradientMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .noise {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.03;
+            z-index: -1;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            padding: 24px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            background: rgba(10,10,10,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav a::before {
+            content: '←';
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+
+        .nav a:hover::before {
+            transform: translateX(-5px);
+        }
+
+        .hero {
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 120px 60px 60px;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .project-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--accent-pink);
+            margin-bottom: 24px;
+            font-weight: 600;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 6vw, 80px);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -3px;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.7);
+            width: 100%;
+            line-height: 1.7;
+            margin-bottom: 40px;
+        }
+
+        .project-meta {
+            display: flex;
+            gap: 60px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .meta-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+        }
+
+        .meta-value {
+            font-size: 16px;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        .main-image {
+            margin-top: 60px;
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
+        }
+
+        .main-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        section {
+            padding: 80px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-text {
+            width: 100%;
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        section p {
+            font-size: 1.125rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .image-container {
+            border-radius: 24px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255,255,255,0.02);
+            margin-bottom: 40px;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        @media (max-width: 1024px) {
+            .nav { padding: 20px 30px; }
+            .hero { padding: 100px 30px 40px; }
+            section { padding: 60px 30px; }
+            .two-col { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        .footer-nav {
+            text-align: center;
+            padding: 100px 60px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .next-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .next-title {
+            font-size: clamp(24px, 4vw, 48px);
+            margin-bottom: 40px;
+            font-weight: 700;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            border-radius: 100px;
+            background: #fff;
+            color: #000;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.3s, background 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            background: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="noise"></div>
+
+    <nav class="nav">
+        <a href="index.html">Back to Portfolio</a>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <span class="project-label">Case Study — Commercial Real Estate API</span>
+            <h1>An API Platform for Commercial Real Estate</h1>
+            <div class="hero-description">
+                <p><strong>Industry:</strong> Financial Services, Real Estate, Title Insurance</p>
+                <p>A leading provider of title insurance, settlement services, and risk solutions for real estate and mortgage transactions. The company plays a critical role in ensuring property ownership integrity and enabling secure real estate transactions across the U.S.</p>
+                <p>Building a programmatic bridge to streamline the title process for 3rd party applications.</p>
+            </div>
+
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Role</span>
+                    <span class="meta-value">Lead Product Designer</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Platform</span>
+                    <span class="meta-value">API Platform / Developer Portal</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Tools</span>
+                    <span class="meta-value">Figma, Miro, API Documentation</span>
+                </div>
+            </div>
+
+            <div class="main-image">
+                <img src="./images/project-ai/New Sliced Images/API/Hero.png" alt="API Platform Hero">
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div class="two-col">
+            <div class="section-text">
+                <h2>Problem Statement</h2>
+                <p>How might we programmatically connect with commercial sector services, allowing 3rd parties to streamline the title process by building them into their applications?</p>
+            </div>
+            <div class="section-text">
+                <h2>Role & Responsibilities</h2>
+                <p>As the Lead Product Designer, I spearheaded the product’s design strategy, overseeing the full design lifecycle — from initial discovery workshops to final implementation. I led a small design team and partnered closely with product managers and engineers to create intuitive user journeys for the mortgage and real estate sectors.</p>
+                <p>I also drove multiple post-MVP iterations, improving usability, performance, and adoption based on customer feedback and business goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-text">
+            <h2>Jam Sessions & Defining the Users</h2>
+            <p>Based on the user information that we learned in the workshops, I imagined the ideal personas that would fit the scenario perfectly and assigned a list of expectations to them. The first persona is for a technology lead working at a marketplace company for commercial real estate—I called the first persona Jessie. They are looking for an API platform with clear documentation guide that would help their company manage deals and orders with access to live data and ease of integration into their application.</p>
+        </div>
+        <div class="image-container">
+            <img src="./images/project-ai/New Sliced Images/API/Jam Sessions.png" alt="Jam Sessions & Personas">
+        </div>
+    </section>
+
+    <section>
+        <div class="section-text">
+            <h2>Workshops & User Journey</h2>
+            <p>Along with the personas, I created a journey map divided into three phases: Discovery Phase, Application Development Phase, and Application Release Phase. Each phase contained the steps that the persona would take to achieve their goal.</p>
+        </div>
+        <div class="image-container">
+            <img src="./images/project-ai/New Sliced Images/API/Workshops.png" alt="Workshops & User Journey">
+        </div>
+    </section>
+
+    <section>
+        <div class="section-text">
+            <h2>Wireframes</h2>
+            <p>Here we can see low-fi designs for the developer portal, specifically the onboarding experience. It should be quick and easy and should require basic information. After submitting the request, the user needs to confirm their email address and then they will get a key and a password to access the API documentation portal and start testing the APIs.</p>
+            <p>I validated the feasibility of the concepts with the front end engineers before moving to high-fi designs, and with the PM to ensure the user stories and business requirements were met.</p>
+        </div>
+        <div class="image-container">
+            <img src="./images/project-ai/New Sliced Images/API/Wireframes.png" alt="Wireframes">
+        </div>
+    </section>
+
+    <section>
+        <div class="section-text">
+            <h2>High-Fidelity Designs</h2>
+            <p>In the high-fidelity design phase, it's time to focus on the design details. I ensure that the paddings and margins are pixel perfect. I review the designs done by the other product designers on the team to ensure consistency in patterns and overall user experience. At this stage, I ensure that all components, colours and text styles are linked to the design system.</p>
+            <p>Before going live with the designs, I prototyped the main flows and interactions. I also love to be part of the user testing sessions to observe how users are reacting to the design and how easy it is for them to navigate through it.</p>
+        </div>
+
+        <div class="section-text">
+            <h3>Admin Dashboard</h3>
+            <p>Designed for internal teams to manage deal flows, monitor API usage, and oversee organizational health with granular control.</p>
+        </div>
+        <div class="image-container">
+            <img src="./images/project-ai/New Sliced Images/API/High_Fidelity_Designs_Admin_Dashboard.png" alt="High Fidelity Admin Dashboard">
+        </div>
+
+        <div class="section-text" style="margin-top: 60px;">
+            <h3>Developer Portal</h3>
+            <p>A streamlined experience for developers to access documentation, manage keys, and test endpoints in a sandbox environment.</p>
+        </div>
+        <div class="image-container">
+            <img src="./images/project-ai/New Sliced Images/API/High_Fidelity_Designs_Developer_Portal.png" alt="High Fidelity Developer Portal">
+        </div>
+
+        <div class="section-text" style="margin-top: 60px;">
+            <h3>Marketing Website</h3>
+            <p>The public-facing side of the platform, focused on clear value propositions, trust, and converting enterprise leads.</p>
+        </div>
+        <div class="image-container">
+            <img src="./images/project-ai/New Sliced Images/API/High_Fidelity_Designs_Marketing_Website.png" alt="High Fidelity Marketing Website">
+        </div>
+    </section>
+
+    <div class="footer-nav">
+        <span class="next-label">Next Project</span>
+        <h2 class="next-title">In-App Messaging — HealthTech</h2>
+        <a href="project-in-app-messaging.html" class="btn">View Case Study</a>
+    </div>
+
+    <script>
+        // Reveal on scroll
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.8s ease-out';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

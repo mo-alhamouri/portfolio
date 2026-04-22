@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 3: Interactive AI Callouts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; background: #0a0a0a; color: #fff; font-family: 'Space Grotesk', sans-serif; padding: 100px 60px; }
+        .chat-container { max-width: 900px; margin: 0 auto; background: #111; border-radius: 24px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
+        .chat-header { padding: 20px; background: #1a1a1a; border-bottom: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; gap: 10px; font-weight: 500; }
+        .chat-header::before { content: ''; width: 12px; height: 12px; background: #00ff88; border-radius: 50%; }
+        .message { padding: 30px; line-height: 1.6; }
+        .user-message { background: rgba(255,255,255,0.05); border-radius: 15px 15px 0 15px; margin: 20px; margin-left: 100px; }
+        .ai-message { margin: 20px; margin-right: 100px; border: 1px solid #ff0055; border-radius: 15px 15px 15px 0; position: relative; }
+        .prompt-tag { position: absolute; top: -10px; left: 20px; background: #ff0055; padding: 2px 10px; font-size: 10px; text-transform: uppercase; border-radius: 4px; }
+        .result-img { width: 100%; border-radius: 10px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">ChatGPT Content Strategy</div>
+        <div class="message ai-message">
+            <span class="prompt-tag">AI Prompt</span>
+            <p>"Generate and refine UX copy for a complex certification workflow, ensuring it's precise, compliant, and conversational."</p>
+        </div>
+        <div class="message user-message">
+            <p><strong>Outcome:</strong> By using AI for drafting, I could iterate on tone and clarity rapidly, ensuring that content aligned with brand voice while reducing friction in multi-step certification processes.</p>
+            <img src="./images/project-ai/New Sliced Images/Chat_gbt_For_UX_Copy.png" class="result-img">
+        </div>
+    </div>
+</body>
+</html>

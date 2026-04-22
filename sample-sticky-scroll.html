@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample 2: Sticky Scroll Transitions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { margin: 0; background: #000; color: #fff; font-family: 'Space Grotesk', sans-serif; overflow-x: hidden; }
+        .section { height: 100vh; position: sticky; top: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .bg-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.4; z-index: 1; transition: opacity 0.5s; }
+        .content { position: relative; z-index: 2; max-width: 800px; text-align: center; padding: 40px; }
+        .content h2 { font-size: 4rem; margin-bottom: 20px; font-weight: 700; letter-spacing: -2px; }
+        .content p { font-size: 1.5rem; color: rgba(255,255,255,0.8); }
+        .section:nth-child(2) { background: #0a0a0a; }
+        .section:nth-child(3) { background: #111; }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <img src="./images/project-ai/New Sliced Images/Hero.png" class="bg-image">
+        <div class="content">
+            <h2>The Vision</h2>
+            <p>Redesigning the certification landscape through AI-driven intelligence.</p>
+        </div>
+    </div>
+    <div class="section">
+        <img src="./images/project-ai/New Sliced Images/Midjourney_AI.png" class="bg-image">
+        <div class="content">
+            <h2>Visual AI</h2>
+            <p>Using MidJourney to explore mood and experimental aesthetics in seconds.</p>
+        </div>
+    </div>
+    <div class="section">
+        <img src="./images/project-ai/New Sliced Images/High-Fidelity_Designs.png" class="bg-image">
+        <div class="content">
+            <h2>Resolution</h2>
+            <p>Final high-fidelity components built for scale and trust.</p>
+        </div>
+    </div>
+</body>
+</html>

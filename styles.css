@@ -679,6 +679,10 @@ body {
         display: none;
     }
 
+    .scroll-indicator {
+        display: none;
+    }
+
     .section {
         padding: 80px 30px;
     }

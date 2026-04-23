@@ -265,22 +265,11 @@ body {
     50% { opacity: 1; transform: scaleY(0.5); }
 }
 
-/* Clients */
-.static-strip {
-    text-align: center;
-    padding: 40px 0;
-}
-
-.static-strip img {
-    width: 100%;
-    height: auto;
-    max-width: 800px; /* Reduced from 1200px */
-    filter: grayscale(1) brightness(1.5) opacity(0.5); /* Improved greyish look */
-    transition: all 0.4s ease;
-}
-
-.static-strip img:hover {
-    filter: grayscale(0) brightness(1) opacity(1);
+/* Sections */
+.section {
+    padding: 120px 60px;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .section-header {

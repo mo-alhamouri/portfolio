@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients Section Styles</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #fff;
+            --accent-pink: #ff0055;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .section {
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+
+        h2 { 
+            padding: 0 60px;
+            font-size: 14px; 
+            text-transform: uppercase; 
+            letter-spacing: 4px; 
+            color: rgba(255,255,255,0.4); 
+            margin-bottom: 40px; 
+        }
+
+        /* OPTION A: INFINITE MARQUEE */
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            background: rgba(255,255,255,0.02);
+            padding: 40px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .marquee-content {
+            display: flex;
+            width: calc(3927px * 2);
+            animation: scroll 40s linear infinite;
+        }
+
+        .marquee-content img {
+            height: 60px;
+            width: auto;
+            opacity: 0.6;
+            filter: grayscale(1) brightness(2);
+            transition: all 0.3s;
+            margin-right: 100px;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-3927px); }
+        }
+
+        /* OPTION B: CENTERED MINIMALIST */
+        .static-strip {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+            text-align: center;
+        }
+
+        .static-strip img {
+            width: 100%;
+            height: auto;
+            max-width: 1200px;
+            opacity: 0.5;
+            filter: grayscale(1) invert(1);
+        }
+
+        /* OPTION C: FLOATING GRID (SLICED) */
+        /* For this, I would need to slice the image into 4-6 pieces */
+        .preview-text { padding: 0 60px; color: rgba(255,255,255,0.6); margin-bottom: 20px; display: block; }
+    </style>
+</head>
+<body>
+
+    <div style="padding: 100px 60px;">
+        <h1 style="font-size: 48px;">Clients Section Options</h1>
+    </div>
+
+    <!-- OPTION A -->
+    <div class="section">
+        <h2>Option A: Infinite Marquee</h2>
+        <span class="preview-text">Interactive, high-end tech feel. Logos scroll infinitely.</span>
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <img src="images/Clients.png" alt="Clients">
+                <img src="images/Clients.png" alt="Clients">
+            </div>
+        </div>
+    </div>
+
+    <div style="height: 100px;"></div>
+
+    <!-- OPTION B -->
+    <div class="section">
+        <h2>Option B: Centered Minimalist</h2>
+        <span class="preview-text">Clean and professional. Best for traditional corporate trust.</span>
+        <div class="static-strip">
+            <img src="images/Clients.png" alt="Clients">
+        </div>
+    </div>
+
+</body>
+</html>

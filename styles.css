@@ -269,21 +269,18 @@ body {
 .static-strip {
     text-align: center;
     padding: 40px 0;
-    opacity: 0.8;
 }
 
 .static-strip img {
     width: 100%;
     height: auto;
-    max-width: 1200px;
-    filter: grayscale(1) brightness(2);
-    opacity: 0.6;
+    max-width: 800px; /* Reduced from 1200px */
+    filter: grayscale(1) brightness(1.5) opacity(0.5); /* Improved greyish look */
     transition: all 0.4s ease;
 }
 
 .static-strip img:hover {
-    opacity: 1;
-    filter: grayscale(0) brightness(1);
+    filter: grayscale(0) brightness(1) opacity(1);
 }
 
 .section-header {

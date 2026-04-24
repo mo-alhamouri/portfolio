@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients Section V2 - With Background</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #fff;
+            --client-bg: rgba(229, 229, 229, 1);
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .container {
+            padding: 100px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        section {
+            margin-bottom: 150px;
+        }
+
+        h2 { 
+            font-size: 14px; 
+            text-transform: uppercase; 
+            letter-spacing: 4px; 
+            color: rgba(255,255,255,0.4); 
+            margin-bottom: 40px; 
+        }
+
+        /* --- OPTION A: MARQUEE WITH BG --- */
+        .marquee-container-bg {
+            background: var(--client-bg);
+            padding: 50px 0;
+            border-radius: 100px; /* Pill shape */
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .marquee-inner {
+            display: flex;
+            width: fit-content;
+            animation: scroll 40s linear infinite;
+        }
+
+        .logo-item {
+            padding: 0 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-item img {
+            height: 35px;
+            width: auto;
+            opacity: 0.8;
+            filter: grayscale(0.2);
+            transition: all 0.3s ease;
+        }
+
+        .logo-item:hover img {
+            opacity: 1;
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- OPTION B: SIDE-BY-SIDE WITH BG --- */
+        .editorial-layout {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .editorial-text h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #fff 0%, #888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .logo-grid-bg {
+            background: var(--client-bg);
+            padding: 60px;
+            border-radius: 32px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .logo-grid-bg img {
+            width: 100%;
+            height: auto;
+            max-height: 30px;
+            object-fit: contain;
+            opacity: 0.8;
+            filter: grayscale(0.2);
+            transition: all 0.3s;
+        }
+
+        .logo-grid-bg img:hover {
+            opacity: 1;
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+        /* --- OPTION C: FULL GRID WITH BG --- */
+        .mosaic-grid-bg {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+            background: var(--client-bg);
+            padding: 60px;
+            border-radius: 32px;
+        }
+
+        .mosaic-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .mosaic-item img {
+            max-width: 100%;
+            max-height: 40px;
+            opacity: 0.8;
+            filter: grayscale(0.2);
+            transition: all 0.3s;
+        }
+
+        .mosaic-item:hover img {
+            opacity: 1;
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 style="font-size: 48px; margin-bottom: 80px;">Client Section V2 — With Background</h1>
+
+        <!-- OPTION A -->
+        <section>
+            <h2>Option A: Floating Marquee (Track Style)</h2>
+            <div class="marquee-container-bg">
+                <div class="marquee-inner">
+                    <div class="logo-item"><img src="images/clients/Accenture.png"></div>
+                    <div class="logo-item"><img src="images/clients/Alcumus.png"></div>
+                    <div class="logo-item"><img src="images/clients/Carrefour.png"></div>
+                    <div class="logo-item"><img src="images/clients/Conquest.png"></div>
+                    <div class="logo-item"><img src="images/clients/Etisalat.png"></div>
+                    <div class="logo-item"><img src="images/clients/FirstAmerican.png"></div>
+                    <div class="logo-item"><img src="images/clients/HingeHealth.png"></div>
+                    <div class="logo-item"><img src="images/clients/Mcafee.png"></div>
+                    <!-- Duplicate for loop -->
+                    <div class="logo-item"><img src="images/clients/Accenture.png"></div>
+                    <div class="logo-item"><img src="images/clients/Alcumus.png"></div>
+                    <div class="logo-item"><img src="images/clients/Carrefour.png"></div>
+                    <div class="logo-item"><img src="images/clients/Conquest.png"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- OPTION B -->
+        <section>
+            <h2>Option B: Side-by-Side (Contained Style)</h2>
+            <div class="editorial-layout">
+                <div class="editorial-text">
+                    <h3>Trusted by Global Partners</h3>
+                    <p style="color: rgba(255,255,255,0.5); line-height: 1.6;">Collaborating with the most innovative companies to deliver high-impact digital experiences.</p>
+                </div>
+                <div class="logo-grid-bg">
+                    <img src="images/clients/Accenture.png">
+                    <img src="images/clients/Alcumus.png">
+                    <img src="images/clients/Carrefour.png">
+                    <img src="images/clients/Conquest.png">
+                    <img src="images/clients/Etisalat.png">
+                    <img src="images/clients/FirstAmerican.png">
+                    <img src="images/clients/HingeHealth.png">
+                    <img src="images/clients/Mcafee.png">
+                </div>
+            </div>
+        </section>
+
+        <!-- OPTION C -->
+        <section>
+            <h2>Option C: Soft Mosaic (Structured Gallery)</h2>
+            <div class="mosaic-grid-bg">
+                <div class="mosaic-item"><img src="images/clients/Accenture.png"></div>
+                <div class="mosaic-item"><img src="images/clients/Alcumus.png"></div>
+                <div class="mosaic-item"><img src="images/clients/Carrefour.png"></div>
+                <div class="mosaic-item"><img src="images/clients/Conquest.png"></div>
+                <div class="mosaic-item"><img src="images/clients/Etisalat.png"></div>
+                <div class="mosaic-item"><img src="images/clients/FirstAmerican.png"></div>
+                <div class="mosaic-item"><img src="images/clients/HingeHealth.png"></div>
+                <div class="mosaic-item"><img src="images/clients/Mcafee.png"></div>
+                <div class="mosaic-item"><img src="images/clients/TheoremOne.png"></div>
+                <div class="mosaic-item"><img src="images/clients/Verizon.png"></div>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>

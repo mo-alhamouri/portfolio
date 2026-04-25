@@ -272,6 +272,54 @@ body {
     margin: 0 auto;
 }
 
+/* Clients */
+.marquee-track {
+    background: #fff;
+    padding: 50px 0;
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.marquee-content {
+    display: flex;
+    width: fit-content;
+    animation: scroll 40s linear infinite;
+}
+
+.marquee-track:hover .marquee-content {
+    animation-play-state: paused;
+}
+
+.logo-item {
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-item img {
+    height: 35px;
+    width: auto;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.logo-item:hover img {
+    transform: scale(1.1);
+}
+
+/* Specific logo size increases */
+.logo-alc { height: 50px !important; }
+.logo-hin { height: 65px !important; }
+.logo-car, .logo-eti { height: 65px !important; }
+.logo-fir { height: 80px !important; }
+
+@keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
 .section-header {
     margin-bottom: 80px;
 }

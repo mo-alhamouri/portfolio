@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients Section Options | Mo Alhamouri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #fff;
+            --white-bg: rgba(255, 255, 255, 1);
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Space Grotesk', sans-serif;
+            overflow-x: hidden;
+            padding: 100px 60px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 { font-size: 48px; margin-bottom: 80px; }
+        h2 { font-size: 14px; text-transform: uppercase; letter-spacing: 4px; color: rgba(255,255,255,0.4); margin-bottom: 40px; margin-top: 100px; }
+
+        /* OPTION 1: MARQUEE (UPDATED) */
+        .marquee-track {
+            background: var(--white-bg);
+            padding: 50px 0;
+            border-radius: 12px; /* Updated from 100px */
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .marquee-content {
+            display: flex;
+            width: fit-content;
+            animation: scroll 40s linear infinite;
+        }
+
+        .marquee-track:hover .marquee-content {
+            animation-play-state: paused; /* Stops animation on hover */
+        }
+
+        .logo-item {
+            padding: 0 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-item img {
+            height: 35px; /* Default height */
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* Specific logo size increases */
+        .logo-alc {
+            height: 50px !important;
+        }
+
+        .logo-hin {
+            height: 65px !important; /* Increased from 50px */
+        }
+
+        .logo-car, .logo-eti {
+            height: 65px !important;
+        }
+
+        .logo-fir {
+            height: 80px !important; /* Increased from 65px */
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* OPTION 2: GRID */
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-item {
+            background: var(--white-bg);
+            height: 120px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .grid-item img {
+            max-width: 100%;
+            max-height: 40px;
+            object-fit: contain;
+        }
+
+        /* OPTION 3: STRIP */
+        .minimal-strip {
+            background: var(--white-bg);
+            width: 100vw;
+            margin-left: -60px;
+            padding: 60px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 60px;
+        }
+
+        .minimal-strip img {
+            height: 30px;
+            width: auto;
+            object-fit: contain;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Client Section Options</h1>
+
+        <h2>Option 1: The Infinite Marquee (12px Radius & Balanced Sizing)</h2>
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <div class="logo-item"><img src="images/Clients/Accenture.png"></div>
+                <div class="logo-item"><img src="images/Clients/Alcumus.png" class="logo-alc"></div>
+                <div class="logo-item"><img src="images/Clients/Carrefour.png" class="logo-car"></div>
+                <div class="logo-item"><img src="images/Clients/Conquest.png"></div>
+                <div class="logo-item"><img src="images/Clients/Etisalat.png" class="logo-eti"></div>
+                <div class="logo-item"><img src="images/Clients/FirstAmerican.png" class="logo-fir"></div>
+                <div class="logo-item"><img src="images/Clients/HingeHealth.png" class="logo-hin"></div>
+                <div class="logo-item"><img src="images/Clients/McAfee.png"></div>
+                <div class="logo-item"><img src="images/Clients/TheoremOne.png"></div>
+                <div class="logo-item"><img src="images/Clients/Verizon.png"></div>
+                <!-- Repeat for loop -->
+                <div class="logo-item"><img src="images/Clients/Accenture.png"></div>
+                <div class="logo-item"><img src="images/Clients/Alcumus.png" class="logo-alc"></div>
+                <div class="logo-item"><img src="images/Clients/Carrefour.png" class="logo-car"></div>
+                <div class="logo-item"><img src="images/Clients/Conquest.png"></div>
+                <div class="logo-item"><img src="images/Clients/Etisalat.png" class="logo-eti"></div>
+                <div class="logo-item"><img src="images/Clients/FirstAmerican.png" class="logo-fir"></div>
+                <div class="logo-item"><img src="images/Clients/HingeHealth.png" class="logo-hin"></div>
+                <div class="logo-item"><img src="images/Clients/McAfee.png"></div>
+                <div class="logo-item"><img src="images/Clients/TheoremOne.png"></div>
+                <div class="logo-item"><img src="images/Clients/Verizon.png"></div>
+            </div>
+        </div>
+
+        <h2>Option 2: The Soft Grid (Tiles)</h2>
+        <div class="clients-grid">
+            <div class="grid-item"><img src="images/Clients/Accenture.png"></div>
+            <div class="grid-item"><img src="images/Clients/Alcumus.png"></div>
+            <div class="grid-item"><img src="images/Clients/Carrefour.png"></div>
+            <div class="grid-item"><img src="images/Clients/Conquest.png"></div>
+            <div class="grid-item"><img src="images/Clients/Etisalat.png"></div>
+            <div class="grid-item"><img src="images/Clients/FirstAmerican.png"></div>
+            <div class="grid-item"><img src="images/Clients/HingeHealth.png"></div>
+            <div class="grid-item"><img src="images/Clients/McAfee.png"></div>
+            <div class="grid-item"><img src="images/Clients/TheoremOne.png"></div>
+            <div class="grid-item"><img src="images/Clients/Verizon.png"></div>
+        </div>
+
+        <h2>Option 3: The Minimalist Strip (Full Width)</h2>
+        <div class="minimal-strip">
+            <img src="images/Clients/Accenture.png">
+            <img src="images/Clients/Alcumus.png">
+            <img src="images/Clients/Carrefour.png">
+            <img src="images/Clients/Conquest.png">
+            <img src="images/Clients/Etisalat.png">
+            <img src="images/Clients/FirstAmerican.png">
+            <img src="images/Clients/HingeHealth.png">
+            <img src="images/Clients/McAfee.png">
+            <img src="images/Clients/TheoremOne.png">
+            <img src="images/Clients/Verizon.png">
+        </div>
+    </div>
+
+</body>
+</html>

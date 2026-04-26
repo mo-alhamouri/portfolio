@@ -107,9 +107,7 @@ body {
 .logo-text {
     font-size: 22px;
     font-weight: 700;
-    background: linear-gradient(135deg, #fff 0%, #888 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: #fff;
     letter-spacing: -1px;
 }
 

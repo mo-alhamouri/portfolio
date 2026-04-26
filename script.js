@@ -63,4 +63,32 @@ document.addEventListener('mousemove', (e) => {
     });
 });
 
+// Testimonial Carousel
+const carousel = document.getElementById('testimonialCarousel');
+const prevBtn = document.getElementById('testPrev');
+const nextBtn = document.getElementById('testNext');
+
+if (carousel && prevBtn && nextBtn) {
+    prevBtn.addEventListener('click', () => {
+        const itemWidth = carousel.querySelector('.testimonial-item').clientWidth + 30;
+        if (carousel.scrollLeft <= 5) {
+            // If at the beginning, wrap to the end
+            carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
+        } else {
+            carousel.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        const itemWidth = carousel.querySelector('.testimonial-item').clientWidth + 30;
+        // Check if we are at the end (with a small buffer)
+        if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
+            // If at the end, wrap back to the start
+            carousel.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+            carousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
+        }
+    });
+}
+
 console.log('Portfolio loaded — Mo Alhamouri | Bold & Experimental');

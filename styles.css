@@ -523,6 +523,95 @@ body {
     line-height: 1.6;
 }
 
+/* Testimonials */
+.testimonial-carousel-container {
+    position: relative;
+    margin-top: 60px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.testimonial-carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    gap: 30px;
+    padding: 20px 0;
+}
+
+.testimonial-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.testimonial-item {
+    flex: 0 0 calc((100% - 60px) / 3); /* Fits 3 items per screen with gaps */
+    scroll-snap-align: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    position: relative;
+    overflow: hidden;
+    min-height: 380px; /* Increased to accommodate longer quotes like Lori's */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Align all text to the top */
+}
+
+.testimonial-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--accent-pink), var(--accent-purple));
+}
+
+.carousel-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    z-index: 10;
+}
+
+.carousel-btn:hover {
+    background: var(--accent-pink);
+    border-color: var(--accent-pink);
+    transform: scale(1.1);
+}
+
+.testimonial-content .timeline-title {
+    font-size: 24px;
+    margin-bottom: 4px;
+}
+
+.testimonial-content .timeline-company {
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.testimonial-content .timeline-desc {
+    font-size: 1.25rem;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.6;
+}
+
 /* Contact */
 .contact {
     padding: 160px 60px;
@@ -784,6 +873,20 @@ body {
     
     .social-cards {
         grid-template-columns: 1fr;
+    }
+
+    .testimonial-item {
+        flex: 0 0 calc((100% - 30px) / 2); /* 2 per screen on tablet */
+    }
+}
+
+@media (max-width: 768px) {
+    .testimonial-item {
+        flex: 0 0 85%; /* Shows a 15% glimpse of the next quote */
+    }
+
+    .carousel-btn {
+        display: none; /* Hide arrows on mobile for swiping */
     }
 }
 

@@ -45,7 +45,7 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.section, .project-card, .timeline-item').forEach((el, index) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
-    el.style.transition = `opacity 0.8s ease ${index * 0.1}s, transform 0.8s ease ${index * 0.1}s`;
+    el.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
     observer.observe(el);
 });
 

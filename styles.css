@@ -380,9 +380,6 @@ body {
     letter-spacing: 1px;
 }
 
-.skill:nth-child(1) { border-color: rgba(255,0,85,0.3); }
-.skill:nth-child(2) { border-color: rgba(0,255,136,0.3); }
-.skill:nth-child(3) { border-color: rgba(136,0,255,0.3); }
 
 /* Projects */
 .projects-grid {

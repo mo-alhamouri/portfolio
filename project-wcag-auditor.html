@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Platform for Commercial Real Estate | Mo Alhamouri</title>
+    <title>WCAG Accessibility Auditor | Mo Alhamouri</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
         :root {
             --bg: #0a0a0a;
             --text: #fff;
-            --accent-pink: #ff0055;
+            --accent-pink: #18a0fb;
             --accent-green: #00ff88;
             --accent-purple: #8800ff;
         }
@@ -29,7 +29,7 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background:
-                radial-gradient(ellipse at 20% 20%, rgba(255,0,85,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 20% 20%, rgba(24, 160, 251, 0.15) 0%, transparent 50%),
                 radial-gradient(ellipse at 80% 80%, rgba(0,255,136,0.15) 0%, transparent 50%);
             animation: gradientMove 20s ease-in-out infinite;
             z-index: -2;
@@ -204,7 +204,6 @@
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.1);
             background: rgba(255,255,255,0.02);
-            margin-bottom: 40px;
         }
 
         .image-container img {
@@ -277,31 +276,30 @@
 
     <header class="hero">
         <div class="hero-content">
-            <span class="project-label">Case Study — Commercial Real Estate API</span>
-            <h1>An API Platform for Commercial Real Estate</h1>
+            <span class="project-label">Figma Plug-in — Case Study</span>
+            <h1>WCAG Accessibility Auditor</h1>
             <div class="hero-description">
-                <p><strong>Industry:</strong> Financial Services, Real Estate, Title Insurance</p>
-                <p>A leading provider of title insurance, settlement services, and risk solutions for real estate and mortgage transactions. The company plays a critical role in ensuring property ownership integrity and enabling secure real estate transactions across the U.S.</p>
-                <p>Building a programmatic bridge to streamline the title process for 3rd party applications.</p>
+                <p>Professional accessibility audits in seconds. Scan for contrast, target sizes, typos, and more.</p>
+                <p>Ensure your designs are inclusive and WCAG-compliant with the most comprehensive accessibility toolkit for Figma. Designed for senior designers and accessibility specialists, the WCAG Accessibility Auditor automates the tedious parts of compliance so you can focus on great UX.</p>
             </div>
 
             <div class="project-meta">
                 <div class="meta-item">
                     <span class="meta-label">Role</span>
-                    <span class="meta-value">Lead Product Designer</span>
+                    <span class="meta-value">Product Designer & Developer</span>
                 </div>
                 <div class="meta-item">
                     <span class="meta-label">Platform</span>
-                    <span class="meta-value">API Platform / Developer Portal</span>
+                    <span class="meta-value">Figma Plug-in</span>
                 </div>
                 <div class="meta-item">
                     <span class="meta-label">Tools</span>
-                    <span class="meta-value">Figma, Miro, API Documentation</span>
+                    <span class="meta-value">Figma, AI (Claude, ChatGPT, Gemini CLI)</span>
                 </div>
             </div>
 
             <div class="main-image">
-                <img src="./images/project-ai/New Sliced Images/API/Hero.png" alt="API Platform Hero">
+                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Hero.png" alt="WCAG Accessibility Auditor Hero">
             </div>
         </div>
     </header>
@@ -309,84 +307,144 @@
     <section>
         <div class="two-col">
             <div class="section-text">
-                <h2>Problem Statement</h2>
-                <p>How might we programmatically connect with commercial sector services, allowing 3rd parties to streamline the title process by building them into their applications?</p>
+                <h2>The Process</h2>
+                <p>Building this plug-in involved a highly iterative and AI-assisted workflow. By leveraging advanced language models for both design logic and code generation, I was able to rapidly prototype, test, and refine complex accessibility auditing features.</p>
             </div>
             <div class="section-text">
-                <h2>Role & Responsibilities</h2>
-                <p>As the Lead Product Designer, I spearheaded the product’s design strategy, overseeing the full design lifecycle — from initial discovery workshops to final implementation. I led a small design team and partnered closely with product managers and engineers to create intuitive user journeys for the mortgage and real estate sectors.</p>
-                <p>I also drove multiple post-MVP iterations, improving usability, performance, and adoption based on customer feedback and business goals.</p>
+                <h2>Why use it?</h2>
+                <p><strong>Zero Noise:</strong> Smart filters ignore decorative layers and background shapes to keep your results actionable.</p>
+                <p><strong>Contextual Zoom:</strong> Double-click any result to zoom directly to the layer on your canvas.</p>
+                <p><strong>Built for Teams:</strong> Standardized reports make it easy to clear issues before handoff.</p>
             </div>
         </div>
     </section>
 
     <section>
         <div class="section-text">
-            <h2>Jam Sessions & Defining the Users</h2>
-            <p>Based on the user information that we learned in the workshops, I imagined the ideal personas that would fit the scenario perfectly and assigned a list of expectations to them. The first persona is for a technology lead working at a marketplace company for commercial real estate—I called the first persona Jessie. They are looking for an API platform with clear documentation guide that would help their company manage deals and orders with access to live data and ease of integration into their application.</p>
+            <h2>01 — AI-Driven Strategy & Refinement</h2>
+            <p>Leveraging ChatGPT, I refined the instructions provided to the Gemini CLI AI model. This strategic approach focused on precise feature definition, efficient bug fixing, and overall enhancement, significantly reducing token consumption and optimizing the AI's performance for the project.</p>
         </div>
         <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/API/Jam Sessions.png" alt="Jam Sessions & Personas">
+            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_1_ChatGPT_Instructions.png" alt="ChatGPT Process">
         </div>
     </section>
 
     <section>
         <div class="section-text">
-            <h2>Workshops & User Journey</h2>
-            <p>Along with the personas, I created a journey map divided into three phases: Discovery Phase, Application Development Phase, and Application Release Phase. Each phase contained the steps that the persona would take to achieve their goal.</p>
+            <h2>02 — Terminal-Based Development with Claude</h2>
+            <p>The refined instructions were then integrated into Claude within the terminal. This phase focused on building the core features and crafting the visual identity of the plug-in, ensuring the underlying codebase was robust and performed seamlessly.</p>
         </div>
         <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/API/Workshops.png" alt="Workshops & User Journey">
+            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_2_Claude_in_Terminal.png" alt="Claude in Terminal Process">
         </div>
     </section>
 
     <section>
         <div class="section-text">
-            <h2>Wireframes</h2>
-            <p>Here we can see low-fi designs for the developer portal, specifically the onboarding experience. It should be quick and easy and should require basic information. After submitting the request, the user needs to confirm their email address and then they will get a key and a password to access the API documentation portal and start testing the APIs.</p>
-            <p>I validated the feasibility of the concepts with the front end engineers before moving to high-fi designs, and with the PM to ensure the user stories and business requirements were met.</p>
+            <h2>03 — Rigorous Figma Testing</h2>
+            <p>Once the plug-in's user interface was live in Figma, I transitioned into a rigorous testing phase. Every feature was meticulously evaluated to ensure accurate implementation, optimal functionality, and a smooth user experience within the Figma environment.</p>
         </div>
         <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/API/Wireframes.png" alt="Wireframes">
+            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_3_Figma_Testing.png" alt="Figma Testing Process">
         </div>
     </section>
 
     <section>
         <div class="section-text">
-            <h2>High-Fidelity Designs</h2>
-            <p>In the high-fidelity design phase, it's time to focus on the design details. I ensure that the paddings and margins are pixel perfect. I review the designs done by the other product designers on the team to ensure consistency in patterns and overall user experience. At this stage, I ensure that all components, colours and text styles are linked to the design system.</p>
-            <p>Before going live with the designs, I prototyped the main flows and interactions. I also love to be part of the user testing sessions to observe how users are reacting to the design and how easy it is for them to navigate through it.</p>
+            <h2>04 — Continuous Enhancement & Community Feedback</h2>
+            <p>Development remains an ongoing process. I continuously leverage Claude for maintenance and feature updates, while actively incorporating feedback from the Figma Community to refine and enhance the plug-in's capabilities over time.</p>
         </div>
+        <div class="image-container">
+            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_4_Claude_Tweaks.png" alt="Claude Tweaks Process">
+        </div>
+    </section>
 
+    <section>
         <div class="section-text">
-            <h3>Admin Dashboard</h3>
-            <p>Designed for internal teams to manage deal flows, monitor API usage, and oversee organizational health with granular control.</p>
+            <h2>Key Features</h2>
+            <p>The WCAG Accessibility Auditor is packed with features designed to make accessibility audits fast, accurate, and actionable.</p>
         </div>
         <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/API/High_Fidelity_Designs_Admin_Dashboard.png" alt="High Fidelity Admin Dashboard">
+            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_1_Overview_of_Features.png" alt="Features Overview">
         </div>
+    </section>
 
-        <div class="section-text" style="margin-top: 60px;">
-            <h3>Developer Portal</h3>
-            <p>A streamlined experience for developers to access documentation, manage keys, and test endpoints in a sandbox environment.</p>
+    <section>
+        <div class="two-col">
+            <div class="section-text">
+                <h2>Master Audit</h2>
+                <p>Run a comprehensive full-page scan. Contrast, targets, typos, and alt-text checked across all artboards in a single click.</p>
+            </div>
+            <div class="image-container">
+                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_2_Master_Audit.png" alt="Master Audit">
+            </div>
         </div>
-        <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/API/High_Fidelity_Designs_Developer_Portal.png" alt="High Fidelity Developer Portal">
-        </div>
+    </section>
 
-        <div class="section-text" style="margin-top: 60px;">
-            <h3>Marketing Website</h3>
-            <p>The public-facing side of the platform, focused on clear value propositions, trust, and converting enterprise leads.</p>
+    <section>
+        <div class="two-col">
+            <div class="section-text">
+                <h2>Contrast Checker</h2>
+                <p>Verify text-to-background ratios against WCAG AA (4.5:1) standards with instant zoom-to-layer functionality.</p>
+            </div>
+            <div class="image-container">
+                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_3_Contrast_Checker.png" alt="Contrast Checker">
+            </div>
         </div>
-        <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/API/High_Fidelity_Designs_Marketing_Website.png" alt="High Fidelity Marketing Website">
+    </section>
+
+    <section>
+        <div class="two-col">
+            <div class="section-text">
+                <h2>Smart Targets</h2>
+                <p>Ensure your interactive elements are accessible. Toggle between Mobile (44px) and Desktop (24px) standards to match your platform.</p>
+            </div>
+            <div class="image-container">
+                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_4_Smart_Targets.png" alt="Smart Targets">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="two-col">
+            <div class="section-text">
+                <h2>Heuristic Typo Detection</h2>
+                <p>Beyond a simple spellcheck. Detect "Lorem Ipsum" placeholders, keyboard slips (df, sa), double words, and inconsistent UI labels.</p>
+            </div>
+            <div class="image-container">
+                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_5_Heuristic_Typo_Detection.png" alt="Typo Detection">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="two-col">
+            <div class="section-text">
+                <h2>Identifiers Check</h2>
+                <p>Automatically find status indicators and icons that rely purely on color to convey meaning—ensuring they include proper icons or text for color-blind users.</p>
+            </div>
+            <div class="image-container">
+                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_6_Identifiers_Check.png" alt="Identifiers Check">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="two-col">
+            <div class="section-text">
+                <h2>AI Alt-Text</h2>
+                <p>Manage and generate descriptive alt-text for images and icons, ensuring your designs are accessible to screen reader users.</p>
+            </div>
+            <div class="image-container">
+                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_7_AI Alt-Text.png" alt="AI Alt-Text">
+            </div>
         </div>
     </section>
 
     <div class="footer-nav">
         <span class="next-label">Next Project</span>
-        <h2 class="next-title">Figma Plug-in — WCAG Accessibility Auditor</h2>
-        <a href="project-wcag-auditor.html" class="btn">View Case Study</a>
+        <h2 class="next-title">In-App Messaging — HealthTech</h2>
+        <a href="project-in-app-messaging.html" class="btn">View Case Study</a>
     </div>
 
     <script>

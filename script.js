@@ -91,4 +91,35 @@ if (carousel && prevBtn && nextBtn) {
     });
 }
 
+// Captcha Logic
+const captchaCodeEl = document.getElementById('captchaCode');
+const captchaInputEl = document.getElementById('captchaInput');
+const contactForm = document.querySelector('.contact-form');
+let currentCaptcha = '';
+
+function generateCaptcha() {
+    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    let code = '';
+    for (let i = 0; i < 4; i++) {
+        code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    currentCaptcha = code;
+    if (captchaCodeEl) {
+        captchaCodeEl.textContent = code;
+    }
+}
+
+if (contactForm) {
+    generateCaptcha();
+
+    contactForm.addEventListener('submit', (e) => {
+        if (captchaInputEl.value.toUpperCase() !== currentCaptcha) {
+            e.preventDefault();
+            alert('Incorrect security code. Please try again.');
+            generateCaptcha();
+            captchaInputEl.value = '';
+        }
+    });
+}
+
 console.log('Portfolio loaded — Mo Alhamouri | Bold & Experimental');

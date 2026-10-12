@@ -228,8 +228,8 @@ body {
 .bubble-1 { top: -30px; right: 10%; animation-delay: 0s; background: rgba(255,0,85,0.15); border-color: rgba(255,0,85,0.4); }
 .bubble-4 { top: 40%; right: 12%; animation-delay: -4.5s; background: rgba(255,165,0,0.15); border-color: rgba(255,165,0,0.4); width: 80px; height: 80px; font-size: 11px; }
 .bubble-5 { bottom: -20px; right: 20%; animation-delay: -2s; background: rgba(0,200,255,0.15); border-color: rgba(0,200,255,0.4); width: 110px; height: 110px; }
-.bubble-3 { top: 10%; right: -100px; animation-delay: -3s; background: rgba(136,0,255,0.15); border-color: rgba(136,0,255,0.4); width: 90px; height: 90px; }
-.bubble-2 { top: 60%; right: -100px; animation-delay: -1.5s; background: rgba(0,255,136,0.15); border-color: rgba(0,255,136,0.4); width: 100px; height: 100px; }
+.bubble-3 { top: 10%; right: -40px; animation-delay: -3s; background: rgba(136,0,255,0.15); border-color: rgba(136,0,255,0.4); width: 90px; height: 90px; }
+.bubble-2 { top: 60%; right: -40px; animation-delay: -1.5s; background: rgba(0,255,136,0.15); border-color: rgba(0,255,136,0.4); width: 100px; height: 100px; }
 
 @keyframes float {
     0%, 100% { transform: translateY(0); }
@@ -1077,6 +1077,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 
 .form-card { padding: 40px; width: 100%; }
 .form-card .contact-form { max-width: none; margin: 0; }
+.form-card .form-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.form-card .form-input, .form-card .form-textarea { min-width: 0; width: 100%; }
+.form-card .captcha-input { min-width: 0; }
+@media (max-width: 1024px) { .form-card .form-row { grid-template-columns: minmax(0, 1fr); } }
 .form-card h3 { font-size: 1.375rem; font-weight: 600; margin-bottom: 28px; }
 .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
 .form-card .submit-btn { margin: 0; }

@@ -42,7 +42,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // Observe sections and cards for reveal
-document.querySelectorAll('.section, .project-card, .timeline-item').forEach((el, index) => {
+document.querySelectorAll('.section').forEach((el, index) => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;

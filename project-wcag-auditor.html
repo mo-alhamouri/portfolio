@@ -4,490 +4,205 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WCAG Accessibility Auditor | Mo Alhamouri</title>
+    <meta name="description" content="Professional accessibility audits in seconds. Scan for contrast, target sizes, typos, and more.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --bg: #0a0a0a;
-            --text: #fff;
-            --accent-pink: #18a0fb;
-            --accent-green: #00ff88;
-            --accent-purple: #8800ff;
-        }
-
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        .bg-gradient {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background:
-                radial-gradient(ellipse at 20% 20%, rgba(24, 160, 251, 0.15) 0%, transparent 50%),
-                radial-gradient(ellipse at 80% 80%, rgba(0,255,136,0.15) 0%, transparent 50%);
-            animation: gradientMove 20s ease-in-out infinite;
-            z-index: -2;
-            pointer-events: none;
-        }
-
-        @keyframes gradientMove {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-
-        .noise {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0.03;
-            z-index: -1;
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-        }
-
-        .nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            padding: 24px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            background: rgba(10,10,10,0.8);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .nav a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .nav a::before {
-            content: '←';
-            font-size: 18px;
-            transition: transform 0.3s;
-        }
-
-        .nav a:hover::before {
-            transform: translateX(-5px);
-        }
-
-        .hero {
-            min-height: 90vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 120px 60px 60px;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            width: 100%;
-        }
-
-        .project-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--accent-pink);
-            margin-bottom: 24px;
-            font-weight: 600;
-        }
-
-        .hero h1 {
-            font-size: clamp(40px, 6vw, 80px);
-            font-weight: 700;
-            line-height: 1.1;
-            letter-spacing: -3px;
-            margin-bottom: 32px;
-            background: linear-gradient(135deg, #fff 0%, #888 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-description {
-            font-size: 1.25rem;
-            color: rgba(255,255,255,0.7);
-            width: 100%;
-            line-height: 1.7;
-            margin-bottom: 40px;
-        }
-
-        .project-meta {
-            display: flex;
-            gap: 60px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .meta-item {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .meta-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: rgba(255,255,255,0.4);
-            font-weight: 500;
-        }
-
-        .meta-value {
-            font-size: 16px;
-            color: #fff;
-            font-weight: 500;
-        }
-
-        .main-image {
-            margin-top: 60px;
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 40px 80px rgba(0,0,0,0.4);
-        }
-
-        .main-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        section {
-            padding: 80px 60px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-text {
-            width: 100%;
-            margin-bottom: 40px;
-        }
-
-        section h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, #fff 0%, #aaa 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        section p {
-            font-size: 1.125rem;
-            color: rgba(255,255,255,0.7);
-            line-height: 1.8;
-            margin-bottom: 24px;
-        }
-
-        .image-container {
-            border-radius: 24px;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(255,255,255,0.02);
-        }
-
-        .image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .two-col {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: start;
-        }
-
-        @media (max-width: 1024px) {
-            .nav { padding: 20px 30px; }
-            .hero { padding: 100px 30px 40px; }
-            section { padding: 60px 30px; }
-            .two-col { grid-template-columns: 1fr; gap: 40px; }
-        }
-
-        .footer-nav {
-            text-align: center;
-            padding: 100px 60px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .next-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            color: rgba(255,255,255,0.4);
-            margin-bottom: 16px;
-            display: block;
-        }
-
-        .next-title {
-            font-size: clamp(24px, 4vw, 48px);
-            margin-bottom: 40px;
-            font-weight: 700;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 16px 32px;
-            border-radius: 100px;
-            background: #fff;
-            color: #000;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 14px;
-            transition: transform 0.3s, background 0.3s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            background: #eee;
-        }
-    </style>
     <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="case-study.css">
 </head>
 <body>
     <div class="bg-gradient"></div>
     <div class="noise"></div>
 
-    <nav class="nav">
-        <a href="index.html">Back to Portfolio</a>
+    <nav class="nav" aria-label="Case study">
+        <a href="index.html#work" class="back"><span aria-hidden="true">←</span> Back to portfolio</a>
+        <a href="project-design-systems.html" class="next">Next project →</a>
+        <div class="progress" id="progress" aria-hidden="true"></div>
     </nav>
 
-    <header class="hero">
-        <div class="hero-content">
-            <span class="project-label">Figma Plug-in — Case Study</span>
+    <main>
+        <header class="hero wrap">
+            <span class="eyebrow">Figma Plug-in · Case Study</span>
             <h1>WCAG Accessibility Auditor</h1>
-            <div class="hero-description">
-                <p>Professional accessibility audits in seconds. Scan for contrast, target sizes, typos, and more.</p>
-                <p>Ensure your designs are inclusive and WCAG-compliant with the most comprehensive accessibility toolkit for Figma. Designed for senior designers and accessibility specialists, the WCAG Accessibility Auditor automates the tedious parts of compliance so you can focus on great UX.</p>
-            </div>
+            <p class="hero-lede">Professional accessibility audits in seconds. Scan for contrast, target sizes, typos, and more.</p>
+            <p class="hero-about">Ensure your designs are inclusive and WCAG-compliant with the most comprehensive accessibility toolkit for Figma. Designed for senior designers and accessibility specialists, the WCAG Accessibility Auditor automates the tedious parts of compliance so you can focus on great UX.</p>
 
-            <div class="project-meta">
-                <div class="meta-item">
-                    <span class="meta-label">Role</span>
-                    <span class="meta-value">Product Designer & Developer</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Platform</span>
-                    <span class="meta-value">Figma Plug-in</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Tools</span>
-                    <span class="meta-value">Figma, AI (Claude, ChatGPT, Gemini CLI)</span>
-                </div>
-            </div>
+            <dl class="facts" style="--cols: 3">
+                <div class="fact"><dt>Role</dt><dd class="v">Product Designer &amp; Developer</dd></div>
+                <div class="fact"><dt>Platform</dt><dd class="v">Figma Plug-in</dd></div>
+                <div class="fact"><dt>Tools</dt><dd class="v">Figma, AI (Claude, ChatGPT, Gemini CLI)</dd></div>
+            </dl>
 
-            <div class="main-image">
-                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Hero.png" alt="WCAG Accessibility Auditor Hero">
+            <div class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Hero.png">
+    <img src="images/project-ai/case/wcag-auditor/hero.webp" width="1920" height="960" fetchpriority="high" alt="WCAG Accessibility Auditor Hero">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</div>
+        </header>
+
+        <div class="body wrap">
+            <aside class="toc" aria-label="On this page">
+                <span class="k">On this page</span>
+                <ol>
+                    <li><a href="#why-use-it">Why use it?</a></li>
+                    <li><a href="#the-process">The Process</a></li>
+                    <li><a href="#key-features">Key Features</a></li>
+                    <li><a href="#approved-published-live-by">Approved &amp; Published Live by…</a></li>
+                    <li><a href="#available-in-the-figma-commu">Available in the Figma Commu…</a></li>
+                </ol>
+            </aside>
+
+            <div class="content">
+                <section class="chapter reveal" id="why-use-it" aria-labelledby="h-why-use-it">
+                    <span class="ch-num">01 — Why it matters</span>
+                    <h2 id="h-why-use-it">Why use it?</h2>
+<div class="rich">
+<p><strong>Zero Noise:</strong> Smart filters ignore decorative layers and background shapes to keep your results actionable.</p>
+<p><strong>Contextual Zoom:</strong> Double-click any result to zoom directly to the layer on your canvas.</p>
+<p><strong>Built for Teams:</strong> Standardized reports make it easy to clear issues before handoff.</p>
+</div>
+                </section>
+                <section class="chapter reveal" id="the-process" aria-labelledby="h-the-process">
+                    <span class="ch-num">02 — Process</span>
+                    <h2 id="h-the-process">The Process</h2>
+<div class="rich">
+<p>Building this plug-in involved a highly iterative and AI-assisted workflow. By leveraging advanced language models for both design logic and code generation, I was able to rapidly prototype, test, and refine complex accessibility auditing features.</p>
+</div>
+<div class="steps">
+<div class="step">
+<div class="step-head"><span class="step-num" style="background:var(--accent-pink)">01</span><h3>AI-Driven Strategy &amp; Refinement</h3></div>
+<div class="rich"><p>Leveraging ChatGPT, I refined the instructions provided to the Gemini CLI AI model. This strategic approach focused on precise feature definition, efficient bug fixing, and overall enhancement, significantly reducing token consumption and optimizing the AI's performance for the project.</p></div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_1_ChatGPT_Instructions.png">
+    <img src="images/project-ai/case/wcag-auditor/process-1-chatgpt-instructions.webp" width="1920" height="960" loading="lazy" decoding="async" alt="ChatGPT Process">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+</div>
+<div class="step">
+<div class="step-head"><span class="step-num" style="background:#8a5cff">02</span><h3>Terminal-Based Development with Claude</h3></div>
+<div class="rich"><p>The refined instructions were then integrated into Claude within the terminal. This phase focused on building the core features and crafting the visual identity of the plug-in, ensuring the underlying codebase was robust and performed seamlessly.</p></div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_2_Claude_in_Terminal.png">
+    <img src="images/project-ai/case/wcag-auditor/process-2-claude-in-terminal.webp" width="1920" height="960" loading="lazy" decoding="async" alt="Claude in Terminal Process">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+</div>
+<div class="step">
+<div class="step-head"><span class="step-num" style="background:#00c8ff">03</span><h3>Rigorous Figma Testing</h3></div>
+<div class="rich"><p>Once the plug-in's user interface was live in Figma, I transitioned into a rigorous testing phase. Every feature was meticulously evaluated to ensure accurate implementation, optimal functionality, and a smooth user experience within the Figma environment.</p></div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_3_Figma_Testing.png">
+    <img src="images/project-ai/case/wcag-auditor/process-3-figma-testing.webp" width="1920" height="960" loading="lazy" decoding="async" alt="Figma Testing Process">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+</div>
+<div class="step">
+<div class="step-head"><span class="step-num" style="background:#ffb020">04</span><h3>Continuous Enhancement &amp; Community Feedback</h3></div>
+<div class="rich"><p>Development remains an ongoing process. I continuously leverage Claude for maintenance and feature updates, while actively incorporating feedback from the Figma Community to refine and enhance the plug-in's capabilities over time.</p></div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_4_Claude_Tweaks.png">
+    <img src="images/project-ai/case/wcag-auditor/process-4-claude-tweaks.webp" width="1920" height="960" loading="lazy" decoding="async" alt="Claude Tweaks Process">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+</div>
+</div>
+                </section>
+                <section class="chapter reveal" id="key-features" aria-labelledby="h-key-features">
+                    <span class="ch-num">03 — Features</span>
+                    <h2 id="h-key-features">Key Features</h2>
+<div class="rich">
+<p>The WCAG Accessibility Auditor is packed with features designed to make accessibility audits fast, accurate, and actionable.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_1_Overview_of_Features.png">
+    <img src="images/project-ai/case/wcag-auditor/feature-1-overview-of-features.webp" width="1920" height="960" loading="lazy" decoding="async" alt="Features Overview">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+<div class="features">
+<div class="feature">
+<div class="rich"><h3>Master Audit</h3>
+<p>Run a comprehensive full-page scan. Contrast, targets, typos, and alt-text checked across all artboards in a single click.</p></div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_2_Master_Audit.png">
+    <img src="images/project-ai/case/wcag-auditor/feature-2-master-audit.webp" width="1920" height="960" loading="lazy" decoding="async" alt="Master Audit">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+</div>
+<div class="feature">
+<div class="rich"><h3>Contrast Checker</h3>
+<p>Verify text-to-background ratios against WCAG AA (4.5:1) standards with instant zoom-to-layer functionality.</p></div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_3_Contrast_Checker.png">
+    <img src="images/project-ai/case/wcag-auditor/feature-3-contrast-checker.webp" width="1920" height="960" loading="lazy" decoding="async" alt="Contrast Checker">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+</div>
+<div class="feature">
+<div class="rich"><h3>Smart Targets</h3>
+<p>Ensure your interactive elements are accessible. Toggle between Mobile (44px) and Desktop (24px) standards to match your platform.</p></div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_4_Smart_Targets.png">
+    <img src="images/project-ai/case/wcag-auditor/feature-4-smart-targets.webp" width="1920" height="960" loading="lazy" decoding="async" alt="Smart Targets">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+</div>
+<div class="feature">
+<div class="rich"><h3>Heuristic Typo Detection</h3>
+<p>Beyond a simple spellcheck. Detect "Lorem Ipsum" placeholders, keyboard slips (df, sa), double words, and inconsistent UI labels.</p></div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_5_Heuristic_Typo_Detection.png">
+    <img src="images/project-ai/case/wcag-auditor/feature-5-heuristic-typo-detection.webp" width="1920" height="960" loading="lazy" decoding="async" alt="Typo Detection">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+</div>
+<div class="feature">
+<div class="rich"><h3>Identifiers Check</h3>
+<p>Automatically find status indicators and icons that rely purely on color to convey meaning—ensuring they include proper icons or text for color-blind users.</p></div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_6_Identifiers_Check.png">
+    <img src="images/project-ai/case/wcag-auditor/feature-6-identifiers-check.webp" width="1920" height="960" loading="lazy" decoding="async" alt="Identifiers Check">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+</div>
+<div class="feature">
+<div class="rich"><h3>AI Alt-Text</h3>
+<p>Manage and generate descriptive alt-text for images and icons, ensuring your designs are accessible to screen reader users.</p></div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_7_AI Alt-Text.png">
+    <img src="images/project-ai/case/wcag-auditor/feature-7-ai-alt-text.webp" width="1920" height="960" loading="lazy" decoding="async" alt="AI Alt-Text">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+</div>
+</div>
+                </section>
+                <section class="chapter reveal" id="approved-published-live-by" aria-labelledby="h-approved-published-live-by">
+                    <span class="ch-num">04 — Launch</span>
+                    <h2 id="h-approved-published-live-by">Approved &amp; Published Live by Figma</h2>
+<div class="rich">
+<p>I am proud to announce that the WCAG Accessibility Auditor has been successfully reviewed, approved, and published live by Figma. This milestone marks the official transition from a private tool to a community-ready resource, meeting Figma's high standards for security, performance, and utility.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Published_Live_1.png">
+    <img src="images/project-ai/case/wcag-auditor/published-live-1.webp" width="2400" height="1170" loading="lazy" decoding="async" alt="Published Live on Figma Community">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+                </section>
+                <section class="chapter reveal" id="available-in-the-figma-commu" aria-labelledby="h-available-in-the-figma-commu">
+                    <span class="ch-num">05 — Launch</span>
+                    <h2 id="h-available-in-the-figma-commu">Available in the Figma Community</h2>
+<div class="rich">
+<p>The plugin is now available for designers from around the world in the Figma Community. Designers can now start benefiting from this amazing plugin to ensure their work is inclusive and WCAG-compliant from the very first pixel. Join the growing community of users who are streamlining their accessibility workflows today.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Published_Live_2.png">
+    <img src="images/project-ai/case/wcag-auditor/published-live-2.webp" width="2400" height="1173" loading="lazy" decoding="async" alt="Figma Community Availability">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+                </section>
             </div>
         </div>
-    </header>
 
-    <section>
-        <div class="two-col">
-            <div class="section-text">
-                <h2>The Process</h2>
-                <p>Building this plug-in involved a highly iterative and AI-assisted workflow. By leveraging advanced language models for both design logic and code generation, I was able to rapidly prototype, test, and refine complex accessibility auditing features.</p>
+        <nav class="footer-nav wrap" aria-label="More projects">
+            <div class="footer-grid">
+                <a class="fn-card" href="index.html#work"><span class="k">← All projects</span><strong>Back to portfolio</strong></a>
+                <a class="fn-card next" href="project-design-systems.html"><span class="k">Next project →</span><strong>Design Systems &amp; UX Guidelines</strong></a>
             </div>
-            <div class="section-text">
-                <h2>Why use it?</h2>
-                <p><strong>Zero Noise:</strong> Smart filters ignore decorative layers and background shapes to keep your results actionable.</p>
-                <p><strong>Contextual Zoom:</strong> Double-click any result to zoom directly to the layer on your canvas.</p>
-                <p><strong>Built for Teams:</strong> Standardized reports make it easy to clear issues before handoff.</p>
-            </div>
-        </div>
-    </section>
+        </nav>
+    </main>
 
-    <section>
-        <div class="section-text">
-            <h2>01 — AI-Driven Strategy & Refinement</h2>
-            <p>Leveraging ChatGPT, I refined the instructions provided to the Gemini CLI AI model. This strategic approach focused on precise feature definition, efficient bug fixing, and overall enhancement, significantly reducing token consumption and optimizing the AI's performance for the project.</p>
-        </div>
-        <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_1_ChatGPT_Instructions.png" alt="ChatGPT Process">
-        </div>
-    </section>
-
-    <section>
-        <div class="section-text">
-            <h2>02 — Terminal-Based Development with Claude</h2>
-            <p>The refined instructions were then integrated into Claude within the terminal. This phase focused on building the core features and crafting the visual identity of the plug-in, ensuring the underlying codebase was robust and performed seamlessly.</p>
-        </div>
-        <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_2_Claude_in_Terminal.png" alt="Claude in Terminal Process">
-        </div>
-    </section>
-
-    <section>
-        <div class="section-text">
-            <h2>03 — Rigorous Figma Testing</h2>
-            <p>Once the plug-in's user interface was live in Figma, I transitioned into a rigorous testing phase. Every feature was meticulously evaluated to ensure accurate implementation, optimal functionality, and a smooth user experience within the Figma environment.</p>
-        </div>
-        <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_3_Figma_Testing.png" alt="Figma Testing Process">
-        </div>
-    </section>
-
-    <section>
-        <div class="section-text">
-            <h2>04 — Continuous Enhancement & Community Feedback</h2>
-            <p>Development remains an ongoing process. I continuously leverage Claude for maintenance and feature updates, while actively incorporating feedback from the Figma Community to refine and enhance the plug-in's capabilities over time.</p>
-        </div>
-        <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Process_4_Claude_Tweaks.png" alt="Claude Tweaks Process">
-        </div>
-    </section>
-
-    <section>
-        <div class="section-text">
-            <h2>Key Features</h2>
-            <p>The WCAG Accessibility Auditor is packed with features designed to make accessibility audits fast, accurate, and actionable.</p>
-        </div>
-        <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_1_Overview_of_Features.png" alt="Features Overview">
-        </div>
-    </section>
-
-    <section>
-        <div class="two-col">
-            <div class="section-text">
-                <h2>Master Audit</h2>
-                <p>Run a comprehensive full-page scan. Contrast, targets, typos, and alt-text checked across all artboards in a single click.</p>
-            </div>
-            <div class="image-container">
-                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_2_Master_Audit.png" alt="Master Audit">
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="two-col">
-            <div class="section-text">
-                <h2>Contrast Checker</h2>
-                <p>Verify text-to-background ratios against WCAG AA (4.5:1) standards with instant zoom-to-layer functionality.</p>
-            </div>
-            <div class="image-container">
-                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_3_Contrast_Checker.png" alt="Contrast Checker">
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="two-col">
-            <div class="section-text">
-                <h2>Smart Targets</h2>
-                <p>Ensure your interactive elements are accessible. Toggle between Mobile (44px) and Desktop (24px) standards to match your platform.</p>
-            </div>
-            <div class="image-container">
-                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_4_Smart_Targets.png" alt="Smart Targets">
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="two-col">
-            <div class="section-text">
-                <h2>Heuristic Typo Detection</h2>
-                <p>Beyond a simple spellcheck. Detect "Lorem Ipsum" placeholders, keyboard slips (df, sa), double words, and inconsistent UI labels.</p>
-            </div>
-            <div class="image-container">
-                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_5_Heuristic_Typo_Detection.png" alt="Typo Detection">
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="two-col">
-            <div class="section-text">
-                <h2>Identifiers Check</h2>
-                <p>Automatically find status indicators and icons that rely purely on color to convey meaning—ensuring they include proper icons or text for color-blind users.</p>
-            </div>
-            <div class="image-container">
-                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_6_Identifiers_Check.png" alt="Identifiers Check">
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="two-col">
-            <div class="section-text">
-                <h2>AI Alt-Text</h2>
-                <p>Manage and generate descriptive alt-text for images and icons, ensuring your designs are accessible to screen reader users.</p>
-            </div>
-            <div class="image-container">
-                <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Feature_7_AI Alt-Text.png" alt="AI Alt-Text">
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="section-text">
-            <h2>Approved & Published Live by Figma</h2>
-            <p>I am proud to announce that the WCAG Accessibility Auditor has been successfully reviewed, approved, and published live by Figma. This milestone marks the official transition from a private tool to a community-ready resource, meeting Figma's high standards for security, performance, and utility.</p>
-        </div>
-        <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Published_Live_1.png" alt="Published Live on Figma Community">
-        </div>
-    </section>
-
-    <section>
-        <div class="section-text">
-            <h2>Available in the Figma Community</h2>
-            <p>The plugin is now available for designers from around the world in the Figma Community. Designers can now start benefiting from this amazing plugin to ensure their work is inclusive and WCAG-compliant from the very first pixel. Join the growing community of users who are streamlining their accessibility workflows today.</p>
-        </div>
-        <div class="image-container">
-            <img src="./images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Published_Live_2.png" alt="Figma Community Availability">
-        </div>
-    </section>
-
-    <div class="footer-nav">
-        <span class="next-label">Next Project</span>
-        <h2 class="next-title">Design Systems & UX Guidelines</h2>
-        <a href="project-design-systems.html" class="btn">View Case Study</a>
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full-size image">
+        <span class="lb-hint">Full resolution · Esc to close</span>
+        <button class="lb-close" type="button" aria-label="Close">✕</button>
+        <img alt="">
     </div>
 
-    <script>
-        // Reveal on scroll
-        const observerOptions = {
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('section').forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(30px)';
-            section.style.transition = 'all 0.8s ease-out';
-            observer.observe(section);
-        });
-    </script>
+    <script src="case-study.js"></script>
 </body>
 </html>

@@ -63,63 +63,100 @@ document.addEventListener('mousemove', (e) => {
     });
 });
 
-// Testimonial Carousel
-const carousel = document.getElementById('testimonialCarousel');
-const prevBtn = document.getElementById('testPrev');
-const nextBtn = document.getElementById('testNext');
-
-if (carousel && prevBtn && nextBtn) {
-    prevBtn.addEventListener('click', () => {
-        const itemWidth = carousel.querySelector('.testimonial-item').clientWidth + 30;
-        if (carousel.scrollLeft <= 5) {
-            // If at the beginning, wrap to the end
-            carousel.scrollTo({ left: carousel.scrollWidth, behavior: 'smooth' });
-        } else {
-            carousel.scrollBy({ left: -itemWidth, behavior: 'smooth' });
-        }
+// Industry filter: highlights matching clients, dims the rest (grid stays stable)
+(function () {
+    const grid = document.getElementById('clientGrid');
+    if (!grid) return;
+    const chips = document.querySelectorAll('.clients .industry-chip');
+    chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const f = chip.dataset.filter;
+            chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+            grid.classList.toggle('is-filtered', f !== 'all');
+            grid.querySelectorAll('.client-card').forEach(card => {
+                card.classList.toggle('is-match', card.dataset.industry === f);
+            });
+        });
     });
+})();
 
-    nextBtn.addEventListener('click', () => {
-        const itemWidth = carousel.querySelector('.testimonial-item').clientWidth + 30;
-        // Check if we are at the end (with a small buffer)
-        if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
-            // If at the end, wrap back to the start
-            carousel.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-            carousel.scrollBy({ left: itemWidth, behavior: 'smooth' });
-        }
+// Project filter: hides non-matching cards; featured cards join the main grid when filtering
+(function () {
+    const chips = document.querySelectorAll('#work .industry-chip');
+    const cards = document.querySelectorAll('#work .pcard');
+    const featuredGrid = document.getElementById('featuredGrid');
+    if (!featuredGrid) return;
+    const empty = document.getElementById('emptyNote');
+    chips.forEach(chip => chip.addEventListener('click', () => {
+        const f = chip.dataset.filter;
+        chips.forEach(c => c.setAttribute('aria-pressed', String(c === chip)));
+        let shown = 0;
+        cards.forEach(card => {
+            const match = f === 'all' || card.dataset.cat.split(' ').includes(f);
+            card.hidden = !match;
+            if (match) shown++;
+        });
+        featuredGrid.hidden = ![...featuredGrid.children].some(c => !c.hidden);
+        empty.hidden = shown > 0;
+    }));
+})();
+
+// Show all testimonials
+(function () {
+    const btn = document.getElementById('showMore');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+        document.querySelectorAll('#quoteGrid .quote.is-hidden').forEach(q => q.classList.remove('is-hidden'));
+        btn.setAttribute('aria-expanded', 'true');
+        btn.parentElement.hidden = true;
     });
-}
+})();
 
-// Captcha Logic
-const captchaCodeEl = document.getElementById('captchaCode');
-const captchaInputEl = document.getElementById('captchaInput');
-const contactForm = document.querySelector('.contact-form');
-let currentCaptcha = '';
-
-function generateCaptcha() {
-    const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-    let code = '';
-    for (let i = 0; i < 4; i++) {
-        code += chars.charAt(Math.floor(Math.random() * chars.length));
+// Contact form: captcha check, then send to Formspree without leaving the page
+(function () {
+    const codeEl = document.getElementById('captchaCode');
+    const input = document.getElementById('captchaInput');
+    const form = document.getElementById('contactForm');
+    if (!form) return;
+    const status = document.getElementById('formStatus');
+    const btn = document.getElementById('submitBtn');
+    let current = '';
+    function gen() {
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+        current = Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+        codeEl.textContent = current;
     }
-    currentCaptcha = code;
-    if (captchaCodeEl) {
-        captchaCodeEl.textContent = code;
+    function setStatus(msg, type) {
+        status.textContent = msg;
+        status.className = 'form-status' + (type ? ' is-' + type : '');
     }
-}
-
-if (contactForm) {
-    generateCaptcha();
-
-    contactForm.addEventListener('submit', (e) => {
-        if (captchaInputEl.value.toUpperCase() !== currentCaptcha) {
-            e.preventDefault();
-            alert('Incorrect security code. Please try again.');
-            generateCaptcha();
-            captchaInputEl.value = '';
+    gen();
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (input.value.trim().toUpperCase() !== current) {
+            setStatus('Incorrect security code. Please try the new one.', 'error');
+            gen(); input.value = ''; input.focus();
+            return;
+        }
+        btn.disabled = true; btn.textContent = 'Sending…';
+        setStatus('');
+        try {
+            const data = new FormData(form);
+            const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+            if (res.ok) {
+                form.reset(); gen();
+                setStatus("Thanks! Your message has been sent. I'll get back to you soon.", 'success');
+            } else {
+                const body = await res.json().catch(() => ({}));
+                const msg = body.errors ? body.errors.map(x => x.message).join(', ') : 'Something went wrong.';
+                setStatus(msg + ' Please try again, or reach me on LinkedIn.', 'error');
+            }
+        } catch (err) {
+            setStatus('Network error. Please try again, or reach me on LinkedIn.', 'error');
+        } finally {
+            btn.disabled = false; btn.textContent = 'Send Message';
         }
     });
-}
+})();
 
 console.log('Portfolio loaded — Mo Alhamouri | Bold & Experimental');

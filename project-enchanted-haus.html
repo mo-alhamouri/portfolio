@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Enchanted Haus — Holiday Home Management Platform | Mo Alhamouri</title>
+    <meta name="description" content="Case study: leading the design of The Enchanted Haus web portal and mobile app for Dubai holiday homes, from discovery workshops and A/B testing to a Claude-built live prototype, the company's first design system and developer handoff.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="case-study.css">
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="noise"></div>
+
+    <nav class="nav" aria-label="Case study">
+        <a href="index.html#work" class="back"><span aria-hidden="true">←</span> Back to portfolio</a>
+        <a href="project-document-management.html" class="next">Next project →</a>
+        <div class="progress" id="progress" aria-hidden="true"></div>
+    </nav>
+
+    <main>
+        <header class="hero wrap">
+            <span class="eyebrow">Case Study · Real Estate · Holiday Homes</span>
+            <h1>The Enchanted Haus — Holiday Home Management Platform</h1>
+            <p class="hero-lede">One web portal and one mobile app that give Dubai homeowners and the operations team a shared, trustworthy view of properties, bookings, operations and earnings.</p>
+            <p class="hero-about">The Enchanted Haus is a holiday home management company in Dubai. It runs short-term rental properties on behalf of homeowners, from listing and guest bookings to cleaning, maintenance, concierge support and monthly payouts.</p>
+
+            <dl class="facts">
+                <div class="fact"><dt>Client</dt><dd class="v">The Enchanted Haus</dd></div>
+                <div class="fact"><dt>Industry</dt><dd class="v">Real Estate, Holiday Homes</dd></div>
+                <div class="fact"><dt>Role</dt><dd class="v">Lead UX/UI Designer</dd></div>
+                <div class="fact"><dt>Platform</dt><dd class="v">Web Portal + Mobile App (iOS / Android)</dd></div>
+                <div class="fact"><dt>Tools</dt><dd class="v">Figma, Claude (live prototyping), Design System</dd></div>
+            </dl>
+
+            <div class="deliverables">
+                <span class="k">What I designed</span>
+                <a class="pill" href="#web-portal" style="--c: #d4af37">Web Portal</a>
+                <a class="pill" href="#mobile-app" style="--c: var(--accent-pink)">Mobile App</a>
+                <a class="pill" href="#design-system" style="--c: var(--accent-green)">Design System</a>
+                <a class="pill" href="https://theenchantedhaus-mockup.vercel.app/" target="_blank" rel="noopener" style="--c: #00c8ff">Live prototype ↗</a>
+            </div>
+
+            <div class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/hero.webp">
+                <img src="images/project-ai/case/enchanted-haus/hero.webp" width="2400" height="1340" alt="The Enchanted Haus web portal portfolio overview next to the homeowner mobile app showing net earnings, occupancy and portfolio ROI." fetchpriority="high">
+                <button class="zoom" type="button">Zoom ⤢</button>
+            </div>
+        </header>
+
+        <div class="body wrap">
+            <aside class="toc" aria-label="On this page">
+                <span class="k">On this page</span>
+                <ol>
+                    <li><a href="#challenge">The challenge</a></li>
+                    <li><a href="#role">My role</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#discovery">Discovery workshops</a></li>
+                    <li><a href="#wireframes">Wireframes</a></li>
+                    <li><a href="#ab-testing">A/B testing</a></li>
+                    <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
+                    <li><a href="#prototype">Live prototype &amp; handoff</a></li>
+                    <li><a href="#design-system">Design system</a></li>
+                    <li><a href="#hifi">High-fidelity designs</a></li>
+                    <li><a href="#results">Results</a></li>
+                </ol>
+            </aside>
+
+            <div class="content">
+                <section class="chapter reveal" id="challenge" aria-labelledby="h-challenge">
+                    <span class="ch-num">01 — Challenge</span>
+                    <h2 id="h-challenge">Problem statement</h2>
+                    <div class="hmw">
+                        <span class="k">How might we</span>
+                        <blockquote>…give homeowners and the operations team one clear, trustworthy view of their properties, bookings, operations and earnings, whether they're at a desk or on the go?</blockquote>
+                    </div>
+                </section>
+
+                <section class="chapter reveal" id="role" aria-labelledby="h-role">
+                    <span class="ch-num">02 — Role</span>
+                    <h2 id="h-role">Role &amp; responsibilities</h2>
+                    <p>As the Lead UX/UI Designer, I led the design of the platform end to end, from the first concept through to handoff to the developers. I ran the discovery workshops with stakeholders, shaped the information architecture for both platforms, and designed every screen in Figma.</p>
+                    <p>Alongside the product work, I built the company's first design system and grew the design team around it. I onboarded new designers to the company, mentored and guided them through critiques and regular feedback, and made sure their work followed the same standards before anything reached development.</p>
+                    <ul class="resp">
+                        <li>Led design from concept to developer handoff</li>
+                        <li>Facilitated discovery workshops to find quick wins and prioritize features</li>
+                        <li>Ran A/B tests with real users on key interactions</li>
+                        <li>Built a live prototype with Claude for stakeholders and developers</li>
+                        <li>Built the company's first design system</li>
+                        <li>Onboarded, mentored and guided new designers</li>
+                    </ul>
+                </section>
+
+                <section class="chapter reveal" id="process" aria-labelledby="h-process">
+                    <span class="ch-num">03 — Process</span>
+                    <h2 id="h-process">From workshops to a live prototype</h2>
+                    <ol class="process">
+                        <li style="--c: #d4af37"><strong>Workshops</strong><span>Found quick wins and prioritized features with stakeholders</span></li>
+                        <li style="--c: var(--accent-pink)"><strong>Wireframes</strong><span>Explored structure for the web portal and mobile app</span></li>
+                        <li style="--c: #8a5cff"><strong>A/B testing</strong><span>Validated key interactions with real users</span></li>
+                        <li style="--c: #00c8ff"><strong>Live prototype</strong><span>Generated with Claude and shared with stakeholders and developers</span></li>
+                        <li style="--c: var(--accent-green)"><strong>Design system &amp; handoff</strong><span>Components and high-fidelity designs in Figma, documented for development</span></li>
+                    </ol>
+                </section>
+
+                <section class="chapter reveal" id="discovery" aria-labelledby="h-discovery">
+                    <span class="ch-num">04 — Research</span>
+                    <h2 id="h-discovery">Discovery workshops</h2>
+                    <p>I started with a series of workshops with the founders and the operations team. We mapped who uses the product and what each group needs day to day, listed every feature idea on the table, and sorted them by value and effort to separate the quick wins from the larger bets.</p>
+                    <p>Two very different audiences came out of those sessions, so the product became two platforms built on one foundation:</p>
+                    <ol class="phases">
+                        <li style="--c: var(--accent-pink)"><span class="k">Homeowners</span><strong>Mobile app: earnings, occupancy and concierge on the go</strong></li>
+                        <li style="--c: #d4af37"><span class="k">Operations &amp; partners</span><strong>Web portal: high-density analytics, inventory and financial reporting</strong></li>
+                    </ol>
+                    <p>The quick wins we agreed to ship first were a clear portfolio overview, live property status (ready, occupied, cleaning, maintenance), a bookings view and a direct line to the concierge team. Deeper financial tooling was prioritized for later.</p>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/platform-hub.webp">
+                        <img src="images/project-ai/case/enchanted-haus/platform-hub.webp" width="2400" height="1500" loading="lazy" decoding="async" alt="The Enchanted Haus platform entry screen offering a mobile app for homeowners and a web portal for operations.">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>One product, two platforms: the mobile app for homeowners and the web portal for operations</figcaption>
+                    </figure>
+                </section>
+
+                <section class="chapter reveal" id="wireframes" aria-labelledby="h-wireframes">
+                    <span class="ch-num">05 — Design</span>
+                    <h2 id="h-wireframes">Wireframes</h2>
+                    <p>With the priorities agreed, I sketched low-fidelity wireframes for the portfolio overview, the properties list, the homeowner's mobile home screen and a short "Add Property" form. Keeping them low-fi let stakeholders focus on structure and content before any visual design, and it surfaced the two open questions we later took to A/B testing.</p>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/wireframes.webp">
+                        <img src="images/project-ai/case/enchanted-haus/wireframes.webp" width="2400" height="1713" loading="lazy" decoding="async" alt="Low-fidelity wireframes of the web portal overview, properties list, mobile owner home screen and Add Property form, with notes marking questions for A/B testing.">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>Low-fidelity wireframes: portfolio overview, properties, mobile owner home and Add Property form</figcaption>
+                    </figure>
+                </section>
+
+                <section class="chapter reveal" id="ab-testing" aria-labelledby="h-ab-testing">
+                    <span class="ch-num">06 — Validation</span>
+                    <h2 id="h-ab-testing">A/B testing with real users</h2>
+                    <p>Rather than settle design debates in meetings, I ran A/B tests with real users on the interactions that mattered most. Each test compared two versions of the same screen built from the live prototype.</p>
+                    <div class="rich">
+                    <h3>Where should "Add Property" live?</h3>
+                    <p>Adding a new property is the action that grows the business, so it had to be easy to find. We compared a primary button in the page header with an entry in the sidebar navigation. The header button was the version that shipped: it read as the main action on the page, while the sidebar entry blended in with navigation.</p>
+                    </div>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/ab-add-property.webp">
+                        <img src="images/project-ai/case/enchanted-haus/ab-add-property.webp" width="2400" height="1202" loading="lazy" decoding="async" alt="A/B test comparing an Add Property button in the page header (variant A) with an Add Property item in the sidebar navigation (variant B).">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>Test 1: a header action (A) vs. a sidebar entry (B)</figcaption>
+                    </figure>
+                    <div class="rich">
+                    <h3>How much data should the dashboard show?</h3>
+                    <p>Stakeholders wanted every metric on the overview, while early feedback suggested users were scanning for only a few numbers. We compared four headline KPIs with trend charts against twelve KPIs above the fold. The focused version shipped, and the detailed operational metrics moved to the Financials and Operations pages.</p>
+                    </div>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/ab-dashboard-density.webp">
+                        <img src="images/project-ai/case/enchanted-haus/ab-dashboard-density.webp" width="2400" height="1202" loading="lazy" decoding="async" alt="A/B test comparing a dashboard with four headline KPIs (variant A) against a dashboard with twelve KPIs above the fold (variant B).">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>Test 2: four headline KPIs (A) vs. twelve KPIs above the fold (B)</figcaption>
+                    </figure>
+                </section>
+
+                <section class="chapter reveal" id="insights-tradeoffs" aria-labelledby="h-insights-tradeoffs">
+                    <span class="ch-num">07 — Insights</span>
+                    <h2 id="h-insights-tradeoffs">Research, Options &amp; Trade-offs</h2>
+<div class="rich">
+<h3>What research revealed</h3>
+<p>Homeowners mostly asked the same few questions: how much they had earned, whether their property was occupied, and whether cleaning or maintenance had been done. Many of those questions arrived as calls and messages to the team. The surprise was that owners wanted fewer numbers, not more. They trusted a short summary and a clear status more than detailed tables.</p>
+<h3>Directions explored</h3>
+<ul>
+<li><strong>Option A:</strong> One responsive web app for owners and operations alike. Dropped: owners check in on the go and needed a quick, mobile-first view, while operations needed density.</li>
+<li><strong>Option B:</strong> A single admin-style dashboard showing every metric to everyone. Dropped: in A/B testing the dense version made the key numbers harder to find.</li>
+<li><strong>Option C:</strong> Two tailored platforms, a mobile app for homeowners and a web portal for operations, built on one shared design system. <strong>Chosen.</strong></li>
+</ul>
+<h3>Trade-offs</h3>
+<p>To move fast, I communicated the experience through a live prototype generated with Claude instead of building a fully clickable Figma prototype for every flow, and kept Figma as the source of truth for components and final designs. Deeper financial features, such as bank-account connection and automated monthly statements, were scoped for later phases so the core experience could launch first.</p>
+</div>
+                </section>
+
+                <section class="chapter reveal" id="prototype" aria-labelledby="h-prototype">
+                    <span class="ch-num">08 — Build</span>
+                    <h2 id="h-prototype">Live prototype &amp; developer handoff</h2>
+                    <p>I used Claude for rapid prototyping and generated a live, clickable mock-up of both platforms. Instead of describing interactions in documents, I shared the live prototype with stakeholders for sign-off and with the developers so they could see exactly how screens, states and transitions should look and behave.</p>
+                    <p>Figma stayed the source of truth. I designed the components and high-fidelity screens there and documented the designs, including states, spacing and behavior notes, before handing them off to development.</p>
+                    <div class="deliverables">
+                        <a class="pill" href="https://theenchantedhaus-mockup.vercel.app/" target="_blank" rel="noopener" style="--c: #00c8ff">Open the live prototype ↗</a>
+                    </div>
+                </section>
+
+                <section class="chapter reveal" id="design-system" aria-labelledby="h-design-system">
+                    <span class="ch-num">09 — Design System</span>
+                    <h2 id="h-design-system">The company's first design system</h2>
+                    <p>The Enchanted Haus had no shared design language, so I built its first design system: a gold-on-night color palette with clear status colors, a Space Grotesk type scale, and core components such as buttons, status badges, inputs, navigation, KPI cards and charts. I documented how and when to use each one.</p>
+                    <p>The system was adopted by 3 designers and 8 developers. It kept the web portal and mobile app consistent and made development more efficient, and it gave the designers I onboarded a common starting point.</p>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/design-system.webp">
+                        <img src="images/project-ai/case/enchanted-haus/design-system.webp" width="2400" height="1372" loading="lazy" decoding="async" alt="Design system foundations: color palette, Space Grotesk type scale, buttons, status badges, inputs, navigation, KPI card and chart components.">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>Design system foundations and core components</figcaption>
+                    </figure>
+                </section>
+
+                <section class="chapter reveal" id="hifi" aria-labelledby="h-hifi">
+                    <span class="ch-num">10 — Design</span>
+                    <h2 id="h-hifi">High-fidelity designs</h2>
+                    <p>The final designs pair a premium, hospitality-inspired look with practical clarity: a dark canvas, gold accents for primary actions and key numbers, and consistent status colors across both platforms.</p>
+                    <div class="sub-nav">
+                        <a class="pill" href="#web-portal" style="--c: #d4af37">Web Portal</a>
+                        <a class="pill" href="#mobile-app" style="--c: var(--accent-pink)">Mobile App</a>
+                    </div>
+
+                    <div class="product" id="web-portal">
+                        <div class="product-head"><h3>Web Portal</h3><span class="tag">Operations &amp; partners</span></div>
+                        <p>The portfolio overview leads with four headline KPIs, revenue trends, portfolio distribution and occupancy, with "Add Property" always one click away.</p>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/web-overview.webp">
+                            <img src="images/project-ai/case/enchanted-haus/web-overview.webp" width="2400" height="1500" loading="lazy" decoding="async" alt="Portfolio Performance overview with projected annual revenue, portfolio value, RevPAR and ranking, a revenue chart and portfolio distribution.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                            <figcaption>Portfolio overview</figcaption>
+                        </figure>
+                        <p>Properties are shown as cards with live status, monthly revenue and occupancy, with search and status filters. Adding a property takes three fields and photos.</p>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/web-properties.webp">
+                            <img src="images/project-ai/case/enchanted-haus/web-properties.webp" width="2400" height="1500" loading="lazy" decoding="async" alt="Properties page with search, status filters and property cards showing status, monthly revenue and occupancy.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                            <figcaption>Properties with live status</figcaption>
+                        </figure>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/web-addproperty.webp">
+                            <img src="images/project-ai/case/enchanted-haus/web-addproperty.webp" width="2400" height="1500" loading="lazy" decoding="async" alt="Add New Property modal with property name, location, property type and photo upload.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                            <figcaption>Add Property: a short, focused form</figcaption>
+                        </figure>
+                        <p>Bookings, Financials and Operations hold the detail that was moved off the overview: guest stays, profit and expense analysis, and real-time service status from the management team.</p>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/web-bookings.webp">
+                            <img src="images/project-ai/case/enchanted-haus/web-bookings.webp" width="2400" height="1500" loading="lazy" decoding="async" alt="Bookings page listing active, upcoming and past guest stays with dates, status and amounts.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                            <figcaption>Bookings</figcaption>
+                        </figure>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/web-financials.webp">
+                            <img src="images/project-ai/case/enchanted-haus/web-financials.webp" width="2400" height="1500" loading="lazy" decoding="async" alt="Financial Insights page with net profit versus expenses chart, profit margin, operational leakage, cleaning overhead and ROI.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                            <figcaption>Financial insights</figcaption>
+                        </figure>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/web-operations.webp">
+                            <img src="images/project-ai/case/enchanted-haus/web-operations.webp" width="2400" height="1500" loading="lazy" decoding="async" alt="Service Status page with completed tasks, active requests, turnaround time, quality score and a table of recent management tasks.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                            <figcaption>Operations: service status</figcaption>
+                        </figure>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/web-support.webp">
+                            <img src="images/project-ai/case/enchanted-haus/web-support.webp" width="2400" height="1500" loading="lazy" decoding="async" alt="Support Center with a dedicated account team and a support ticket conversation.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                            <figcaption>Support center</figcaption>
+                        </figure>
+                    </div>
+
+                    <div class="product" id="mobile-app">
+                        <div class="product-head"><h3>Mobile App</h3><span class="tag">Homeowners</span></div>
+                        <p>For homeowners, the app answers the most common questions first: net earnings, occupancy and ROI, followed by property status, bookings, operations updates, a concierge chat and finance.</p>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/case/enchanted-haus/mobile-app.webp">
+                            <img src="images/project-ai/case/enchanted-haus/mobile-app.webp" width="2400" height="1249" loading="lazy" decoding="async" alt="Five mobile app screens: portfolio, bookings, operations, concierge chat and finance.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                            <figcaption>Mobile app: portfolio, bookings, operations, concierge and finance</figcaption>
+                        </figure>
+                    </div>
+                </section>
+
+                <section class="chapter reveal" id="results" aria-labelledby="h-results">
+                    <span class="ch-num">11 — Outcome</span>
+                    <h2 id="h-results">Results</h2>
+<div class="rich">
+<p>Over 40 homeowners signed up for The Enchanted Haus services at launch, and the company now receives more than 100 inquiries per month from owners looking to use its services.</p>
+</div>
+                </section>
+            </div>
+        </div>
+
+        <nav class="footer-nav wrap" aria-label="More projects">
+            <div class="footer-grid">
+                <a class="fn-card" href="index.html#work"><span class="k">← All projects</span><strong>Back to portfolio</strong></a>
+                <a class="fn-card next" href="project-document-management.html"><span class="k">Next project →</span><strong>Automation — Document Management</strong></a>
+            </div>
+        </nav>
+    </main>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full-size image">
+        <span class="lb-hint">Full resolution · Esc to close</span>
+        <button class="lb-close" type="button" aria-label="Close">✕</button>
+        <img alt="">
+    </div>
+
+    <script src="case-study.js"></script>
+</body>
+</html>

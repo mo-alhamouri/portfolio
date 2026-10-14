@@ -49,6 +49,7 @@
                     <li><a href="#problem-statement">Problem Statement</a></li>
                     <li><a href="#role-responsibilities">Role &amp; Responsibilities</a></li>
                     <li><a href="#research">Research</a></li>
+                    <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
                     <li><a href="#high-fidelity-designs">High-Fidelity Designs</a></li>
                 </ol>
             </aside>
@@ -83,8 +84,23 @@
     <button class="zoom" type="button">Zoom ⤢</button>
 </figure>
                 </section>
+                <section class="chapter reveal" id="insights-tradeoffs" aria-labelledby="h-insights-tradeoffs">
+                    <span class="ch-num">04 — Insights</span>
+                    <h2 id="h-insights-tradeoffs">Research, Options &amp; Trade-offs</h2>
+<div class="rich">
+<h3>What research revealed</h3>
+<p>Contractors uploaded documents but couldn't tell whether they'd been accepted, so they chased customer care. Internal teams were re-checking expiry dates by hand.</p>
+<h3>Directions explored</h3>
+<ul>
+<li><strong>Option A:</strong> A single bulk-upload screen. Dropped: client-specific rules meant each document needed its own status and feedback.</li>
+<li><strong>Option B:</strong> A document list with per-item status (accepted, pending, expiring, rejected with reason) and inline re-upload. <strong>Chosen.</strong></li>
+</ul>
+<h3>Trade-offs</h3>
+<p>Some client-specific acceptance rules stayed manual at launch because the D365 integration couldn't express them yet. We designed clear "under review" states rather than delaying the release.</p>
+</div>
+                </section>
                 <section class="chapter reveal" id="high-fidelity-designs" aria-labelledby="h-high-fidelity-designs">
-                    <span class="ch-num">04 — Design</span>
+                    <span class="ch-num">05 — Design</span>
                     <h2 id="h-high-fidelity-designs">High-Fidelity Designs</h2>
 <div class="rich">
 <p>I designed a comprehensive, high-fidelity experience that enables contractors to upload, track, and manage critical documents independently, while giving internal teams clear visibility and control. The designs introduced clear document statuses, expiry indicators, notifications, and qualification impacts, ensuring users always understood what was required and why.</p>

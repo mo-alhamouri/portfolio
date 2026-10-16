@@ -32,7 +32,7 @@
                 <div class="fact"><dt>Industry</dt><dd class="v">Cybersecurity, Software</dd></div>
                 <div class="fact"><dt>Role</dt><dd class="v">Lead Product Designer</dd></div>
                 <div class="fact"><dt>Platform</dt><dd class="v">Cross-Platform (Desktop / Mobile)</dd></div>
-                <div class="fact"><dt>Tools</dt><dd class="v">Figma, Prototype, User Testing</dd></div>
+                <div class="fact"><dt>Tools</dt><dd class="v">Figma, Prototype, User Testing, A/B Testing</dd></div>
             </dl>
 
             <div class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Onboarding Experience - Cybersecurity/Hero.png">
@@ -47,7 +47,10 @@
                 <ol>
                     <li><a href="#problem-statement">Problem Statement</a></li>
                     <li><a href="#role-responsibilities">Role &amp; Responsibilities</a></li>
-                    <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
+                    <li><a href="#research-workshop">Research &amp; Workshop</a></li>
+                    <li><a href="#insights-tradeoffs">Options &amp; Trade-offs</a></li>
+                    <li><a href="#ab-testing">A/B Testing</a></li>
+                    <li><a href="#wireframes">Wireframes</a></li>
                     <li><a href="#high-fidelity-designs">High-Fidelity Designs</a></li>
                     <li><a href="#results">Results</a></li>
                 </ol>
@@ -70,43 +73,88 @@
 <p>I partnered closely with product managers and engineering leads to translate business requirements into high-quality, security-focused user experiences.</p>
 </div>
                 </section>
-                <section class="chapter reveal" id="insights-tradeoffs" aria-labelledby="h-insights-tradeoffs">
-                    <span class="ch-num">03 — Insights</span>
-                    <h2 id="h-insights-tradeoffs">Research, Options &amp; Trade-offs</h2>
+                <section class="chapter reveal" id="research-workshop" aria-labelledby="h-research-workshop">
+                    <span class="ch-num">03 — Research</span>
+                    <h2 id="h-research-workshop">Research &amp; Workshop</h2>
 <div class="rich">
 <h3>What research revealed</h3>
-<p>New users dropped off when asked to grant several permissions up front without understanding why.</p>
+<p>New users dropped off when asked to grant several permissions up front without understanding why. Many contacted support during setup instead of finishing it.</p>
+<p>I ran a workshop with Product and Engineering to map what users told us against the goals they described in their own words: keep my devices secure, keep my personal information safe, and protect me when I browse the web. We turned those into ideas, then narrowed them to a direction we could test.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Onboarding Experience - Cybersecurity/Workshop.png">
+    <img src="images/project-ai/case/cybersecurity-onboarding/workshop.webp" width="2400" height="1204" loading="lazy" decoding="async" alt="Workshop board: user pain points, user goals, ideas and decisions for the onboarding flow.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Workshop synthesis: pain points, user goals, ideas and decisions (recreated for this case study)</figcaption>
+</figure>
+
+                </section>
+                <section class="chapter reveal" id="insights-tradeoffs" aria-labelledby="h-insights-tradeoffs">
+                    <span class="ch-num">04 — Insights</span>
+                    <h2 id="h-insights-tradeoffs">Options &amp; Trade-offs</h2>
+<div class="rich">
 <h3>Directions explored</h3>
 <ul>
 <li><strong>Option A:</strong> One long setup flow. Dropped: highest drop-off in testing.</li>
-<li><strong>Option B:</strong> A short, progressive flow that explains the benefit before each permission, with an A/B test on the order of steps. <strong>Chosen.</strong></li>
+<li><strong>Option B:</strong> A short, progressive flow that asks for goals first and explains the benefit before each permission. <strong>Chosen.</strong></li>
 </ul>
 <h3>Trade-offs</h3>
 <p>Some protection features were turned on after onboarding rather than during it, accepting slower full protection in exchange for completion.</p>
 </div>
                 </section>
+                <section class="chapter reveal" id="ab-testing" aria-labelledby="h-ab-testing">
+                    <span class="ch-num">05 — Validation</span>
+                    <h2 id="h-ab-testing">A/B Testing</h2>
+<div class="rich">
+<p>I led an A/B test with first-time users comparing the long setup flow against the progressive, goal-first flow, then tested the order of setup steps within the winning flow. The primary metric was onboarding completion, with drop-off per step and onboarding-related support tickets as guardrails.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Onboarding Experience - Cybersecurity/AB_Test.png">
+    <img src="images/project-ai/case/cybersecurity-onboarding/ab-test.webp" width="2400" height="1094" loading="lazy" decoding="async" alt="A/B test plan comparing a long setup flow with a short progressive flow, with hypothesis, metrics and result.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>A/B test plan, metrics and outcome (recreated for this case study)</figcaption>
+</figure>
+
+                </section>
+                <section class="chapter reveal" id="wireframes" aria-labelledby="h-wireframes">
+                    <span class="ch-num">06 — Structure</span>
+                    <h2 id="h-wireframes">Wireframes</h2>
+<div class="rich">
+<p>Before visual design, I worked the five-step flow out in low fidelity to agree on order, copy hierarchy and the choices on each screen with users and engineering.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Onboarding Experience - Cybersecurity/Wireframes.png">
+    <img src="images/project-ai/case/cybersecurity-onboarding/wireframes.webp" width="2400" height="1003" loading="lazy" decoding="async" alt="Five low-fidelity wireframes: welcome, goals, recommendations, guided setup and completion.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Low-fidelity wireframes of the five-step flow</figcaption>
+</figure>
+
+                </section>
                 <section class="chapter reveal" id="high-fidelity-designs" aria-labelledby="h-high-fidelity-designs">
-                    <span class="ch-num">04 — Design</span>
+                    <span class="ch-num">07 — Design</span>
                     <h2 id="h-high-fidelity-designs">High-Fidelity Designs</h2>
 <div class="rich">
-<p>Once the low-fidelity concepts were validated, I moved to high-fidelity designs consistent with McAfee’s visual identity and design system. I focused on clear layouts, intuitive navigation, and visual hierarchy to support first-time users.</p>
+<p>Once the low-fidelity concepts were validated, I moved to high-fidelity designs consistent with McAfee’s visual identity and design system. Each screen does one job: explain protection, capture goals, recommend first steps, guide setup, and celebrate completion.</p>
 <p>Working closely with engineering, I ensured the designs were technically feasible and user-ready, using prototypes to demonstrate key interactions and guide implementation.</p>
 </div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Onboarding Experience - Cybersecurity/Onboarding_Flow.png">
+    <img src="images/project-ai/case/cybersecurity-onboarding/onboarding-flow.webp" width="2400" height="1841" loading="lazy" decoding="async" alt="Five high-fidelity onboarding screens: welcome, protection goals, recommended first steps, guided setup and completion.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>The shipped five-screen onboarding flow</figcaption>
+</figure>
+
 <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Onboarding Experience - Cybersecurity/High_Fidelity_Designs.png">
     <img src="images/project-ai/case/cybersecurity-onboarding/high-fidelity-designs.webp" width="2400" height="1879" loading="lazy" decoding="async" alt="High Fidelity Cybersecurity Designs">
     <button class="zoom" type="button">Zoom ⤢</button>
 </figure>
                 </section>
                 <section class="chapter reveal" id="results" aria-labelledby="h-results">
-                    <span class="ch-num">05 — Outcome</span>
+                    <span class="ch-num">08 — Outcome</span>
                     <h2 id="h-results">Results</h2>
 <div class="rich">
-<p>90% onboarding completion, and onboarding support tickets dropped significantly.</p>
+<p>90% of new users who started onboarding completed it, and onboarding-related support tickets dropped significantly after launch.</p>
+<p><em>How we measured: onboarding funnel analytics (users who finished setup ÷ users who started it), and onboarding-tagged support tickets compared before and after launch.</em></p>
 </div>
                 </section>
             </div>
         </div>
-
         <nav class="footer-nav wrap" aria-label="More projects">
             <div class="footer-grid">
                 <a class="fn-card" href="index.html#work"><span class="k">← All projects</span><strong>Back to portfolio</strong></a>

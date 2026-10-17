@@ -22,7 +22,7 @@ a { color: inherit; }
 /* ---------- Top bar ---------- */
 .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100;
     padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; gap: 16px;
-    background: rgba(10,10,10,0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    background: rgba(10,10,10,0.94); /* no backdrop blur: it repainted on every scroll frame and flickered in Chrome */
     border-bottom: 1px solid rgba(255,255,255,0.06); }
 .nav a { text-decoration: none; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
 .nav .back span { transition: transform 0.25s; }
@@ -57,7 +57,7 @@ a { color: inherit; }
 .shot img { width: 100%; height: auto; }
 .zoom { position: absolute; right: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 100px;
     font: inherit; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; color: #fff; cursor: zoom-in;
-    background: rgba(10,10,10,0.75); border: 1px solid rgba(255,255,255,0.2); backdrop-filter: blur(8px); opacity: 0.85; transition: opacity 0.2s; }
+    background: rgba(10,10,10,0.75); border: 1px solid rgba(255,255,255,0.2); opacity: 0.85; transition: opacity 0.2s; }
 .shot:hover .zoom, .zoom:focus-visible { opacity: 1; }
 .shot.is-zoomable { cursor: zoom-in; }
 

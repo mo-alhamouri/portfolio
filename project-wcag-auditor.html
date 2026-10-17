@@ -47,6 +47,7 @@
                     <li><a href="#why-use-it">Why use it?</a></li>
                     <li><a href="#the-process">The Process</a></li>
                     <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
+                    <li><a href="#wireframes">Wireframes</a></li>
                     <li><a href="#key-features">Key Features</a></li>
                     <li><a href="#approved-published-live-by">Approved &amp; Published Live by…</a></li>
                     <li><a href="#available-in-the-figma-commu">Available in the Figma Commu…</a></li>
@@ -108,6 +109,11 @@
                 <section class="chapter reveal" id="insights-tradeoffs" aria-labelledby="h-insights-tradeoffs">
                     <span class="ch-num">03 — Insights</span>
                     <h2 id="h-insights-tradeoffs">Research, Options &amp; Trade-offs</h2>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Research.png">
+    <img src="images/project-ai/case/wcag-auditor/research.webp" width="2400" height="1291" loading="lazy" decoding="async" alt="Research board: what designers struggled with, WCAG checks to cover, ideas and decisions">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Research and problem framing (recreated for this case study)</figcaption>
+</figure>
 <div class="rich">
 <h3>What research revealed</h3>
 <p>Designers ignored audit tools that flagged decorative layers and background shapes. Noise, not missing checks, was the main complaint.</p>
@@ -119,9 +125,28 @@
 <h3>Trade-offs</h3>
 <p>Figma plug-in API limits shaped which checks could run automatically. Some checks stay guidance rather than automatic detection.</p>
 </div>
+<aside class="lead-call" aria-label="Leadership">
+<span class="k">Leadership · Making a hard call</span>
+<h3>Fewer results, but every one worth acting on</h3>
+<p>The easy version of this plug-in would have flagged everything and left designers to sort it out, and that is exactly the noise that made them ignore other audit tools. I chose smart filters that skip decorative layers and background shapes, and double-click to jump straight to each issue, so every result is something a designer can fix before handoff.</p>
+<p class="cost"><strong>What it cost:</strong> Coverage. Checks the Figma plug-in API can't run reliably stay as guidance instead of automatic detection, so the tool does less on its own in exchange for results people trust.</p>
+</aside>
                 </section>
+                <section class="chapter reveal" id="wireframes" aria-labelledby="h-wireframes">
+                    <span class="ch-num">04 — Design</span>
+                    <h2 id="h-wireframes">Wireframes</h2>
+<div class="rich">
+<p>Before building with Claude and Gemini CLI, I sketched the panel in low fidelity: a home screen with one Master Audit and focused checks, grouped results with zoom to layer, and detail views for contrast and target sizes.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/WCAG Accessibility Auditor/Wireframes.png">
+    <img src="images/project-ai/case/wcag-auditor/wireframes.webp" width="2400" height="1203" loading="lazy" decoding="async" alt="Low-fidelity wireframes of the plug-in panel: home, results, contrast checker and target sizes">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Low-fidelity wireframes of the plug-in panel (recreated for this case study)</figcaption>
+</figure>
+                </section>
+
                 <section class="chapter reveal" id="key-features" aria-labelledby="h-key-features">
-                    <span class="ch-num">04 — Features</span>
+                    <span class="ch-num">05 — Features</span>
                     <h2 id="h-key-features">Key Features</h2>
 <div class="rich">
 <p>The WCAG Accessibility Auditor is packed with features designed to make accessibility audits fast, accurate, and actionable.</p>
@@ -182,7 +207,7 @@
 </div>
                 </section>
                 <section class="chapter reveal" id="approved-published-live-by" aria-labelledby="h-approved-published-live-by">
-                    <span class="ch-num">05 — Launch</span>
+                    <span class="ch-num">06 — Launch</span>
                     <h2 id="h-approved-published-live-by">Approved &amp; Published Live by Figma</h2>
 <div class="rich">
 <p>I am proud to announce that the WCAG Accessibility Auditor has been successfully reviewed, approved, and published live by Figma. This milestone marks the official transition from a private tool to a community-ready resource, meeting Figma's high standards for security, performance, and utility.</p>
@@ -193,7 +218,7 @@
 </figure>
                 </section>
                 <section class="chapter reveal" id="available-in-the-figma-commu" aria-labelledby="h-available-in-the-figma-commu">
-                    <span class="ch-num">06 — Launch</span>
+                    <span class="ch-num">07 — Launch</span>
                     <h2 id="h-available-in-the-figma-commu">Available in the Figma Community</h2>
 <div class="rich">
 <p>The plugin is now available for designers from around the world in the Figma Community. Designers can now start benefiting from this amazing plugin to ensure their work is inclusive and WCAG-compliant from the very first pixel. Join the growing community of users who are streamlining their accessibility workflows today.</p>
@@ -204,7 +229,7 @@
 </figure>
                 </section>
                 <section class="chapter reveal" id="results" aria-labelledby="h-results">
-                    <span class="ch-num">07 — Outcome</span>
+                    <span class="ch-num">08 — Outcome</span>
                     <h2 id="h-results">Results</h2>
 <div class="rich">
 <p>The plug-in has been installed by 21 users as of October 2026.</p>

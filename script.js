@@ -25,29 +25,36 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Reveal on scroll with stagger
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-};
+// Reveal on scroll: content is visible by default; the animation is an enhancement on top.
+// Only sections that start below the fold are prepared for the animation, and any
+// situation where the animation might not run (no IntersectionObserver, reduced motion,
+// automated browsers, printing, jumping to an anchor) leaves everything visible.
+(function () {
+    const sections = [...document.querySelectorAll('.section')];
+    const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!('IntersectionObserver' in window) || reduce || navigator.webdriver) return;
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, observerOptions);
+    const show = el => el.classList.remove('pre-reveal');
+    const showAll = () => sections.forEach(show);
+    const pending = sections.filter(el => el.getBoundingClientRect().top > window.innerHeight * 0.9);
+    // A page opened at an anchor (e.g. #work) shows everything straight away
+    if (location.hash) return;
+    pending.forEach(el => el.classList.add('pre-reveal'));
 
-// Observe sections and cards for reveal
-document.querySelectorAll('.section').forEach((el, index) => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = `opacity 0.5s ease ${index * 0.1}s, transform 0.5s ease ${index * 0.1}s`;
-    observer.observe(el);
-});
+    const io = new IntersectionObserver(entries => entries.forEach(e => {
+        if (e.isIntersecting) { show(e.target); io.unobserve(e.target); }
+    }), { rootMargin: '0px 0px -8% 0px', threshold: 0 });
+    pending.forEach(el => io.observe(el));
+
+    // Safety nets: reveal everything when jumping to a section, printing, or if the
+    // page has been scrolled but the observer hasn't fired (e.g. throttled background tab)
+    addEventListener('hashchange', showAll);
+    document.addEventListener('click', e => { if (e.target.closest('a[href^="#"]')) showAll(); });
+    addEventListener('beforeprint', showAll);
+    addEventListener('scroll', () => {
+        pending.forEach(el => { if (el.getBoundingClientRect().top < innerHeight) show(el); });
+    }, { passive: true });
+})();
 
 // Mouse parallax effect for floating bubbles
 const floatingBubbles = document.querySelectorAll('.floating-bubble');

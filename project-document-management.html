@@ -50,6 +50,7 @@
                     <li><a href="#role-responsibilities">Role &amp; Responsibilities</a></li>
                     <li><a href="#research">Research</a></li>
                     <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
+                    <li><a href="#wireframes">Wireframes</a></li>
                     <li><a href="#high-fidelity-designs">High-Fidelity Designs</a></li>
                     <li><a href="#results">Results</a></li>
                 </ol>
@@ -99,9 +100,28 @@
 <h3>Trade-offs</h3>
 <p>Some client-specific acceptance rules stayed manual at launch because the D365 integration couldn't express them yet. We designed clear "under review" states rather than delaying the release.</p>
 </div>
+<aside class="lead-call" aria-label="Leadership">
+<span class="k">Leadership · Making a hard call</span>
+<h3>Launch with manual review, or wait for the integration</h3>
+<p>The D365 integration couldn't yet express some client-specific acceptance rules. The team could delay the release until it could, or launch with those rules handled by people. I recommended launching, and designed clear “under review” states so contractors always knew where each document stood and what to do next.</p>
+<p class="cost"><strong>What it cost:</strong> Extra manual work for the operations team, who kept reviewing those documents by hand at launch, but contractors got self-service sooner.</p>
+</aside>
                 </section>
-                <section class="chapter reveal" id="high-fidelity-designs" aria-labelledby="h-high-fidelity-designs">
+                <section class="chapter reveal" id="wireframes" aria-labelledby="h-wireframes">
                     <span class="ch-num">05 — Design</span>
+                    <h2 id="h-wireframes">Wireframes</h2>
+<div class="rich">
+<p>With the business rules mapped, I sketched the happy path in low fidelity: the 30-day expiry reminder, the contractor’s documents list with a status for every document, the upload step and the internal review. Operations, compliance and engineering checked each status and edge case against these before high-fidelity design.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Automation/Wireframes.png">
+    <img src="images/project-ai/case/document-management/wireframes.webp" width="2400" height="979" loading="lazy" decoding="async" alt="Low-fidelity wireframes of the critical document flow: reminder email, documents list, upload and internal review">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Low-fidelity wireframes: reminder, documents list, upload and review (recreated for this case study)</figcaption>
+</figure>
+                </section>
+
+                <section class="chapter reveal" id="high-fidelity-designs" aria-labelledby="h-high-fidelity-designs">
+                    <span class="ch-num">06 — Design</span>
                     <h2 id="h-high-fidelity-designs">High-Fidelity Designs</h2>
 <div class="rich">
 <p>I designed a comprehensive, high-fidelity experience that enables contractors to upload, track, and manage critical documents independently, while giving internal teams clear visibility and control. The designs introduced clear document statuses, expiry indicators, notifications, and qualification impacts, ensuring users always understood what was required and why.</p>
@@ -113,7 +133,7 @@
 </figure>
                 </section>
                 <section class="chapter reveal" id="results" aria-labelledby="h-results">
-                    <span class="ch-num">06 — Outcome</span>
+                    <span class="ch-num">07 — Outcome</span>
                     <h2 id="h-results">Results</h2>
 <div class="rich">
 <p>Document-related support tickets dropped by 90%, from about 200 to 20 a month, within 3 months of launching automation.</p>

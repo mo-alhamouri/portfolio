@@ -139,8 +139,10 @@ figcaption { padding: 14px 18px; font-size: 13px; color: var(--faint); border-to
     background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); }
 .lb-hint { position: fixed; top: 26px; left: 50%; transform: translateX(-50%); font-size: 13px; color: var(--faint); }
 
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.in { opacity: 1; transform: none; }
+/* Visible by default; case-study.js adds .pre only to chapters below the fold and removes it as they scroll in */
+.reveal { transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.pre { opacity: 0; transform: translateY(24px); }
+@media print { .reveal.pre { opacity: 1; transform: none; } }
 
 @media (max-width: 1100px) {
     .body { grid-template-columns: 1fr; gap: 0; }
@@ -168,7 +170,7 @@ figcaption { padding: 14px 18px; font-size: 13px; color: var(--faint); border-to
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     .bg-gradient { animation: none; }
-    .reveal { opacity: 1; transform: none; transition: none; }
+    .reveal, .reveal.pre { opacity: 1; transform: none; transition: none; }
 }
 
 /* ---------- Generic blocks used across case studies ---------- */
@@ -192,3 +194,13 @@ figcaption { padding: 14px 18px; font-size: 13px; color: var(--faint); border-to
     .gallery { grid-template-columns: 1fr; }
 }
 
+
+/* Leadership callout (2026-10-16): one per featured case study, at the end of "Research, Options & Trade-offs" */
+.lead-call { margin-top: 36px; padding: 28px 32px; border-radius: 20px; max-width: 80ch;
+    background: linear-gradient(135deg, rgba(0,255,136,0.08), rgba(255,255,255,0.02) 60%); border: 1px solid rgba(0,255,136,0.22); }
+.lead-call .k { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-green); }
+.lead-call h3 { margin-top: 10px !important; font-size: 1.35rem; line-height: 1.35; font-weight: 600; }
+.lead-call p { margin-top: 12px; }
+.lead-call .cost { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); font-size: 1rem; color: rgba(255,255,255,0.8); }
+.lead-call .cost strong { color: var(--accent-pink); font-weight: 600; }
+@media (max-width: 640px) { .lead-call { padding: 22px 20px; } }

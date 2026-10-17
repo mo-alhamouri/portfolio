@@ -10,11 +10,22 @@
 })();
 
 // Reveal on scroll
+// Content is visible by default; the fade-in is an enhancement on top. Only chapters that
+// start below the fold are prepared, and anchors, printing, reduced motion and automated
+// browsers always get the content without waiting for the animation.
 (function () {
-    const els = document.querySelectorAll('.reveal');
-    if (!('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); return; }
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.08 });
+    const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!('IntersectionObserver' in window) || reduce || navigator.webdriver || location.hash) return;
+    const els = [...document.querySelectorAll('.reveal')].filter(e => e.getBoundingClientRect().top > innerHeight * 0.9);
+    const show = e => e.classList.remove('pre');
+    const showAll = () => els.forEach(show);
+    els.forEach(e => e.classList.add('pre'));
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } }), { rootMargin: '0px 0px -6% 0px', threshold: 0 });
     els.forEach(e => io.observe(e));
+    addEventListener('hashchange', showAll);
+    document.addEventListener('click', e => { if (e.target.closest('a[href^="#"]')) showAll(); });
+    addEventListener('beforeprint', showAll);
+    addEventListener('scroll', () => els.forEach(e => { if (e.getBoundingClientRect().top < innerHeight) show(e); }), { passive: true });
 })();
 
 // Table of contents: highlight current chapter

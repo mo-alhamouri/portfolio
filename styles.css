@@ -645,6 +645,11 @@ body {
     width: auto;
     object-fit: contain;
 }
+.client-via {
+    margin-top: -14px;
+    font-size: 11px;
+    color: #7a7a72;
+}
 .client-tag {
     font-size: 11px;
     font-weight: 600;
@@ -1115,3 +1120,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     .quote, .contact-link, .contact-link .arrow { transition: none; }
     .quote:hover { transform: none; }
 }
+
+/* Reveal on scroll (2026-10-16): sections are visible by default.
+   script.js adds .pre-reveal only to sections below the fold, then removes it as they scroll in. */
+.section { transition: opacity 0.6s ease, transform 0.6s ease; }
+.section.pre-reveal { opacity: 0; transform: translateY(30px); }
+@media (prefers-reduced-motion: reduce) { .section, .section.pre-reveal { opacity: 1; transform: none; transition: none; } }
+@media print { .section.pre-reveal { opacity: 1; transform: none; } }

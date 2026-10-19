@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COIT Website Redesign | Mo Alhamouri</title>
+    <meta name="description" content="Redesigning coit.com from scratch as a mobile-first, responsive website, using Claude to speed up UI/UX exploration in Figma.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <link rel="stylesheet" href="case-study.css">
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="noise"></div>
+
+    <nav class="nav" aria-label="Case study">
+        <a href="index.html#work" class="back"><span aria-hidden="true">←</span> Back to portfolio</a>
+        <a href="project-api.html" class="next">Next project →</a>
+        <div class="progress" id="progress" aria-hidden="true"></div>
+    </nav>
+
+        <main>
+        <header class="hero wrap">
+            <span class="eyebrow">Case Study · Website Redesign · AI-accelerated</span>
+            <h1>COIT: Redesigning coit.com, Mobile First</h1>
+            <p class="hero-lede">Starting from a blank page to a responsive homepage, navigation and location pages for a 75-year-old cleaning and restoration brand.</p>
+            <p class="hero-about">COIT Cleaning &amp; Restoration was founded in 1950 at the base of San Francisco’s Coit Tower and has grown from a single carpet cleaner into home and business cleaning and restoration services across the U.S., Canada and Thailand. I worked on the redesign of coit.com as a Product Design Consultant at Kanopi Studios.</p>
+
+            <dl class="glance" aria-label="At a glance">
+                <div class="g g-problem"><dt>Problem</dt><dd>The site had to serve homeowners, businesses and people in an emergency, across a national network of locations, and most of them arrive on a phone. They needed to find the right service and book or call fast.</dd></div>
+                <div class="g"><dt>My role</dt><dd>Product Design Consultant (UX/UI), Kanopi Studios</dd></div>
+                <div class="g"><dt>Team</dt><dd>Kanopi Studios project team, working with COIT stakeholders</dd></div>
+                <div class="g"><dt>Timeline</dt><dd>Aug 2026 – present (in progress)</dd></div>
+                <div class="g g-result"><dt>Result</dt><dd>Seven homepage rounds, from v1.0 to v4.3, plus a new navigation and a location page template, each designed for desktop and mobile</dd></div>
+            </dl>
+
+            <dl class="facts" style="--cols: 4">
+                <div class="fact"><dt>Client</dt><dd class="v">COIT Cleaning &amp; Restoration</dd></div>
+                <div class="fact"><dt>Industry</dt><dd class="v">Home &amp; Business Services</dd></div>
+                <div class="fact"><dt>Platform</dt><dd class="v">Responsive Website (Desktop / Mobile)</dd></div>
+                <div class="fact"><dt>Tools</dt><dd class="v">Figma, Claude (Figma MCP), Design Canvas</dd></div>
+            </dl>
+
+            <div class="shot is-zoomable" data-full="images/project-ai/case/coit/hero.webp">
+    <img src="images/project-ai/case/coit/hero.webp" width="2400" height="1300" fetchpriority="high" alt="COIT homepage redesign on desktop and mobile">
+    <button class="zoom" type="button">Zoom ⤢</button>
+</div>
+        </header>
+
+        <div class="body wrap">
+            <aside class="toc" aria-label="On this page">
+                <span class="k">On this page</span>
+                <ol>
+                    <li><a href="#problem-statement">Problem Statement</a></li>
+                    <li><a href="#role-responsibilities">Role &amp; Responsibilities</a></li>
+                    <li><a href="#from-scratch">Starting from scratch</a></li>
+                    <li><a href="#claude">Designing faster with Claude</a></li>
+                    <li><a href="#mobile">Mobile first</a></li>
+                    <li><a href="#locations">Location pages</a></li>
+                    <li><a href="#insights-tradeoffs">Options &amp; Trade-offs</a></li>
+                    <li><a href="#results">Where it stands</a></li>
+                </ol>
+            </aside>
+
+            <div class="content">
+                <section class="chapter reveal" id="problem-statement" aria-labelledby="h-problem-statement">
+                    <span class="ch-num">01 — Challenge</span>
+                    <h2 id="h-problem-statement">Problem Statement</h2>
+<div class="hmw problem-box">
+<span class="k">Problem statement</span>
+<blockquote>How might we help homeowners, businesses and people in an emergency find the right COIT service and book or call in seconds, on any screen?</blockquote>
+</div>
+                </section>
+                <section class="chapter reveal" id="role-responsibilities" aria-labelledby="h-role-responsibilities">
+                    <span class="ch-num">02 — Role</span>
+                    <h2 id="h-role-responsibilities">Role &amp; Responsibilities</h2>
+<div class="rich">
+<p>I own the UX and UI of the redesign: the homepage, the navigation and information architecture, and a reusable location page, each designed for desktop and mobile. I turn client feedback into the next round, explore layout options for the team and the client to choose from, and keep every page consistent with COIT’s brand and accessible.</p>
+</div>
+                </section>
+                <section class="chapter reveal" id="from-scratch" aria-labelledby="h-from-scratch">
+                    <span class="ch-num">03 — Process</span>
+                    <h2 id="h-from-scratch">Starting from scratch</h2>
+<div class="rich">
+<p>The first homepage, v1.0, followed a familiar pattern: a carousel for each service line (Home Cleaning, Business Cleaning, Restoration &amp; Emergency), a location map, reviews and blogs. It was complete, but long, and on a phone the important actions sat far down the page.</p>
+<p>Each review with COIT tightened it. By v3.0 the page told COIT’s story and trust signals earlier. By v4.3 the hero, the 75-year history timeline, a single “Ready to schedule your clean?” banner and the 100% satisfaction guarantee carry the page, and the call and booking actions are always one tap away.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/case/coit/evolution.webp">
+    <img src="images/project-ai/case/coit/evolution.webp" width="2340" height="1700" loading="lazy" decoding="async" alt="Three rounds of the COIT homepage side by side: v1.0, v3.0 and the final v4.3">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Seven rounds in total, from v1.0 to v4.3</figcaption>
+</figure>
+<figure class="shot is-zoomable" data-full="images/project-ai/case/coit/desktop-home.webp">
+    <img src="images/project-ai/case/coit/desktop-home.webp" width="1600" height="4673" loading="lazy" decoding="async" alt="COIT homepage v4.3 on desktop">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Homepage v4.3, desktop</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="claude" aria-labelledby="h-claude">
+                    <span class="ch-num">04 — AI</span>
+                    <h2 id="h-claude">Designing faster with Claude</h2>
+<div class="rich">
+<p>I used Claude connected to Figma as a design partner that works directly in the file. I set the direction, the content and the rules, and Claude built the frames for me to review, edit and choose from:</p>
+<ul>
+<li><strong>Mobile from desktop:</strong> Claude rebuilt full desktop pages at 390px, reusing existing mobile sections where the content matched and redesigning the desktop-only sections for small screens, with the text copied straight from the desktop frames.</li>
+<li><strong>Options to compare:</strong> for sections like the Bay Area introduction, Claude built three layouts side by side. I picked one, cut it down and rewrote the copy before it went into the page.</li>
+<li><strong>States that take time:</strong> open states for the new desktop mega-menu and the mobile navigation, built from the same patterns so they stay consistent.</li>
+<li><strong>A design canvas:</strong> a shared canvas with artboards for resource-page options, hero typography options, the design system and a brand style guide, so the team could compare directions in one place.</li>
+</ul>
+<p>The speed came from skipping the repetitive build work, not the design decisions. Every layout, edit and piece of copy still went through me before anyone else saw it.</p>
+</div>
+<aside class="lead-call" aria-label="How I worked">
+<span class="k">How I worked with AI</span>
+<h3>I make the calls, Claude does the building</h3>
+<p>I treated Claude like a fast production partner: clear instructions, real content only, and placeholders marked as placeholders. That kept quality in my hands while rounds that used to take days of rebuilding took far less.</p>
+</aside>
+                </section>
+                <section class="chapter reveal" id="mobile" aria-labelledby="h-mobile">
+                    <span class="ch-num">05 — Design</span>
+                    <h2 id="h-mobile">Mobile first</h2>
+<div class="rich">
+<p>On mobile the call and “Schedule Appointment” actions stay at the top of every page, services become sideways-scrolling tabs with one large feature card, and long lists such as the 22 Bay Area service areas fold into two columns. Small orange text uses a darker orange (#B8461C) so it reaches about 5:1 contrast on light backgrounds, while the brand orange stays on buttons and large shapes.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/case/coit/mobile-screens.webp">
+    <img src="images/project-ai/case/coit/mobile-screens.webp" width="2203" height="2769" loading="lazy" decoding="async" alt="COIT mobile screens: homepage, location page services and the satisfaction guarantee">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Mobile: homepage, location page and guarantee</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="locations" aria-labelledby="h-locations">
+                    <span class="ch-num">06 — Design</span>
+                    <h2 id="h-locations">A location page template</h2>
+<div class="rich">
+<p>COIT serves customers through local locations, so I designed a location page template, starting with the Bay Area: a tabbed services hub, local reviews, a local introduction, contact details with every area served, a video section and FAQs. The same template can be filled in for any location.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/case/coit/franchise-desktop.webp">
+    <img src="images/project-ai/case/coit/franchise-desktop.webp" width="1600" height="2157" loading="lazy" decoding="async" alt="COIT Bay Area location page on desktop: local introduction, contact details and areas served, and FAQs">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Bay Area location page, desktop</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="insights-tradeoffs" aria-labelledby="h-insights-tradeoffs">
+                    <span class="ch-num">07 — Insights</span>
+                    <h2 id="h-insights-tradeoffs">Options &amp; Trade-offs</h2>
+<div class="rich">
+<h3>Directions explored</h3>
+<ul>
+<li><strong>Option A:</strong> One carousel per service line on the homepage. Dropped: too long, and the main actions were buried on mobile.</li>
+<li><strong>Option B:</strong> A shorter homepage built on trust (history, guarantee, reviews), with services reached through a clearer navigation and location pages. <strong>Chosen.</strong></li>
+</ul>
+<h3>Trade-offs</h3>
+<p>Moving services out of the homepage put more weight on the navigation, so the mega-menu and mobile navigation had to be designed and reviewed alongside the homepage rather than after it. Brand feedback also shaped the details: COIT asked us to avoid anything that read as caution tape or a flame, so the accent lines became a soft multi-colour gradient.</p>
+</div>
+                </section>
+                <section class="chapter reveal" id="results" aria-labelledby="h-results">
+                    <span class="ch-num">08 — Outcome</span>
+                    <h2 id="h-results">Where it stands</h2>
+<div class="rich">
+<p>The redesign is in progress. So far: seven homepage rounds from v1.0 to v4.3, a new navigation for desktop and mobile, and a location page template, each designed for desktop and mobile. Results will be added after launch.</p>
+</div>
+                </section>
+            </div>
+        </div>
+
+        <nav class="footer-nav wrap" aria-label="More projects">
+            <div class="footer-grid">
+                <a class="fn-card" href="index.html#work"><span class="k">← All projects</span><strong>Back to portfolio</strong></a>
+                <a class="fn-card next" href="project-api.html"><span class="k">Next project →</span><strong>First American — Title Insurance API</strong></a>
+            </div>
+        </nav>
+    </main>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full-size image">
+        <span class="lb-hint">Full resolution · Esc to close</span>
+        <button class="lb-close" type="button" aria-label="Close">✕</button>
+        <img alt="">
+    </div>
+
+    <script src="case-study.js"></script>
+</body>
+</html>

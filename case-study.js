@@ -148,3 +148,108 @@
     });
     render();
 })();
+
+// Interactive key request demo (project-api.html only)
+(function () {
+    var root = document.querySelector('.kp');
+    if (!root) return;
+    var form = root.querySelector('[data-screen="form"]');
+    var confirmBtn = form.querySelector('[data-act="confirm"]');
+    var tip = form.querySelector('.kp-tip');
+    var toast = root.querySelector('.kp-toast');
+    var toastT;
+    var email = '';
+    var lastFocus = null;
+
+    function show(name) {
+        root.querySelectorAll('.kp-screen').forEach(function (s) { s.classList.toggle('is-on', s.getAttribute('data-screen') === name); });
+    }
+    function step(n) {
+        root.querySelectorAll('.kp-steps li').forEach(function (li) {
+            var s = +li.getAttribute('data-s');
+            li.classList.toggle('is-on', s === n);
+            li.classList.toggle('is-done', s < n);
+            if (s === n) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
+        });
+    }
+    function say(msg) {
+        toast.textContent = msg; toast.classList.add('is-on');
+        clearTimeout(toastT); toastT = setTimeout(function () { toast.classList.remove('is-on'); }, 2200);
+    }
+    function modal(name, open) {
+        var m = root.querySelector('[data-modal="' + name + '"]');
+        if (open) { lastFocus = document.activeElement; m.hidden = false; var b = m.querySelector('button.kp-btn:last-child') || m.querySelector('button'); if (b) b.focus(); }
+        else { m.hidden = true; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+    }
+    function valid() {
+        var ok = true;
+        form.querySelectorAll('input, select').forEach(function (el) { if (!el.value.trim()) ok = false; });
+        var e = form.querySelector('[name="email"]');
+        if (e.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e.value)) { ok = false; e.setAttribute('aria-invalid', 'true'); }
+        else e.removeAttribute('aria-invalid');
+        return ok;
+    }
+    function anyFilled() {
+        var any = false;
+        form.querySelectorAll('input, select').forEach(function (el) { if (el.value.trim()) any = true; });
+        return any;
+    }
+    function refresh() {
+        var ok = valid();
+        confirmBtn.disabled = !ok;
+        tip.classList.toggle('is-armed', !ok);
+    }
+    function rand(n) {
+        var c = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789', s = '';
+        for (var i = 0; i < n; i++) s += c.charAt(Math.floor(Math.random() * c.length));
+        return s;
+    }
+    function reset() {
+        form.reset(); refresh(); show('form'); step(1); root.querySelector('[data-bind="authed"]').hidden = true;
+        root.querySelectorAll('.kp-modal').forEach(function (m) { m.hidden = true; });
+    }
+
+    form.addEventListener('input', refresh);
+    form.addEventListener('change', refresh);
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        if (!valid()) return;
+        email = form.querySelector('[name="email"]').value.trim();
+        confirmBtn.classList.add('is-busy'); confirmBtn.disabled = true;
+        setTimeout(function () {
+            confirmBtn.classList.remove('is-busy');
+            root.querySelector('[data-bind="email"]').textContent = email;
+            show('verify'); step(2);
+        }, 900);
+    });
+    root.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-act], [data-copy]');
+        if (!b) return;
+        var act = b.getAttribute('data-act');
+        if (b.hasAttribute('data-copy')) {
+            var txt = root.querySelector('[data-bind="' + b.getAttribute('data-copy') + '"]').textContent;
+            try { navigator.clipboard.writeText(txt).catch(function () {}); } catch (err) {}
+            say('Copied to clipboard');
+            return;
+        }
+        if (act === 'cancel') { if (anyFilled()) modal('cancel', true); else say('Nothing to cancel yet'); }
+        else if (act === 'goback') modal('cancel', false);
+        else if (act === 'exit') { modal('cancel', false); reset(); say('Form cleared'); }
+        else if (act === 'resend') say('Verification email sent again');
+        else if (act === 'verify') {
+            root.querySelector('[data-bind="key"]').textContent = 'pk_test_' + rand(32);
+            root.querySelector('[data-bind="secret"]').textContent = 'sk_test_' + rand(40);
+            show('docs'); step(3); modal('key', true);
+        }
+        else if (act === 'keydone') { modal('key', false); step(4); root.querySelector('[data-bind="authed"]').hidden = false; say('You are authorized to try the API'); }
+        else if (act === 'again') modal('expired', true);
+        else if (act === 'closeexp') modal('expired', false);
+        else if (act === 'restart') reset();
+    });
+    root.addEventListener('keydown', function (e) {
+        if (e.key !== 'Escape') return;
+        var open = root.querySelector('.kp-modal:not([hidden])');
+        if (open) modal(open.getAttribute('data-modal'), false);
+    });
+    refresh();
+})();

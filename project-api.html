@@ -69,6 +69,8 @@
                     <li><a href="#wireframes">Wireframes</a></li>
                     <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
                     <li><a href="#hifi">High-fidelity designs</a></li>
+                    <li><a href="#try-key">Try the key request</a></li>
+                    <li><a href="#states">Every state</a></li>
                     <li><a href="#results">Results</a></li>
                 </ol>
             </aside>
@@ -158,10 +160,10 @@
                         <li><b>4</b> Explore docs &amp; test APIs</li>
                     </ol>
                     <p>I validated the feasibility of the concepts with the front end engineers before moving to high-fi designs, and with the PM to ensure the user stories and business requirements were met.</p>
-                    <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/API/Wireframes.png">
-                        <img src="images/project-ai/case/api/wireframes.webp" width="2400" height="1534" loading="lazy" decoding="async" alt="Low-fidelity wireframes of the developer portal access request flow and the admin dashboard.">
+                    <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/API/Wireframes_Lofi.png">
+                        <img src="images/project-ai/case/api/wireframes.webp" width="2400" height="1079" loading="lazy" decoding="async" alt="Lo-fi screens for the three audiences: the admin account page, the partner documentation and dev workspace, and the guest test key request form.">
                         <button class="zoom" type="button">Zoom ⤢</button>
-                        <figcaption>Low-fidelity wireframes: Developer Portal access request and Admin Dashboard</figcaption>
+                        <figcaption>Lo-fi screens for admins, partners and guests</figcaption>
                     </figure>
                 </section>
 
@@ -224,8 +226,124 @@
                         </figure>
                     </div>
                 </section>
+                <section class="chapter reveal" id="try-key" aria-labelledby="h-try-key">
+                    <span class="ch-num">09 — Interactive</span>
+                    <h2 id="h-try-key">Try it: request a test API key</h2>
+                    <p>The developer onboarding flow, rebuilt in code from the final designs. Fill in the form, confirm your email and get a test key, including the states most people never see: the disabled button, cancelling halfway and a key that can only be shown once.</p>
+                    <div class="kp" aria-label="Interactive demo of the developer portal key request">
+                        <ol class="kp-steps" aria-label="Progress">
+                            <li class="is-on" data-s="1"><b>1</b> Request access</li>
+                            <li data-s="2"><b>2</b> Confirm email</li>
+                            <li data-s="3"><b>3</b> Receive key</li>
+                            <li data-s="4"><b>4</b> Explore docs</li>
+                        </ol>
+                        <div class="kp-win">
+                            <div class="kp-bar">
+                                <span class="kp-logo">clarity<i>first</i> <em>PARTNERS</em></span>
+                                <span class="kp-search" aria-hidden="true">Search Documentation…</span>
+                                <span class="kp-nav" aria-hidden="true">API v1.0 · Request Key · Account</span>
+                            </div>
+                            <div class="kp-body">
+                                <!-- 1. Form -->
+                                <form class="kp-screen is-on" data-screen="form" novalidate>
+                                    <p class="kp-crumb">Documentation / Request Key</p>
+                                    <h3>Receive a Test API Key</h3>
+                                    <p class="kp-lede">Receiving a test key allows you to begin developing your application with our API using test data.</p>
+                                    <div class="kp-card">
+                                        <div class="kp-card-h">Request Key Form</div>
+                                        <div class="kp-grid">
+                                            <span class="kp-sec">Personal Details</span>
+                                            <label class="kp-f"><span>Name *</span><input name="name" autocomplete="off" required></label>
+                                            <label class="kp-f"><span>Email *</span><input name="email" type="email" autocomplete="off" required></label>
+                                            <span class="kp-sec">Organization Details</span>
+                                            <label class="kp-f"><span>Organization Name *</span><input name="org" autocomplete="off" required></label>
+                                            <label class="kp-f"><span>Partner Type *</span>
+                                                <select name="ptype" required><option value=""></option><option>Lender</option><option>Law firm</option><option>Real estate investor</option><option>Technology partner</option><option>Other</option></select></label>
+                                            <span class="kp-sec" aria-hidden="true"></span>
+                                            <label class="kp-f"><span>Title *</span>
+                                                <select name="title" required><option value=""></option><option>Developer</option><option>Engineering lead</option><option>Product manager</option><option>Other</option></select></label>
+                                        </div>
+                                    </div>
+                                    <div class="kp-foot">
+                                        <span class="kp-small">* Required field</span>
+                                        <div class="kp-actions">
+                                            <button type="button" class="kp-btn kp-ghost" data-act="cancel">Cancel</button>
+                                            <span class="kp-tipwrap">
+                                                <button type="submit" class="kp-btn kp-primary" data-act="confirm" disabled aria-describedby="kp-tip">Confirm</button>
+                                                <span class="kp-tip" id="kp-tip" role="tooltip">Fill in all required fields to continue</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- 2. Verify -->
+                                <div class="kp-screen" data-screen="verify">
+                                    <h3>Request Submitted</h3>
+                                    <p class="kp-lede">Follow the below instructions to complete the request.</p>
+                                    <div class="kp-card kp-center">
+                                        <svg class="kp-ill" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 10 14v16c0 14 9.5 23.5 22 28 12.5-4.5 22-14 22-28V14L32 6Z" fill="#E3EAF3" stroke="#345580" stroke-width="2"/><rect x="20" y="24" width="24" height="16" rx="2" fill="#fff" stroke="#345580" stroke-width="2"/><path d="m20 26 12 8 12-8" fill="none" stroke="#345580" stroke-width="2"/></svg>
+                                        <h4>Email verification needed</h4>
+                                        <p>In order to retrieve your test key, we'll need to verify your email.</p>
+                                        <p>Please confirm your email by clicking the link in the email we just sent you at <strong data-bind="email"></strong>.</p>
+                                        <p><button type="button" class="kp-link" data-act="resend">Resend email</button> if you have not received it.</p>
+                                        <button type="button" class="kp-btn kp-primary" data-act="verify">Open the link from your inbox</button>
+                                        <span class="kp-small kp-demo">Demo shortcut: in the real flow this link arrives by email.</span>
+                                    </div>
+                                </div>
+                                <!-- 3/4. Docs + key -->
+                                <div class="kp-screen" data-screen="docs">
+                                    <div class="kp-docs">
+                                        <ul class="kp-side" aria-hidden="true"><li>Overview</li><li class="on">Authorization</li><li>Open Orders</li><li>Order Details</li><li>Documents</li><li>Events</li></ul>
+                                        <div>
+                                            <div class="kp-auth"><h3>Authorization <span class="kp-pill">0.1</span> <span class="kp-pill kp-green">OAS3</span></h3><span class="kp-ok" data-bind="authed" hidden>Authorized ✓</span></div>
+                                            <p class="kp-small">/swagger/v0.1/swagger.json</p>
+                                            <div class="kp-ep"><span class="kp-m">POST</span><code>/v0.1/Orders/test</code><span>Returns OrderDetails for a test order (Auth)</span></div>
+                                            <div class="kp-ep"><span class="kp-m kp-get">GET</span><code>/v0.1/WorkspaceAPI</code><span>Lists workspace resources (Auth)</span></div>
+                                            <p><button type="button" class="kp-link" data-act="again">View my key and secret again</button></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Modals -->
+                                <div class="kp-modal" data-modal="key" role="dialog" aria-modal="true" aria-labelledby="kp-mk" hidden>
+                                    <div class="kp-dialog">
+                                        <h4 id="kp-mk">PartnerAPI Test Key</h4>
+                                        <p>This test key gives access to make the documentation interactive, but you can also use it in your software for testing purposes.</p>
+                                        <p>Once this message is closed, it will not be possible to view the personal test key again. Make sure to store it in a safe place.</p>
+                                        <div class="kp-key"><span>Key</span><code data-bind="key"></code><button type="button" class="kp-copy" data-copy="key" aria-label="Copy key">Copy</button></div>
+                                        <div class="kp-key"><span>Secret</span><code data-bind="secret"></code><button type="button" class="kp-copy" data-copy="secret" aria-label="Copy secret">Copy</button></div>
+                                        <div class="kp-dfoot"><button type="button" class="kp-btn kp-primary" data-act="keydone">Confirm</button></div>
+                                    </div>
+                                </div>
+                                <div class="kp-modal" data-modal="cancel" role="dialog" aria-modal="true" aria-labelledby="kp-mc" hidden>
+                                    <div class="kp-dialog">
+                                        <h4 id="kp-mc">Cancel and Exit?</h4>
+                                        <p>If you cancel and exit the form, you will lose all entered information. Are you sure you want to proceed?</p>
+                                        <div class="kp-dfoot"><button type="button" class="kp-btn kp-ghost" data-act="goback">Go Back</button><button type="button" class="kp-btn kp-danger" data-act="exit">Cancel &amp; Exit</button></div>
+                                    </div>
+                                </div>
+                                <div class="kp-modal" data-modal="expired" role="dialog" aria-modal="true" aria-labelledby="kp-me" hidden>
+                                    <div class="kp-dialog">
+                                        <h4 id="kp-me">The Key and Secret are no longer Available</h4>
+                                        <p>The Key and Secret are no longer available to view. If you need a new Key and Secret, <button type="button" class="kp-link" data-act="restart">click here</button> to request one.</p>
+                                        <div class="kp-dfoot"><button type="button" class="kp-btn kp-primary" data-act="closeexp">Confirm</button></div>
+                                    </div>
+                                </div>
+                                <div class="kp-toast" role="status" aria-live="polite"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section class="chapter reveal" id="states" aria-labelledby="h-states">
+                    <span class="ch-num">10 — Edge cases</span>
+                    <h2 id="h-states">Designing every state</h2>
+                    <p>The happy path is only part of the job. For the developer portal I designed what happens when data is loading, when it fails to load, when a search finds nothing, when someone cancels a form halfway and when a one-time key has already been shown. Every state was annotated in Figma for the engineers, so nothing was left to guesswork at handoff.</p>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/API/Every_State.png">
+                        <img src="images/project-ai/case/api/states.webp" width="2400" height="1446" loading="lazy" decoding="async" alt="Six developer portal states: table skeleton loading, table failed to load, search with no results, cancel and exit confirmation, expired key and secret, and email verification needed.">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>Loading, error, empty and confirmation states from the handoff file</figcaption>
+                    </figure>
+                </section>
                 <section class="chapter reveal" id="results" aria-labelledby="h-results">
-                    <span class="ch-num">09 — Outcome</span>
+                    <span class="ch-num">11 — Outcome</span>
                     <h2 id="h-results">Results</h2>
 <div class="rich">
 <p>8 clients signed up to adopt the API platform within 6 months of launch, plus 20 new leads.</p>

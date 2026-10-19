@@ -63,3 +63,88 @@
     lb.addEventListener('click', e => { if (e.target === lb) close(); });
     addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('open')) close(); });
 })();
+
+// Interactive design system playground (project-design-systems.html only)
+(function () {
+    var root = document.querySelector('.ds-play');
+    if (!root) return;
+    var T = {
+        en: {
+            'banner-warning': 'Your next session is due today.',
+            'banner-error': 'We couldn’t save your progress. Please try again.',
+            'banner-info': 'New exercises were added to your plan.',
+            'banner-success': 'Great work! Session complete.',
+            'reset': 'Show banner again',
+            'meta': 'Daily playlist · 15 min',
+            'title': 'Lower back mobility',
+            'today': 'Today',
+            'ex1': 'Cat-cow stretch',
+            'ex2': 'Bird dog',
+            'ex3': 'Glute bridge',
+            'acc-q': 'How do I do this exercise?',
+            'acc-a': 'Move slowly and stop if you feel sharp pain. Your coach can adjust your plan.',
+            'cta': 'Start session',
+            'cta2': 'Skip for today'
+        },
+        fr: {
+            'banner-warning': 'Votre prochaine séance est prévue aujourd’hui.',
+            'banner-error': 'Impossible d’enregistrer votre progression. Veuillez réessayer.',
+            'banner-info': 'De nouveaux exercices ont été ajoutés à votre programme.',
+            'banner-success': 'Bravo ! Séance terminée.',
+            'reset': 'Afficher à nouveau la bannière',
+            'meta': 'Playlist du jour · 15 min',
+            'title': 'Mobilité du bas du dos',
+            'today': 'Aujourd’hui',
+            'ex1': 'Étirement chat-vache',
+            'ex2': 'Extension bras-jambe opposés à quatre pattes',
+            'ex3': 'Pont fessier',
+            'acc-q': 'Comment réaliser correctement cet exercice ?',
+            'acc-a': 'Bougez lentement et arrêtez-vous si vous ressentez une douleur vive. Votre coach peut adapter votre programme.',
+            'cta': 'Commencer la séance',
+            'cta2': 'Passer pour aujourd’hui'
+        }
+    };
+    var state = { lang: 'en', banner: 'warning', variant: 'primary', disabled: false };
+    var screen = root.querySelector('.ds-screen');
+    var banner = root.querySelector('.ds-banner');
+    var bannerText = root.querySelector('.ds-bt');
+    var reset = root.querySelector('.ds-reset');
+    var cta = root.querySelector('.ds-bar .ds-btn');
+    var btns = root.querySelectorAll('.ds-bar .ds-btn');
+
+    function render() {
+        var t = T[state.lang];
+        screen.setAttribute('lang', state.lang);
+        root.querySelectorAll('[data-i18n]').forEach(function (el) {
+            var k = el.getAttribute('data-i18n');
+            if (t[k]) el.textContent = t[k];
+        });
+        banner.setAttribute('data-type', state.banner);
+        bannerText.textContent = t['banner-' + state.banner];
+        cta.setAttribute('data-variant', state.variant);
+        btns.forEach(function (b) { b.disabled = state.disabled; });
+    }
+    function seg(attr, key) {
+        root.querySelectorAll('.ds-seg [' + attr + ']').forEach(function (b) {
+            b.addEventListener('click', function () {
+                state[key] = b.getAttribute(attr);
+                b.parentNode.querySelectorAll('button').forEach(function (o) { o.setAttribute('aria-checked', o === b ? 'true' : 'false'); });
+                if (key === 'banner') { banner.hidden = false; reset.hidden = true; }
+                render();
+            });
+        });
+    }
+    seg('data-variant', 'variant');
+    seg('data-banner', 'banner');
+    seg('data-lang', 'lang');
+    root.querySelector('[data-disabled]').addEventListener('change', function (e) { state.disabled = e.target.checked; render(); });
+    root.querySelector('.ds-x').addEventListener('click', function () { banner.hidden = true; reset.hidden = false; reset.focus(); });
+    reset.addEventListener('click', function () { banner.hidden = false; reset.hidden = true; });
+    var acc = root.querySelector('.ds-acc button');
+    acc.addEventListener('click', function () {
+        var open = acc.getAttribute('aria-expanded') === 'true';
+        acc.setAttribute('aria-expanded', open ? 'false' : 'true');
+        document.getElementById('ds-acc-body').hidden = open;
+    });
+    render();
+})();

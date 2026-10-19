@@ -58,6 +58,7 @@
                     <li><a href="#research">Research: Figma audit</a></li>
                     <li><a href="#mvp">MVP</a></li>
                     <li><a href="#post-mvp">Post MVP</a></li>
+                    <li><a href="#playground">Try the components</a></li>
                     <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
                     <li><a href="#wireframes">Wireframes</a></li>
                     <li><a href="#processes">Processes</a></li>
@@ -95,6 +96,22 @@
     <button class="zoom" type="button">Zoom ⤢</button>
     <figcaption>Figma audit synthesis</figcaption>
 </figure>
+<div class="rich">
+<p>With the audit in hand, I ran a kick-off workshop with the product designers, front-end engineers and the UX copywriter. We sorted every team’s components into one inventory, named each one once for Figma and code, listed what slowed each team down, and agreed what the MVP had to cover.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Design Systems/Research_Workshop.png">
+    <img src="images/project-ai/case/design-systems/research-workshop.webp" width="2400" height="1519" loading="lazy" decoding="async" alt="Workshop board: agenda, component inventory sort, biggest blockers and what the team agreed">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Kick-off workshop with design, engineering and content</figcaption>
+</figure>
+<div class="rich">
+<p>Once the MVP shipped, I ran a weekly design system session for designers and developers: what had shipped that week, a short demo of one component, then open questions. Answers went into the documentation, and issues went into the maintenance process.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Design Systems/Research_Weekly_Session.png">
+    <img src="images/project-ai/case/design-systems/research-weekly-session.webp" width="2400" height="1207" loading="lazy" decoding="async" alt="Weekly design system session: component demo, questions from designers and developers, and outcomes">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Weekly design system session: demo and open Q&amp;A</figcaption>
+</figure>
                 </section>
 
                 <section class="chapter reveal" id="mvp" aria-labelledby="h-mvp">
@@ -104,7 +121,7 @@
 <p>I championed the creation and adoption of our design system, presenting its vision and benefits to the company’s co-founders and entire team to build excitement and alignment. I audited all Figma files, consolidated colors, typography, icons, and components, and used analytics to identify the top 10 most-used elements—packaging them into a streamlined MVP for scalable implementation.</p>
 </div>
 <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Design Systems/MVP.png">
-    <img src="images/project-ai/case/design-systems/mvp.webp" width="2400" height="3403" loading="lazy" decoding="async" alt="Design System MVP">
+    <img src="images/project-ai/case/design-systems/mvp.webp" width="2400" height="3630" loading="lazy" decoding="async" alt="Design system MVP in Figma: functional colour palettes, typography, every button type and state, banners, the Button documentation page and bottom sheets">
     <button class="zoom" type="button">Zoom ⤢</button>
 </figure>
                 </section>
@@ -114,13 +131,101 @@
 <div class="rich">
 <p>For post MVP, I wanted to have less impact on designers’ files, and so whenever a group of components and styles were created and documented, I shared them with the team. I continued to closely collaborate with the designers on the team to ensure accurate design and documentation, as well as with the front end engineers to ensure proper implementation.</p>
 </div>
-<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Design Systems/Post_MVP.png">
-    <img src="images/project-ai/case/design-systems/post-mvp.webp" width="2400" height="3526" loading="lazy" decoding="async" alt="Design System Post MVP">
-    <button class="zoom" type="button">Zoom ⤢</button>
-</figure>
+                </section>
+                <section class="chapter reveal" id="playground" aria-labelledby="h-playground">
+                    <span class="ch-num">06 — Interactive</span>
+                    <h2 id="h-playground">Try the components</h2>
+<div class="rich">
+<p>A few of the core components, rebuilt in code so you can try them. Switch the language to see how the components were built to hold longer translated text for localization.</p>
+</div>
+<div class="ds-play" data-lang="en">
+    <div class="ds-controls" role="group" aria-label="Playground controls">
+        <div class="ds-ctl">
+            <span class="ds-k" id="ds-k-variant">Button</span>
+            <div class="ds-seg" role="radiogroup" aria-labelledby="ds-k-variant">
+                <button type="button" role="radio" aria-checked="true" data-variant="primary">Primary</button>
+                <button type="button" role="radio" aria-checked="false" data-variant="secondary">Secondary</button>
+                <button type="button" role="radio" aria-checked="false" data-variant="tertiary">Tertiary</button>
+            </div>
+        </div>
+        <div class="ds-ctl">
+            <span class="ds-k" id="ds-k-banner">Banner</span>
+            <div class="ds-seg" role="radiogroup" aria-labelledby="ds-k-banner">
+                <button type="button" role="radio" aria-checked="true" data-banner="warning">Warning</button>
+                <button type="button" role="radio" aria-checked="false" data-banner="error">Error</button>
+                <button type="button" role="radio" aria-checked="false" data-banner="info">Info</button>
+                <button type="button" role="radio" aria-checked="false" data-banner="success">Success</button>
+            </div>
+        </div>
+        <div class="ds-ctl">
+            <span class="ds-k" id="ds-k-lang">Language</span>
+            <div class="ds-seg" role="radiogroup" aria-labelledby="ds-k-lang">
+                <button type="button" role="radio" aria-checked="true" data-lang="en">English</button>
+                <button type="button" role="radio" aria-checked="false" data-lang="fr">Français</button>
+            </div>
+        </div>
+        <label class="ds-switch"><input type="checkbox" data-disabled> <span>Disabled state</span></label>
+        <div class="ds-ctl">
+            <span class="ds-k">Also try</span>
+            <ul class="ds-tips">
+                <li>Dismiss the banner with ×</li>
+                <li>Tick off today’s exercises</li>
+                <li>Open the accordion</li>
+                <li>Tab through it with your keyboard</li>
+            </ul>
+        </div>
+        <div class="ds-ctl">
+            <span class="ds-k">Colour tokens in use</span>
+            <div class="ds-tokens">
+                <span><i style="background:#007B34"></i>Primary 200 · #007B34</span>
+                <span><i style="background:#006229"></i>Pressed · #006229</span>
+                <span><i style="background:#BFE9D1"></i>Primary 50 · #BFE9D1</span>
+                <span><i style="background:#FFC600"></i>Rate · #FFC600</span>
+                <span><i style="background:#DD342D"></i>Red · #DD342D</span>
+                <span><i style="background:#3D4747"></i>Neutral 700 · #3D4747</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="ds-device">
+        <div class="ds-screen">
+            <div class="ds-banner" data-type="warning" role="status">
+                <svg class="ds-bi" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20L12 3Zm0 6v5m0 3v.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="ds-bt" data-i18n="banner-warning"></span>
+                <button type="button" class="ds-x" aria-label="Dismiss banner">×</button>
+            </div>
+            <button type="button" class="ds-reset" hidden data-i18n="reset"></button>
+
+            <div class="ds-card">
+                <div class="ds-thumb" aria-hidden="true"></div>
+                <div>
+                    <span class="ds-meta" data-i18n="meta"></span>
+                    <strong data-i18n="title"></strong>
+                </div>
+            </div>
+
+            <fieldset class="ds-checks">
+                <legend data-i18n="today"></legend>
+                <label><input type="checkbox" checked> <span data-i18n="ex1"></span></label>
+                <label><input type="checkbox"> <span data-i18n="ex2"></span></label>
+                <label><input type="checkbox"> <span data-i18n="ex3"></span></label>
+            </fieldset>
+
+            <div class="ds-acc">
+                <button type="button" aria-expanded="false" aria-controls="ds-acc-body"><span data-i18n="acc-q"></span><span class="ds-chev" aria-hidden="true">⌄</span></button>
+                <div id="ds-acc-body" hidden><p data-i18n="acc-a"></p></div>
+            </div>
+
+            <div class="ds-bar">
+                <button type="button" class="ds-btn" data-variant="primary" data-i18n="cta"></button>
+                <button type="button" class="ds-btn" data-variant="ghost" data-i18n="cta2"></button>
+            </div>
+        </div>
+    </div>
+</div>
                 </section>
                 <section class="chapter reveal" id="insights-tradeoffs" aria-labelledby="h-insights-tradeoffs">
-                    <span class="ch-num">06 — Insights</span>
+                    <span class="ch-num">07 — Insights</span>
                     <h2 id="h-insights-tradeoffs">Research, Options &amp; Trade-offs</h2>
 <div class="rich">
 <h3>What research revealed</h3>
@@ -141,7 +246,7 @@
 </aside>
                 </section>
                 <section class="chapter reveal" id="wireframes" aria-labelledby="h-wireframes">
-                    <span class="ch-num">07 — Design</span>
+                    <span class="ch-num">08 — Design</span>
                     <h2 id="h-wireframes">Wireframes</h2>
 <div class="rich">
 <p>I wireframed the pieces that would hold the system together: one documentation template for every component, a rollout plan that shipped the MVP first and grew in batches, and a simple way for designers to report glitches, bugs and limitations.</p>
@@ -151,10 +256,18 @@
     <button class="zoom" type="button">Zoom ⤢</button>
     <figcaption>Low-fidelity wireframes: documentation, rollout plan and maintenance</figcaption>
 </figure>
+<div class="rich">
+<p>Each core component was wireframed in grey boxes first: its anatomy, states and slots. We then tested it in real app screens, so layout and behaviour were agreed before colour, type and tokens went on.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Design Systems/Wireframes_Components.png">
+    <img src="images/project-ai/case/design-systems/wireframes-components.webp" width="2400" height="1570" loading="lazy" decoding="async" alt="Low-fidelity component wireframes (Button, Button Bar, Banner, Checkbox, Accordion, Daily Playlist card) and two app screens built from them">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Component wireframes, tested in app screens</figcaption>
+</figure>
                 </section>
 
                 <section class="chapter reveal" id="processes" aria-labelledby="h-processes">
-                    <span class="ch-num">08 — Process</span>
+                    <span class="ch-num">09 — Process</span>
                     <h2 id="h-processes">Processes</h2>
 <div class="rich">
 <p>Processes are crucial when working with design systems, they provide guidance and create discipline. I created a maintenance processes and shared it with the team to guide them how to report glitches, bugs, or limitations when it comes to components and styles.</p>
@@ -166,7 +279,7 @@
 </figure>
                 </section>
                 <section class="chapter reveal" id="leadership" aria-labelledby="h-leadership">
-                    <span class="ch-num">09 — Leadership</span>
+                    <span class="ch-num">10 — Leadership</span>
                     <h2 id="h-leadership">Leading the squad through a rebrand and localization</h2>
 <div class="rich">
 <p>The system was never just a component library. It became the tool my squad used to carry two company-wide initiatives: the Hinge Health rebrand and the internationalization and localization of the product. I led a squad of three product designers, a UX copywriter and two senior front-end developers, and my job was to keep that work moving without letting quality slip.</p>
@@ -190,7 +303,7 @@
 </aside>
                 </section>
                 <section class="chapter reveal" id="results" aria-labelledby="h-results">
-                    <span class="ch-num">10 — Outcome</span>
+                    <span class="ch-num">11 — Outcome</span>
                     <h2 id="h-results">Results</h2>
 <div class="rich">
 <p>32 components, adopted by 30 designers and 65 developers within 2 months of the MVP. Average design-to-release time for comparable features fell 40%, from about 5 to 3 weeks, measured over one quarter.</p>

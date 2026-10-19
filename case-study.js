@@ -244,7 +244,7 @@
         else if (act === 'keydone') { modal('key', false); step(4); root.querySelector('[data-bind="authed"]').hidden = false; say('You are authorized to try the API'); }
         else if (act === 'again') modal('expired', true);
         else if (act === 'closeexp') modal('expired', false);
-        else if (act === 'restart') reset();
+        else if (act === 'restart') { reset(); say('Demo restarted'); }
     });
     root.addEventListener('keydown', function (e) {
         if (e.key !== 'Escape') return;
@@ -252,4 +252,97 @@
         if (open) modal(open.getAttribute('data-modal'), false);
     });
     refresh();
+})();
+
+// Interactive Conquest dashboard demo (project-machine-learning.html only). Sample data.
+(function () {
+    var root = document.querySelector('.cq');
+    if (!root) return;
+    var BASE = {
+        on:  { retirement: 105, education: 100, car: 89, vacation: 100, legacy: 1.2 },
+        off: { retirement: 80,  education: 92,  car: 64, vacation: 100, legacy: 0.8 }
+    };
+    var STRAT = {
+        portfolio: { title: 'Implement the Recommended portfolio', why: 'One of the most important ways to ensure financial success is to invest wisely. Adopting the recommended portfolio raises the return your plan can expect.', goal: 'retirement', d: 8 },
+        education: { title: 'Save $500 Monthly', why: 'Setting aside a fixed amount each month keeps the education fund on track without changing your lifestyle.', goal: 'education', d: 6 },
+        greece:    { title: 'Save $5,000 from your tax refund each year', why: 'Saving part of your annual tax refund grows the travel fund without taking a bite out of your monthly cash flow.', goal: 'vacation', d: 5 },
+        tfsa:      { title: 'Take advantage of a TFSA', why: 'Tax-free growth on savings you already make.', goal: 'retirement', d: 6 },
+        tfsa2:     { title: 'Contribute more to your TFSA', why: 'Raising contributions compounds the tax-free growth.', goal: 'retirement', d: 4 },
+        earlier:   { title: 'Retire earlier', why: 'Shifting savings forward lets you retire sooner at the same lifestyle.', goal: 'retirement', d: 3 }
+    };
+    var state, current;
+    var rec = root.querySelector('[data-rec]');
+    var toast = root.querySelector('.cq-toast'), toastT;
+    var bars = root.querySelector('.cq-bars');
+    var results = root.querySelector('.cq-results');
+
+    function say(m) { toast.textContent = m; toast.classList.add('is-on'); clearTimeout(toastT); toastT = setTimeout(function () { toast.classList.remove('is-on'); }, 2200); }
+    function val(goal) { var v = BASE[rec.checked ? 'on' : 'off'][goal]; return goal === 'legacy' ? v : v + (state.boost[goal] || 0); }
+    function render(changed) {
+        root.querySelector('[data-bind="recstate"]').textContent = rec.checked ? 'ON' : 'OFF';
+        root.querySelector('[data-bind="recnote"]').textContent = rec.checked
+            ? 'The charts below show your ability to achieve your goals if you follow the recommendations.'
+            : 'The charts below show your ability to achieve your goals on your current path, without the recommendations.';
+        root.querySelectorAll('.cq-goals li').forEach(function (li) {
+            var g = li.getAttribute('data-goal'), v = val(g), out = li.querySelector('.cq-val');
+            var pct = g === 'legacy' ? Math.round(v / 1.4 * 100) : Math.min(v, 100);
+            li.querySelector('.cq-arc').style.strokeDashoffset = (201 - 201 * pct / 100).toFixed(1);
+            out.textContent = g === 'legacy' ? '$' + v.toFixed(1) + 'M' : v + '%';
+            out.classList.toggle('is-good', g !== 'legacy' && v >= 100);
+            if (changed === g) { out.classList.remove('is-up'); void out.offsetWidth; out.classList.add('is-up'); }
+        });
+        var r = val('retirement'), html = '';
+        for (var i = 0; i <= 40; i++) {
+            var retired = i >= 18, inc, wd = 0, sf = 0;
+            if (!retired) inc = 55 + i * 1.6 + (i % 3) * 2;
+            else { inc = 18 + (i % 4) * 2; wd = 52 + (i % 5) * 3; sf = Math.max(0, (100 - r) * 0.9 - (40 - i) * 0.4); wd = Math.max(10, wd - sf); }
+            html += '<span><em style="height:' + inc + '%;background:#4A90E2"></em><em style="height:' + wd + '%;background:#B5B5B5"></em><em style="height:' + sf + '%;background:#E05252"></em></span>';
+        }
+        bars.innerHTML = html;
+        var ul = root.querySelector('[data-bind="planned"]');
+        ul.innerHTML = state.planned.length ? state.planned.map(function (t) { return '<li>✓ ' + t + '</li>'; }).join('') : '<li class="cq-empty">Nothing added yet. Apply a strategy from SAM.</li>';
+    }
+    function view(v) { root.querySelectorAll('.cq-sam-view').forEach(function (el) { el.classList.toggle('is-on', el.getAttribute('data-view') === v); }); }
+    function open(key) {
+        current = key; var s = STRAT[key];
+        root.querySelector('[data-bind="stitle"]').textContent = s.title;
+        root.querySelector('[data-bind="swhy"]').textContent = s.why;
+        root.querySelector('[data-bind="simpact"]').textContent = 'Goal impact: ' + s.goal.charAt(0).toUpperCase() + s.goal.slice(1) + ' +' + s.d + '%';
+        var applied = state.planned.indexOf(s.title) > -1, b = root.querySelector('[data-act="apply"]');
+        b.disabled = applied; b.textContent = applied ? 'Applied' : 'Apply';
+        view('strategy');
+    }
+    function apply(key) {
+        var s = STRAT[key];
+        if (state.planned.indexOf(s.title) > -1) return false;
+        state.planned.push(s.title);
+        state.boost[s.goal] = (state.boost[s.goal] || 0) + s.d;
+        render(s.goal); say('Added to your plan: ' + s.title);
+        return true;
+    }
+    function reset() {
+        state = { boost: {}, planned: [] };
+        rec.checked = true; results.innerHTML = ''; root.querySelector('#cq-q').value = ''; view('next'); render();
+    }
+
+    rec.addEventListener('change', function () { render(); say(rec.checked ? 'Showing your plan with recommendations' : 'Showing your current path'); });
+    root.addEventListener('click', function (e) {
+        var b = e.target.closest('[data-act]'); if (!b) return;
+        var a = b.getAttribute('data-act');
+        if (a === 'open') open(b.getAttribute('data-strategy'));
+        else if (a === 'back') view('next');
+        else if (a === 'apply') { if (apply(current)) { b.disabled = true; b.textContent = 'Applied'; } }
+        else if (a === 'add') { if (apply(b.getAttribute('data-strategy'))) { b.disabled = true; b.textContent = '✓'; b.setAttribute('aria-label', 'Added'); } }
+        else if (a === 'reset') { reset(); say('Dashboard reset'); }
+    });
+    root.querySelector('.cq-ask').addEventListener('submit', function (e) {
+        e.preventDefault();
+        var q = root.querySelector('#cq-q').value.toLowerCase();
+        var keys = /retire|earl/.test(q) ? ['earlier', 'portfolio'] : ['tfsa', 'tfsa2'];
+        results.innerHTML = '<li class="cq-k" style="border:0">Some strategies I found…</li>' + keys.map(function (k) {
+            var s = STRAT[k], done = state.planned.indexOf(s.title) > -1;
+            return '<li><span>' + s.title + '<small>Goal impact: +' + s.d + '%</small></span><button type="button" data-act="add" data-strategy="' + k + '" aria-label="Add ' + s.title + '"' + (done ? ' disabled>✓' : '>+') + '</button></li>';
+        }).join('');
+    });
+    reset();
 })();

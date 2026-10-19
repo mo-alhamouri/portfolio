@@ -346,3 +346,231 @@
     });
     reset();
 })();
+
+// Interactive ISOQAR portal demo (project-ai-compliance.html only). Sample data.
+(function () {
+    var root = document.querySelector('.iq');
+    if (!root) return;
+    var MON = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var COL = { 'Certificate': '#0F9996', 'Invoice': '#00804A', 'Site visit': '#3C2869', 'Registration': '#FBCB21' };
+    var ICON = {
+        'Certificate': '<svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+        'Invoice': '<svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m9 13 2 2 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+        'Site visit': '<svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 3v4M16 3v4M4 10h16" stroke="currentColor" stroke-width="2"/></svg>',
+        'Registration': '<svg viewBox="0 0 24 24"><path d="M6 4h9l3 3v13H6Z M9 11h6M9 15h6" fill="none" stroke="currentColor" stroke-width="2"/></svg>'
+    };
+    var today = new Date(); today.setHours(0, 0, 0, 0);
+    function add(d) { var x = new Date(today); x.setDate(x.getDate() + d); return x; }
+    function fmt(d) { return d.getDate() + ' ' + MON[d.getMonth()].slice(0, 3) + ' ' + d.getFullYear(); }
+    var CERTS = [['Stage 3', 'ISO 9001'], ['Recertification 2023', 'ISO 22301'], ['Annex 2023', 'ISO 22301'], ['Appendix 2023', 'ISO 9001'], ['ETS Site 24/26', 'ISO 44001'], ['Stage 2', 'ISO 22301'], ['Recertification 2022', 'ISO 9001'], ['Annex 2022', 'ISO 45001']];
+    var state, filter = 'all';
+    var toast = root.querySelector('.iq-toast'), toastT;
+    function say(m) { toast.textContent = m; toast.classList.add('is-on'); clearTimeout(toastT); toastT = setTimeout(function () { toast.classList.remove('is-on'); }, 2200); }
+    function $(b) { return root.querySelector('[data-bind="' + b + '"]'); }
+
+    function reset() {
+        state = {
+            bookings: [{ d: add(24), site: 'Head office, London', std: 'ISO 9001', st: 'Scheduled' }, { d: add(9), site: 'Bristol', std: 'ISO 22301', st: 'Scheduled' }, { d: add(40), site: 'Glasgow', std: 'ISO 45001', st: 'Scheduled' }],
+            updates: [
+                { t: 'Certificate', n: 'ISO 22301 - Stage 2', d: add(-2) },
+                { t: 'Invoice', n: 'Partial Credit for Audit', d: add(-6) },
+                { t: 'Site visit', n: 'New site booking - Bristol', d: add(-9) },
+                { t: 'Registration', n: '20113 - Demo Group PLC - ISO 22301', d: add(-14) },
+                { t: 'Invoice', n: 'Cancellation fee', d: add(-20) },
+                { t: 'Certificate', n: 'ISO 22301 - Recertification', d: add(-31) }
+            ],
+            notes: [{ c: '#0F9996', t: 'New certificate available', s: 'ISO 22301 - Stage 2' }, { c: '#3C2869', t: 'Site booking confirmed', s: 'Bristol' }],
+            unread: 2, sel: null
+        };
+        filter = 'all';
+        root.querySelectorAll('.iq-chips button').forEach(function (b) { b.setAttribute('aria-checked', b.getAttribute('data-filter') === 'all' ? 'true' : 'false'); });
+        $('certq').value = '';
+        root.querySelector('.iq-fly').hidden = true; root.querySelector('.iq-bell').setAttribute('aria-expanded', 'false');
+        root.querySelector('.iq-modal').hidden = true;
+        go('home'); render();
+    }
+    function go(v) {
+        root.querySelectorAll('.iq-nav button').forEach(function (b) { var on = b.getAttribute('data-view') === v; b.classList.toggle('is-on', on); if (on) b.setAttribute('aria-current', 'page'); else b.removeAttribute('aria-current'); });
+        root.querySelectorAll('.iq-view').forEach(function (el) { el.classList.toggle('is-on', el.getAttribute('data-view') === v); });
+    }
+    function render() {
+        var next = state.bookings.filter(function (b) { return b.d >= today; }).sort(function (a, b) { return a.d - b.d; })[0];
+        var days = Math.round((next.d - today) / 864e5);
+        $('days').textContent = days + (days === 1 ? ' day' : ' days');
+        $('auditdate').textContent = fmt(next.d) + ' · ' + next.site + ' · ' + next.std;
+        // updates
+        var list = state.updates.filter(function (u) { return filter === 'all' || u.t === filter; });
+        $('updates').innerHTML = list.map(function (u, i) {
+            return '<li><span class="iq-tile" style="--c:' + COL[u.t] + '">' + ICON[u.t] + '</span><span><em>' + u.t + '</em><a data-act="open" data-name="' + u.n + '">' + u.n + '</a></span><span class="iq-date">' + fmt(u.d) + '</span><button type="button" class="iq-dl" data-act="dl" data-name="' + u.n + '" aria-label="Download ' + u.n + '">⤓</button></li>';
+        }).join('') || '<li><span></span><span class="iq-small">Nothing here yet.</span></li>';
+        // mini calendar (current month)
+        var y = today.getFullYear(), m = today.getMonth(), first = new Date(y, m, 1), start = (first.getDay() + 6) % 7, dim = new Date(y, m + 1, 0).getDate();
+        var has = {}; state.bookings.forEach(function (b) { if (b.d.getMonth() === m && b.d.getFullYear() === y) has[b.d.getDate()] = b; });
+        var h = '<span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span><span>S</span>';
+        for (var i = 0; i < start; i++) h += '<span></span>';
+        for (var d = 1; d <= dim; d++) h += has[d] ? '<button type="button" class="has' + (state.sel === d ? ' is-sel' : '') + '" data-act="day" data-day="' + d + '" aria-label="' + d + ' ' + MON[m] + ': site visit">' + d + '</button>' : '<button type="button" tabindex="-1" disabled>' + d + '</button>';
+        $('mcal').innerHTML = h;
+        $('mcalnote').textContent = state.sel && has[state.sel] ? has[state.sel].site + ' · ' + has[state.sel].std + ' · ' + has[state.sel].st : MON[m] + ': highlighted dates have a site visit. Pick one.';
+        // bookings table
+        $('bookings').innerHTML = state.bookings.slice().sort(function (a, b) { return a.d - b.d; }).map(function (b) {
+            return '<tr><td>' + fmt(b.d) + '</td><td>' + b.site + '</td><td>' + b.std + '</td><td><span class="iq-state' + (b.st !== 'Scheduled' ? ' is-req' : '') + '">' + b.st + '</span></td></tr>';
+        }).join('');
+        // certificates
+        var q = $('certq').value.trim().toLowerCase();
+        var rows = CERTS.filter(function (c) { return !q || (c[0] + ' ' + c[1]).toLowerCase().indexOf(q) > -1; });
+        $('certcount').textContent = rows.length + ' files';
+        $('certs').innerHTML = rows.map(function (c, i) { return '<tr><td><a data-act="dl" data-name="' + c[0] + '">' + c[0] + '</a></td><td>' + fmt(add(-10 - i * 23)) + '</td><td>' + c[1] + '</td><td><button type="button" class="iq-dl" data-act="dl" data-name="' + c[0] + '" aria-label="Download ' + c[0] + '">⤓</button></td></tr>'; }).join('') || '<tr><td colspan="4" class="iq-small">No certificates match “' + q + '”.</td></tr>';
+        // notifications
+        $('count').textContent = state.unread ? state.unread : '';
+        $('notes').innerHTML = state.notes.map(function (n) { return '<li><i style="--c:' + n.c + '"></i><span>' + n.t + '<small>' + n.s + '</small></span></li>'; }).join('');
+    }
+    var modal = root.querySelector('.iq-modal'), form = modal.querySelector('form'), sendBtn = form.querySelector('[type="submit"]'), lastFocus;
+    function openModal() { lastFocus = document.activeElement; form.reset(); sendBtn.disabled = true; var d = form.querySelector('[name="date"]'); d.min = add(1).toISOString().slice(0, 10); modal.hidden = false; form.querySelector('select').focus(); }
+    function closeModal() { modal.hidden = true; if (lastFocus) lastFocus.focus(); }
+    form.addEventListener('input', function () { sendBtn.disabled = !form.checkValidity(); });
+    form.addEventListener('submit', function (e) {
+        e.preventDefault(); if (!form.checkValidity()) return;
+        var p = form.querySelector('[name="date"]').value.split('-'), d = new Date(+p[0], +p[1] - 1, +p[2]);
+        var site = form.site.value, std = form.std.value;
+        state.bookings.push({ d: d, site: site, std: std, st: 'Requested' });
+        state.updates.unshift({ t: 'Site visit', n: 'New site booking - ' + site, d: today });
+        state.notes.unshift({ c: '#3C2869', t: 'Booking requested', s: site + ' · ' + fmt(d) }); state.unread++;
+        closeModal(); render(); go('bookings'); say('Booking requested. ISOQAR will confirm the date.');
+    });
+    root.addEventListener('click', function (e) {
+        var nb = e.target.closest('.iq-nav button'); if (nb) { go(nb.getAttribute('data-view')); return; }
+        var ch = e.target.closest('.iq-chips button');
+        if (ch) { filter = ch.getAttribute('data-filter'); ch.parentNode.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-checked', b === ch ? 'true' : 'false'); }); render(); return; }
+        var b = e.target.closest('[data-act]'); if (!b) return;
+        var a = b.getAttribute('data-act');
+        if (a === 'dl' || a === 'open') say('Downloading ' + b.getAttribute('data-name') + ' (demo)');
+        else if (a === 'book') openModal();
+        else if (a === 'cancel') closeModal();
+        else if (a === 'day') { state.sel = +b.getAttribute('data-day'); render(); }
+        else if (a === 'bell') { var f = root.querySelector('.iq-fly'); f.hidden = !f.hidden; b.setAttribute('aria-expanded', f.hidden ? 'false' : 'true'); if (!f.hidden) { state.unread = 0; render(); } }
+        else if (a === 'reset') { reset(); say('Portal reset'); }
+    });
+    $('certq').addEventListener('input', render);
+    root.addEventListener('keydown', function (e) { if (e.key === 'Escape') { if (!modal.hidden) closeModal(); var f = root.querySelector('.iq-fly'); if (!f.hidden) { f.hidden = true; root.querySelector('.iq-bell').setAttribute('aria-expanded', 'false'); } } });
+    reset();
+})();
+
+// Interactive McAfee onboarding demo (project-cybersecurity-onboarding.html only). Sample data.
+(function () {
+    var root = document.querySelector('.mo');
+    if (!root) return;
+    var IMG = 'images/project-ai/case/cybersecurity-onboarding/demo/';
+    var GOALS = {
+        device:   { name: 'Device protection',   img: 'p-device',   opts: ['Download Antivirus', 'Make my Wi-Fi safer'], rec: 0, short: 'Antivirus', title: 'Get McAfee Antivirus', desc: 'Download the app and start protecting your device.', ill: 's-antivirus' },
+        identity: { name: 'Identity protection', img: 'p-identity', opts: ['Monitor for identity fraud', 'Scan for breaches'], rec: 0, short: 'ID Monitoring', title: 'Start your ID Monitoring', desc: 'Check if your email address is found in data breaches.', ill: 's-id' },
+        privacy:  { name: 'Privacy protection',  img: 'p-privacy',  opts: ['Secure my accounts', 'Protect my web browsing'], rec: 1, short: 'Web protection', title: 'Get web protection', desc: 'Browse the web knowing you’re protected from unsafe websites.', ill: 's-web' }
+    };
+    var ORDER = ['device', 'identity', 'privacy'];
+    var NTH = ['first', 'second', 'third'], NUM = ['', 'one', 'two', 'three'];
+    var FLOW = ['welcome', 'ways', 'goals', 'steps', 'setup', 'install', 'congrats', 'dash'];
+    var state, welcomeT, installT, toastT;
+    var toast = root.querySelector('.mo-toast');
+    function $(b) { return root.querySelector('[data-bind="' + b + '"]'); }
+    function say(m) { toast.textContent = m; toast.classList.add('is-on'); clearTimeout(toastT); toastT = setTimeout(function () { toast.classList.remove('is-on'); }, 2200); }
+    function picked() { return ORDER.filter(function (k) { return state.goals[k]; }); }
+
+    function go(v, focus) {
+        state.view = v;
+        root.querySelectorAll('.mo-view').forEach(function (el) { el.classList.toggle('is-on', el.getAttribute('data-view') === v); });
+        root.querySelector('.mo-prog i').style.width = Math.round(FLOW.indexOf(v) / (FLOW.length - 1) * 100) + '%';
+        if (v === 'steps') renderRecs();
+        if (v === 'setup') renderCards();
+        if (v === 'dash') renderDash();
+        if (focus !== false) { var h = root.querySelector('.mo-view.is-on h3'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
+    }
+    function renderRecs() {
+        var ks = picked(), box = $('recs');
+        box.style.setProperty('--n', ks.length);
+        box.innerHTML = ks.map(function (k) {
+            var g = GOALS[k];
+            return '<div><img src="' + IMG + g.img + '.webp" alt=""><strong>' + g.name + '</strong>' + g.opts.map(function (o, i) {
+                return '<span class="mo-chip' + (i === g.rec ? ' is-on' : '') + '">' + o + (i === g.rec ? '<span class="mo-sr"> (recommended)</span>' : '') + '</span>';
+            }).join('') + '</div>';
+        }).join('');
+    }
+    function renderCards() {
+        var ks = picked(), box = $('cards');
+        box.style.setProperty('--n', ks.length);
+        box.innerHTML = ks.map(function (k, i) {
+            var g = GOALS[k], done = state.done[k];
+            return '<div class="mo-card"><b>Step ' + (i + 1) + '</b><div class="mo-cin"><img src="' + IMG + g.ill + '.webp" alt=""><em>Quick setup</em><strong>' + g.title + '</strong><p>' + g.desc + '</p>' +
+                (done ? '<button type="button" class="mo-btn is-done" disabled aria-label="' + g.title + ': done">✓</button>'
+                      : '<button type="button" class="mo-btn mo-outline" data-act="start" data-goal="' + k + '" aria-label="Get started: ' + g.title + '">Get started →</button>') + '</div></div>';
+        }).join('');
+    }
+    function renderDash() {
+        var ks = picked(), n = ks.filter(function (k) { return state.done[k]; }).length;
+        var all = ks.length && n === ks.length;
+        var score = all ? 900 : n ? 750 : 600;
+        $('score').textContent = score;
+        $('scorelabel').textContent = all ? 'Excellent' : n ? 'Good' : 'Fair';
+        var arc = root.querySelector('.mo-arc');
+        arc.style.strokeDashoffset = 301.6;
+        requestAnimationFrame(function () { requestAnimationFrame(function () { arc.style.strokeDashoffset = (301.6 * (1 - score / 1000)).toFixed(1); }); });
+        var list = ks.length ? ks : ORDER;
+        $('done').innerHTML = list.map(function (k) {
+            var g = GOALS[k];
+            return '<li><img src="' + IMG + g.ill + '.webp" alt=""><span><b>' + g.title + '</b>' + (state.done[k] ? '<span class="ok">✓ Protected</span>' : '<button type="button" class="mo-link" data-act="start" data-goal="' + k + '">Get started →</button>') + '</span></li>';
+        }).join('');
+    }
+    function startInstall(k) {
+        var ks = picked();
+        if (ks.indexOf(k) < 0) { state.goals[k] = true; syncGoals(); ks = picked(); }
+        state.current = k; state.fromDash = state.view === 'dash';
+        var nth = ks.filter(function (x) { return state.done[x]; }).length;
+        $('ill').src = IMG + GOALS[k].ill + '.webp';
+        $('installing').textContent = 'Setting up your ' + NTH[nth] + ' protection…';
+        var fill = $('fill'), btn = $('donebtn');
+        fill.classList.remove('is-run'); void fill.offsetWidth; btn.disabled = true;
+        go('install');
+        requestAnimationFrame(function () { fill.classList.add('is-run'); });
+        clearTimeout(installT);
+        installT = setTimeout(function () { btn.disabled = false; btn.focus({ preventScroll: true }); }, 1500);
+    }
+    function installed() {
+        var k = state.current; state.done[k] = true;
+        say('✓ ' + GOALS[k].short + ' is on');
+        if (state.fromDash) { go('dash'); return; }
+        var ks = picked(), left = ks.filter(function (x) { return !state.done[x]; }).length;
+        if (left) { go('setup'); return; }
+        $('congrats').textContent = 'Nicely done — you’ve successfully set up your first ' + (ks.length > 1 ? NUM[ks.length] + ' ' : '') + 'protection feature' + (ks.length > 1 ? 's' : '') + '. Explore your dashboard and discover more ways McAfee can protect you.';
+        go('congrats');
+    }
+    function syncGoals() {
+        root.querySelectorAll('.mo-goals .mo-chip').forEach(function (b) { b.setAttribute('aria-pressed', state.goals[b.getAttribute('data-goal')] ? 'true' : 'false'); });
+        $('next').disabled = !picked().length;
+    }
+    function armWelcome() {
+        clearTimeout(welcomeT);
+        welcomeT = setTimeout(function () { if (state.view === 'welcome') go('ways', false); }, 1800);
+    }
+    function reset(focus) {
+        clearTimeout(installT);
+        state = { goals: {}, done: {}, view: 'welcome', current: null };
+        syncGoals(); go('welcome', focus);
+        if (seen) armWelcome();
+    }
+
+    root.addEventListener('click', function (e) {
+        var chip = e.target.closest('.mo-goals .mo-chip');
+        if (chip) { var k = chip.getAttribute('data-goal'); state.goals[k] = !state.goals[k]; syncGoals(); return; }
+        if (state.view === 'welcome' && e.target.closest('[data-view="welcome"]')) { go('ways'); return; }
+        var b = e.target.closest('[data-act]'); if (!b) return;
+        var a = b.getAttribute('data-act');
+        if (a === 'go') go(b.getAttribute('data-to'));
+        else if (a === 'start') startInstall(b.getAttribute('data-goal'));
+        else if (a === 'installed') installed();
+        else if (a === 'restart') { reset(false); say('Onboarding restarted'); }
+    });
+
+    var seen = false;
+    if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (es, o) { if (es[0].isIntersecting) { seen = true; armWelcome(); o.disconnect(); } }, { threshold: 0.4 }).observe(root);
+    } else { seen = true; }
+    reset(false);
+})();

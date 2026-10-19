@@ -64,6 +64,7 @@
                     <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
                     <li><a href="#wireframes">Wireframes</a></li>
                     <li><a href="#high-fidelity-designs">High-Fidelity Designs</a></li>
+                    <li><a href="#try-portal">Try the portal</a></li>
                     <li><a href="#results">Results</a></li>
                 </ol>
             </aside>
@@ -169,6 +170,16 @@
 <h3>Trade-offs</h3>
 <p>We shipped status tracking, documents and visit booking first and left payments in the legacy flow, so we could launch sooner on top of the existing back-end.</p>
 </div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/AI/Research_Board.png">
+    <img src="images/project-ai/case/ai-compliance/research.webp" width="2400" height="1022" loading="lazy" decoding="async" alt="Research board: what customers contacted support about, the design principles it led to, and where each shows up in the portal">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>What support contacts revealed, and how each finding shaped the portal</figcaption>
+</figure>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/AI/Options_Tradeoffs.png">
+    <img src="images/project-ai/case/ai-compliance/options-tradeoffs.webp" width="2400" height="1205" loading="lazy" decoding="async" alt="Options board: sketches of a page-by-page reskin, a dashboard-first portal and a guided wizard, with the dashboard chosen and payments left in the legacy flow">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Three directions explored: dashboard-first chosen, payments kept in the legacy flow for launch</figcaption>
+</figure>
 <aside class="lead-call" aria-label="Leadership">
 <span class="k">Leadership · Getting stakeholders to agree</span>
 <h3>Showing leadership the whole map before redesigning a page</h3>
@@ -196,13 +207,113 @@
 <p>The final design system and high-fidelity screens brought together the research insights, AI-driven concepting, and stakeholder alignment into a polished, enterprise-ready experience. The new portal features a streamlined dashboard with clear certification status, simplified navigation, a guided visit booking experience, self-serve access to certificates and invoices, and a modern design system built for scalability.</p>
 <p>The UI prioritizes clarity, trust, accessibility, and professional polish — supporting users who may be new to certification processes while providing efficiency and control for returning customers.</p>
 </div>
-<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/AI/High-Fidelity_Designs.png">
-    <img src="images/project-ai/case/ai-compliance/high-fidelity-designs.webp" width="2400" height="4459" loading="lazy" decoding="async" alt="High Fidelity Designs">
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/AI/High_Fidelity_Home.png">
+    <img src="images/project-ai/case/ai-compliance/hifi-home.webp" width="2400" height="1620" loading="lazy" decoding="async" alt="ISOQAR portal home page with next audit date, latest updates, site bookings calendar and latest invoices, next to the sign-in page">
     <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Home page and sign in</figcaption>
+</figure>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/AI/High_Fidelity_Bookings.png">
+    <img src="images/project-ai/case/ai-compliance/hifi-bookings.webp" width="2400" height="1360" loading="lazy" decoding="async" alt="Site bookings shown as a calendar, a list of active and historical bookings, and a map of sites">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Site bookings: calendar, list and map</figcaption>
+</figure>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/AI/High_Fidelity_SelfServe.png">
+    <img src="images/project-ai/case/ai-compliance/hifi-selfserve.webp" width="2400" height="1790" loading="lazy" decoding="async" alt="Self-serve pages for certificates, audit reports, invoices, training courses, notifications and account details">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Self-serve documents, training, notifications and account</figcaption>
 </figure>
                 </section>
+                <section class="chapter reveal" id="try-portal" aria-labelledby="h-try-portal">
+                    <span class="ch-num">11 — Interactive</span>
+                    <h2 id="h-try-portal">Try the portal</h2>
+                    <p>A working slice of the customer portal, rebuilt in code from the final designs with sample data. Check when the next audit is, filter the latest updates, book a site visit and find a certificate, all things customers used to call or email about.</p>
+                    <div class="iq" aria-label="Interactive demo of the ISOQAR customer portal">
+                        <button type="button" class="iq-restart" data-act="reset" aria-label="Reset the portal demo">↺ Reset</button>
+                        <div class="iq-win">
+                            <div class="iq-bar">
+                                <span class="iq-logo"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.4 5.6L20 6l-2.6 5.4L22 15l-5.8.6L15 21.5 12 16.8 9 21.5l-1.2-5.9L2 15l4.6-3.6L4 6l5.6 1.6Z" fill="#0172C5"/></svg>ISOQAR</span>
+                                <span class="iq-org">Organisation: <b>Demo Group Plc</b></span>
+                                <button type="button" class="iq-bell" data-act="bell" aria-label="Notifications" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17V11a6 6 0 1 1 12 0v6l1.5 2h-15ZM10 21h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><i data-bind="count">2</i></button>
+                                <div class="iq-fly" hidden>
+                                    <strong>Notifications</strong>
+                                    <ul data-bind="notes"></ul>
+                                </div>
+                            </div>
+                            <div class="iq-shell">
+                                <nav class="iq-nav" aria-label="Portal sections">
+                                    <button type="button" class="is-on" data-view="home" aria-label="Home" title="Home"><svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9h-6v-6H9v6H3Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></button>
+                                    <button type="button" data-view="bookings" aria-label="Site bookings" title="Site bookings"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M8 3v4M16 3v4M4 10h16" stroke="currentColor" stroke-width="2"/></svg></button>
+                                    <button type="button" data-view="certs" aria-label="Certificates" title="Certificates"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 5 3 8 7 10 4-2 7-5 7-10V6Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="2"/></svg></button>
+                                </nav>
+                                <div class="iq-main">
+                                    <!-- HOME -->
+                                    <div class="iq-view is-on" data-view="home">
+                                        <h3>Welcome Chris</h3>
+                                        <div class="iq-grid">
+                                            <div class="iq-col">
+                                                <div class="iq-card iq-navy"><strong>Your information</strong><span>Chris Barnes</span><span>Certifications Manager</span></div>
+                                                <div class="iq-card iq-blue"><strong>Contact ISOQAR</strong><span>Primary contact</span><span>Your account manager</span></div>
+                                                <div class="iq-card">
+                                                    <strong class="iq-h">Site bookings calendar</strong>
+                                                    <div class="iq-mcal" data-bind="mcal"></div>
+                                                    <p class="iq-small" data-bind="mcalnote">Highlighted dates have a site visit. Pick one.</p>
+                                                </div>
+                                            </div>
+                                            <div class="iq-col">
+                                                <div class="iq-card iq-audit">
+                                                    <span class="iq-k">Next audit date</span>
+                                                    <span class="iq-big" data-bind="days"></span>
+                                                    <span class="iq-small" data-bind="auditdate"></span>
+                                                    <button type="button" class="iq-btn" data-act="book">Request booking</button>
+                                                </div>
+                                                <div class="iq-card">
+                                                    <div class="iq-row"><strong class="iq-h">Latest updates</strong>
+                                                        <div class="iq-chips" role="radiogroup" aria-label="Filter updates">
+                                                            <button type="button" role="radio" aria-checked="true" data-filter="all">All</button>
+                                                            <button type="button" role="radio" aria-checked="false" data-filter="Certificate">Certificates</button>
+                                                            <button type="button" role="radio" aria-checked="false" data-filter="Invoice">Invoices</button>
+                                                            <button type="button" role="radio" aria-checked="false" data-filter="Site visit">Site visits</button>
+                                                        </div>
+                                                    </div>
+                                                    <ul class="iq-updates" data-bind="updates"></ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- BOOKINGS -->
+                                    <div class="iq-view" data-view="bookings">
+                                        <div class="iq-row"><h3>Site bookings</h3><button type="button" class="iq-btn" data-act="book">Request booking</button></div>
+                                        <div class="iq-card">
+                                            <strong class="iq-h">Active bookings</strong>
+                                            <table class="iq-table"><thead><tr><th>Start date</th><th>Site</th><th>Product</th><th>State</th></tr></thead><tbody data-bind="bookings"></tbody></table>
+                                        </div>
+                                    </div>
+                                    <!-- CERTS -->
+                                    <div class="iq-view" data-view="certs">
+                                        <h3>Certificates</h3>
+                                        <div class="iq-card">
+                                            <div class="iq-row"><strong class="iq-h">Certificates <span class="iq-small" data-bind="certcount"></span></strong>
+                                                <label class="iq-search"><span class="iq-sr">Search certificates</span><input type="search" placeholder="Search certificates" data-bind="certq"></label></div>
+                                            <table class="iq-table"><thead><tr><th>Name</th><th>Date added</th><th>Product</th><th><span class="iq-sr">Download</span></th></tr></thead><tbody data-bind="certs"></tbody></table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="iq-modal" role="dialog" aria-modal="true" aria-labelledby="iq-mt" hidden>
+                                <form class="iq-dialog">
+                                    <h4 id="iq-mt">Request site booking</h4>
+                                    <label class="iq-f"><span>Site</span><select name="site" required><option value="">Select a site</option><option>Head office, London</option><option>Bristol</option><option>Glasgow</option></select></label>
+                                    <label class="iq-f"><span>Standard</span><select name="std" required><option value="">Select a standard</option><option>ISO 9001</option><option>ISO 22301</option><option>ISO 45001</option></select></label>
+                                    <label class="iq-f"><span>Preferred date</span><input type="date" name="date" required></label>
+                                    <div class="iq-dfoot"><button type="button" class="iq-btn iq-ghost" data-act="cancel">Cancel</button><button type="submit" class="iq-btn" disabled>Send request</button></div>
+                                </form>
+                            </div>
+                            <div class="iq-toast" role="status" aria-live="polite"></div>
+                        </div>
+                    </div>
+                </section>
                 <section class="chapter reveal" id="results" aria-labelledby="h-results">
-                    <span class="ch-num">11 — Outcome</span>
+                    <span class="ch-num">12 — Outcome</span>
                     <h2 id="h-results">Results</h2>
 <div class="rich">
 <p>Support tickets from calls and emails dropped by 80%, from about 300 to 60 a month, within 3 months of the portal launching.</p>

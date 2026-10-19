@@ -7,7 +7,7 @@
     <meta name="description" content="A global cybersecurity company that develops digital protection solutions for consumers and enterprises. Its products safeguard devices and data against…">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="case-study.css">
 </head>
@@ -60,6 +60,7 @@
                     <li><a href="#ab-testing">A/B Testing</a></li>
                     <li><a href="#wireframes">Wireframes</a></li>
                     <li><a href="#high-fidelity-designs">High-Fidelity Designs</a></li>
+                    <li><a href="#try-onboarding">Try the onboarding</a></li>
                     <li><a href="#results">Results</a></li>
                 </ol>
             </aside>
@@ -159,8 +160,102 @@
     <button class="zoom" type="button">Zoom ⤢</button>
 </figure>
                 </section>
+                <section class="chapter reveal" id="try-onboarding" aria-labelledby="h-try-onboarding">
+                    <span class="ch-num">08 — Interactive</span>
+                    <h2 id="h-try-onboarding">Try the onboarding</h2>
+                    <p>A working version of the first-time onboarding, rebuilt in code from the final designs. Pick your protection goals, see the steps recommended for them, set each one up and land on your dashboard.</p>
+                    <div class="mo" aria-label="Interactive demo of the McAfee first-time onboarding">
+                        <button type="button" class="mo-restart" data-act="restart">↺ Start over</button>
+                        <div class="mo-win">
+                            <div class="mo-bar"><img src="images/project-ai/case/cybersecurity-onboarding/demo/logo.webp" width="173" height="42" alt="McAfee"><span class="mo-prog" aria-hidden="true"><i></i></span></div>
+                            <div class="mo-stage" aria-live="polite">
+                                <!-- 1 WELCOME -->
+                                <div class="mo-view is-on" data-view="welcome">
+                                    <div class="mo-center">
+                                        <img class="mo-shield" src="images/project-ai/case/cybersecurity-onboarding/demo/shield.webp" width="73" height="79" alt="">
+                                        <h3>Welcome to McAfee, Alex!</h3>
+                                        <p class="mo-lede">Let’s get you set up — it’ll only take a minute.</p>
+                                        <span class="mo-spin" aria-hidden="true"></span>
+                                    </div>
+                                </div>
+                                <!-- 2 THREE WAYS -->
+                                <div class="mo-view" data-view="ways">
+                                    <h3>McAfee protects you in three ways</h3>
+                                    <div class="mo-three">
+                                        <div><img src="images/project-ai/case/cybersecurity-onboarding/demo/p-device.webp" width="148" height="137" alt=""><strong>Device protection</strong><p>Get protection from malware and viruses on desktop or mobile.</p></div>
+                                        <div><img src="images/project-ai/case/cybersecurity-onboarding/demo/p-identity.webp" width="140" height="129" alt=""><strong>Identity protection</strong><p>Protect your important info — we make sure your personal details stay safe.</p></div>
+                                        <div><img src="images/project-ai/case/cybersecurity-onboarding/demo/p-privacy.webp" width="138" height="135" alt=""><strong>Privacy protection</strong><p>Browse worry-free, knowing strangers can’t track your online activities.</p></div>
+                                    </div>
+                                    <div class="mo-actions"><button type="button" class="mo-btn" data-act="go" data-to="goals">Let’s get started</button></div>
+                                </div>
+                                <!-- 3 GOALS -->
+                                <div class="mo-view" data-view="goals">
+                                    <h3>What are your protection goals?</h3>
+                                    <p class="mo-lede">To help get you started, tell us which protection goals matter most to you.</p>
+                                    <div class="mo-goals" role="group" aria-label="Protection goals">
+                                        <button type="button" class="mo-chip" aria-pressed="false" data-goal="device">I want to keep my devices secure.</button>
+                                        <button type="button" class="mo-chip" aria-pressed="false" data-goal="identity">I want to keep my personal information safe.</button>
+                                        <button type="button" class="mo-chip" aria-pressed="false" data-goal="privacy">I want protection when browsing the web.</button>
+                                    </div>
+                                    <div class="mo-actions"><button type="button" class="mo-btn" data-act="go" data-to="steps" data-bind="next" disabled>Next</button><button type="button" class="mo-link" data-act="go" data-to="dash">Skip this step</button></div>
+                                </div>
+                                <!-- 4 RECOMMENDED STEPS -->
+                                <div class="mo-view" data-view="steps">
+                                    <h3>Your first protection steps</h3>
+                                    <p class="mo-lede">Based on your goals, here’s what we recommend you start with.</p>
+                                    <div class="mo-recs" data-bind="recs"></div>
+                                    <p class="mo-note">This is just to get you started; you can always add more protection later.</p>
+                                    <div class="mo-actions"><button type="button" class="mo-btn" data-act="go" data-to="setup">Set up your protection</button><button type="button" class="mo-link" data-act="go" data-to="dash">Skip this step</button></div>
+                                </div>
+                                <!-- 5 SET UP -->
+                                <div class="mo-view" data-view="setup">
+                                    <h3>Set up your first protection steps</h3>
+                                    <p class="mo-lede">Great! Here are your recommended starting setups.</p>
+                                    <div class="mo-cards" data-bind="cards"></div>
+                                    <div class="mo-actions"><button type="button" class="mo-link" data-act="go" data-to="dash">Take me to the dashboard</button></div>
+                                </div>
+                                <!-- 6 INSTALLING -->
+                                <div class="mo-view" data-view="install">
+                                    <div class="mo-center">
+                                        <img class="mo-ill" data-bind="ill" src="images/project-ai/case/cybersecurity-onboarding/demo/s-antivirus.webp" width="166" height="162" alt="">
+                                        <h3 data-bind="installing">Setting up your first protection…</h3>
+                                        <span class="mo-track" aria-hidden="true"><i data-bind="fill"></i></span>
+                                        <button type="button" class="mo-btn" data-act="installed" data-bind="donebtn" disabled>Next</button>
+                                    </div>
+                                </div>
+                                <!-- 7 CONGRATS -->
+                                <div class="mo-view" data-view="congrats">
+                                    <div class="mo-center">
+                                        <img class="mo-confetti" src="images/project-ai/case/cybersecurity-onboarding/demo/confetti.webp" width="276" height="184" alt="">
+                                        <h3>Congratulations! Your first protection steps are all complete</h3>
+                                        <p class="mo-lede" data-bind="congrats">Nicely done — you’ve successfully set up your first three protection features. Explore your dashboard and discover more ways McAfee can protect you.</p>
+                                        <button type="button" class="mo-btn mo-outline" data-act="go" data-to="dash">Explore your dashboard →</button>
+                                    </div>
+                                </div>
+                                <!-- 8 DASHBOARD -->
+                                <div class="mo-view" data-view="dash">
+                                    <div class="mo-dash">
+                                        <div>
+                                            <p class="mo-hey">Hey there, Alex!</p>
+                                            <h3>Welcome to your McAfee Protection center</h3>
+                                        </div>
+                                        <div class="mo-score">
+                                            <span class="mo-tag">Protection score</span>
+                                            <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="48" fill="none" stroke="#E3D3F7" stroke-width="16"/><circle class="mo-arc" cx="60" cy="60" r="48" fill="none" stroke="#8A3FD1" stroke-width="16" stroke-linecap="round" stroke-dasharray="301.6" stroke-dashoffset="301.6" transform="rotate(-90 60 60)"/></svg>
+                                            <span class="mo-num"><b data-bind="score">900</b><small>/1000</small></span>
+                                            <strong data-bind="scorelabel">Excellent</strong>
+                                        </div>
+                                    </div>
+                                    <h4 class="mo-h4">Let’s get you set up</h4>
+                                    <ul class="mo-done" data-bind="done"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mo-toast" role="status" aria-live="polite"></div>
+                    </div>
+                </section>
                 <section class="chapter reveal" id="results" aria-labelledby="h-results">
-                    <span class="ch-num">08 — Outcome</span>
+                    <span class="ch-num">09 — Outcome</span>
                     <h2 id="h-results">Results</h2>
 <div class="rich">
 <p>90% of new users who started onboarding completed it, up from about 60% with the previous flow. Onboarding-related support tickets fell by about 70% within 4 months of launch.</p>

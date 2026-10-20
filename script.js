@@ -56,19 +56,37 @@ window.addEventListener('scroll', () => {
     }, { passive: true });
 })();
 
-// Mouse parallax effect for floating bubbles
-const floatingBubbles = document.querySelectorAll('.floating-bubble');
-
-document.addEventListener('mousemove', (e) => {
-    const x = (e.clientX / window.innerWidth - 0.5) * 20;
-    const y = (e.clientY / window.innerHeight - 0.5) * 20;
-
-    floatingBubbles.forEach((bubble, index) => {
-        const factor = (index % 3 + 1) * 0.5;
-        bubble.style.setProperty('--parallax-x', `${x * factor}px`);
-        bubble.style.setProperty('--parallax-y', `${y * factor}px`);
+// Hero v2: highlight pills orbit the portrait and the glow follows the cursor.
+// Transform-only animation, so nothing here moves the layout.
+(function () {
+    const port = document.querySelector('.hv-port');
+    if (!port) return;
+    const hero = document.querySelector('.hero-v2'), aura = document.querySelector('.hv-aura');
+    const pills = [...port.querySelectorAll('.hv-pill')];
+    const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let a = 0, ax = null, ay = null, tx = null, ty = null, visible = true;
+    const place = () => {
+        const w = port.clientWidth, narrow = innerWidth < 600, R = w * (narrow ? .44 : .56), RY = w * (narrow ? .55 : .52);
+        pills.forEach((p, k) => {
+            const ang = a + k * Math.PI * 2 / pills.length;
+            p.style.transform = `translate(-50%, -50%) translate(${(Math.cos(ang) * R).toFixed(1)}px, ${(Math.sin(ang) * RY).toFixed(1)}px)`;
+        });
+    };
+    place();
+    if (reduce) return;
+    hero.addEventListener('pointermove', e => {
+        const r = hero.getBoundingClientRect(); tx = e.clientX - r.left; ty = e.clientY - r.top;
+        if (ax === null) { ax = tx; ay = ty; }
     });
-});
+    if ('IntersectionObserver' in window) new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(hero);
+    (function frame() {
+        if (visible) {
+            a += .0025; place();
+            if (tx !== null) { ax += (tx - ax) * .06; ay += (ty - ay) * .06; aura.style.transform = `translate(${ax - aura.offsetWidth / 2}px, ${ay - aura.offsetHeight / 2}px)`; }
+        }
+        requestAnimationFrame(frame);
+    })();
+})();
 
 // Industry filter: highlights matching clients, dims the rest (grid stays stable)
 (function () {

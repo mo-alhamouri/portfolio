@@ -12,9 +12,7 @@ This is the source code for my professional portfolio, featuring a range of high
 - **Dashboard for Health Professionals** (CareHub)
 - **Cybersecurity Onboarding** (McAfee)
 - **Admin Web Portal**
-- **Rewards System** (e& Youth)
 - **Secure Wifi Network Scan** (Verizon)
-- **Mobile App Experience for Youth** (e&)
 - **Figma Plug-in: WCAG Accessibility Auditor**
 
 ## 🛠 Tech Stack

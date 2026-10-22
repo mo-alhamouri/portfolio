@@ -59,10 +59,16 @@
                     <li><a href="#role-responsibilities">Role &amp; Responsibilities</a></li>
                     <li><a href="#user-types">User Types</a></li>
                     <li><a href="#competitive-analysis">Competitive Analysis</a></li>
+                    <li><a href="#principles">Principles</a></li>
                     <li><a href="#user-journey">User Journey</a></li>
+                    <li><a href="#scenarios">Scenarios</a></li>
                     <li><a href="#wireframes">Wireframes</a></li>
                     <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
                     <li><a href="#high-fidelity-designs">High-Fidelity Designs</a></li>
+                    <li><a href="#finding-messages">Finding messages</a></li>
+                    <li><a href="#new-message">Starting a conversation</a></li>
+                    <li><a href="#care-team-threads">Care team threads</a></li>
+                    <li><a href="#trust-details">Details that build trust</a></li>
                 </ol>
             </aside>
 
@@ -108,8 +114,23 @@
     <button class="zoom" type="button">Zoom ⤢</button>
 </figure>
                 </section>
-                <section class="chapter reveal" id="user-journey" aria-labelledby="h-user-journey">
+                <section class="chapter reveal" id="principles" aria-labelledby="h-principles">
                     <span class="ch-num">05 — Research</span>
+                    <h2 id="h-principles">Principles from the audit</h2>
+<div class="rich">
+<p>The competitive audit turned into a few principles the team agreed on before designing:</p>
+<ul>
+<li><strong>Topic first.</strong> People message because of a topic or event, so threads are organized by topic, not by person.</li>
+<li><strong>Accuracy and speed.</strong> A clear, correct answer matters more than an instant one.</li>
+<li><strong>Keep it personal.</strong> Messages come from real, named people with their credentials.</li>
+<li><strong>Be transparent.</strong> Members always know who they’re talking to and when to expect a reply.</li>
+<li><strong>Not for marketing or tech support.</strong> Those are handled in other channels.</li>
+</ul>
+</div>
+
+                </section>
+                <section class="chapter reveal" id="user-journey" aria-labelledby="h-user-journey">
+                    <span class="ch-num">06 — Research</span>
                     <h2 id="h-user-journey">User Journey</h2>
 <div class="rich">
 <p>With a clear understanding of user types and competitor patterns, I mapped the end-to-end user flow for in-app messaging. This included key touchpoints such as receiving a notification, opening a message, reading and replying, and getting provider responses.</p>
@@ -120,8 +141,22 @@
     <button class="zoom" type="button">Zoom ⤢</button>
 </figure>
                 </section>
+                <section class="chapter reveal" id="scenarios" aria-labelledby="h-scenarios">
+                    <span class="ch-num">07 — Research</span>
+                    <h2 id="h-scenarios">Scenarios we designed for</h2>
+<div class="rich">
+<p>We wrote user stories from real care situations and designed the flows around them:</p>
+<h3>A new injury mid-program</h3>
+<p>Annie rolls her ankle on a trail run and doesn’t want to lose her progress. She starts a new message, answers a couple of quick questions about what’s going on, and sees that a PT will reply within a day. Dr. Ryan asks a follow-up, updates her exercise therapy for two weeks, and Annie gets a notification that takes her straight to the thread.</p>
+<h3>From coach to PT</h3>
+<p>Jonah tells his coach one exercise hurts his knees. After a few messages, the coach loops in a physical therapist. Dr. Chloe sees the thread and the coach’s note in CareHub, swaps the exercises, and lets Jonah know.</p>
+<h3>A change of care team</h3>
+<p>Jessie moves from Oregon to Michigan, where her PT isn’t licensed. A new message from Dr. Steph introduces herself as Jessie’s new primary PT, so the change never feels like a gap in care.</p>
+</div>
+
+                </section>
                 <section class="chapter reveal" id="wireframes" aria-labelledby="h-wireframes">
-                    <span class="ch-num">06 — Design</span>
+                    <span class="ch-num">08 — Design</span>
                     <h2 id="h-wireframes">Wireframes</h2>
 <div class="rich">
 <p>Based on the defined user flow, I sketched multiple interaction concepts to explore different approaches for message layout, notifications, and quick replies. I focused on usability, accessibility, and clarity—keeping our clinical users and patients in mind.</p>
@@ -133,7 +168,7 @@
 </figure>
                 </section>
                 <section class="chapter reveal" id="insights-tradeoffs" aria-labelledby="h-insights-tradeoffs">
-                    <span class="ch-num">07 — Insights</span>
+                    <span class="ch-num">09 — Insights</span>
                     <h2 id="h-insights-tradeoffs">Research, Options &amp; Trade-offs</h2>
 <div class="rich">
 <h3>What research revealed</h3>
@@ -148,7 +183,7 @@
 </div>
                 </section>
                 <section class="chapter reveal" id="high-fidelity-designs" aria-labelledby="h-high-fidelity-designs">
-                    <span class="ch-num">08 — Design</span>
+                    <span class="ch-num">10 — Design</span>
                     <h2 id="h-high-fidelity-designs">High-Fidelity Designs</h2>
 <div class="rich">
 <p>After validating the low-fidelity concepts, I transitioned to high-fidelity designs that aligned with Hinge Health's brand and design system. I refined UI components, typography, and visual hierarchy to ensure clarity and accessibility, especially for users with limited tech familiarity.</p>
@@ -157,6 +192,54 @@
 <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/In App Messaging/High_Fidelity_Designs.png">
     <img src="images/project-ai/case/in-app-messaging/high-fidelity-designs.webp" width="2400" height="3651" loading="lazy" decoding="async" alt="High Fidelity Designs">
     <button class="zoom" type="button">Zoom ⤢</button>
+</figure>
+                </section>
+                <section class="chapter reveal" id="finding-messages" aria-labelledby="h-finding-messages">
+                    <span class="ch-num">11 — Design</span>
+                    <h2 id="h-finding-messages">Finding and reading messages</h2>
+<div class="rich">
+<p>Members reach their messages from a push notification, a new-message card on Home, or the Messages inbox. The inbox groups conversations by topic, such as Getting started, Exercise therapy, Health coaching and New pain, with the care team member’s name and credentials on every thread. My Care shows the whole care team, each with a quick way to message them.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/In App Messaging/Entry.jpg">
+    <img src="images/project-ai/case/in-app-messaging/entry.webp" width="2400" height="1330" loading="lazy" decoding="async" alt="A push notification, a new message card on the Home screen, the Messages inbox grouped by topic, and the care team in My Care.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Ways into messaging: notification, Home, inbox and My Care</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="new-message" aria-labelledby="h-new-message">
+                    <span class="ch-num">12 — Design</span>
+                    <h2 id="h-new-message">Starting a conversation</h2>
+<div class="rich">
+<p>Starting a new message takes two choices: who to message, and the topic, from health coaching and exercise therapy to new pain, escalating pain or pelvic health. The thread then sets expectations up front, for example “Your care team responds within 2 days”, which was the biggest source of uncertainty in research.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/In App Messaging/New.jpg">
+    <img src="images/project-ai/case/in-app-messaging/new.webp" width="2400" height="1341" loading="lazy" decoding="async" alt="Choose who you want to message, select a topic, and a new thread that says when the care team will respond.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Choosing a recipient and topic, with response times shown</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="care-team-threads" aria-labelledby="h-care-team-threads">
+                    <span class="ch-num">13 — Design</span>
+                    <h2 id="h-care-team-threads">Conversations with the whole care team</h2>
+<div class="rich">
+<p>Threads start with a personal welcome from the coach and an introduction from the PT. When a coach is away, a covering coach is added to the thread to reply and leaves when the coach returns, so members always see who they’re talking to. PTs can adjust the exercise plan and share a link to book a video visit right in the conversation.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/In App Messaging/Threads.jpg">
+    <img src="images/project-ai/case/in-app-messaging/threads.webp" width="2400" height="1330" loading="lazy" decoding="async" alt="Coach welcome message and reply, PT introduction, PT adjusting the exercise plan, and a covering coach joining the conversation.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Coach and PT threads, including a covering coach</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="trust-details" aria-labelledby="h-trust-details">
+                    <span class="ch-num">14 — Design</span>
+                    <h2 id="h-trust-details">Details that build trust</h2>
+<div class="rich">
+<p>Tapping a name opens the care team member’s bio. Coaches can share educational articles that open in the app, and members can send photos with clear permission prompts. The send button stays disabled until there’s something to send, and long messages grow the input up to the screen height.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/In App Messaging/Details.jpg">
+    <img src="images/project-ai/case/in-app-messaging/details.webp" width="2400" height="1318" loading="lazy" decoding="async" alt="A PT bio, a shared education article, the send an image sheet, and the camera access prompt.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Bios, shared articles and sending images</figcaption>
 </figure>
                 </section>
             </div>

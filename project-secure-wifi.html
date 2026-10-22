@@ -18,7 +18,7 @@
 
     <nav class="nav" aria-label="Case study">
         <a href="index.html#work" class="back"><span aria-hidden="true">←</span> Back to portfolio</a>
-        <a href="project-youth-app.html" class="next">Next project →</a>
+        <a href="project-machine-learning.html" class="next">Next project →</a>
         <div class="progress" id="progress" aria-hidden="true"></div>
     </nav>
 
@@ -27,20 +27,20 @@
             <span class="eyebrow">Case Study · Secure Wi-Fi Scan</span>
             <h1>Verizon — Secure Wi-Fi Scan</h1>
             <p class="hero-lede">Ensuring secure public Wi-Fi connections to protect user data and privacy.</p>
-            <p class="hero-about">One of the world’s leading telecommunications and technology companies, providing wireless, broadband, and digital media services to millions of consumers, businesses, and government clients.</p>
+            <p class="hero-about">One of the world’s leading telecommunications and technology companies, providing wireless, broadband, and digital media services to millions of consumers, businesses, and government clients. Wi-Fi Scan is part of Verizon Digital Secure, the security app McAfee builds for Verizon customers.</p>
 
             <dl class="glance" aria-label="At a glance">
                 <div class="g g-problem"><dt>Problem</dt><dd>Users couldn&#x27;t tell whether a public Wi-Fi network was safe, and technical scan results only confused them.</dd></div>
-                <div class="g"><dt>My role</dt><dd>Lead Product Designer, via Accenture</dd></div>
-                <div class="g"><dt>Team</dt><dd>A small team of designers I led, with cross-functional partners</dd></div>
-                <div class="g"><dt>Timeline</dt><dd>At Accenture (2014 – 2019), MVP plus several enhancement cycles</dd></div>
+                <div class="g"><dt>My role</dt><dd>Product Design Consultant (part-time), via McAfee</dd></div>
+                <div class="g"><dt>Team</dt><dd>McAfee product managers and engineering leads</dd></div>
+                <div class="g"><dt>Timeline</dt><dd>During my McAfee engagement (Aug 2022 – Mar 2023)</dd></div>
                 <div class="g g-result"><dt>Result</dt><dd>A clear safe, caution or unsafe status with one recommended action</dd></div>
             </dl>
 
             <dl class="facts" style="--cols: 5">
-                <div class="fact"><dt>Client</dt><dd class="v">Verizon (via Accenture)</dd></div>
+                <div class="fact"><dt>Client</dt><dd class="v">Verizon (via McAfee)</dd></div>
                 <div class="fact"><dt>Industry</dt><dd class="v">Telecommunications, Technology</dd></div>
-                <div class="fact"><dt>Role</dt><dd class="v">Lead Product Designer</dd></div>
+                <div class="fact"><dt>Role</dt><dd class="v">Product Design Consultant</dd></div>
                 <div class="fact"><dt>Platform</dt><dd class="v">Mobile App (iOS / Android)</dd></div>
                 <div class="fact"><dt>Tools</dt><dd class="v">Figma, Prototype, Security UX</dd></div>
             </dl>
@@ -61,6 +61,13 @@
                     <li><a href="#wireframes">Wireframes</a></li>
                     <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
                     <li><a href="#high-fidelity-designs">High-Fidelity Designs</a></li>
+                    <li><a href="#where-it-lives">Where the scan lives</a></li>
+                    <li><a href="#education">Education &amp; permissions</a></li>
+                    <li><a href="#scan">The scan</a></li>
+                    <li><a href="#results">Results screens</a></li>
+                    <li><a href="#protect">Staying protected</a></li>
+                    <li><a href="#trusted">Trusted networks</a></li>
+                    <li><a href="#errors">Error states</a></li>
                 </ol>
             </aside>
 
@@ -77,8 +84,8 @@
                     <span class="ch-num">02 — Role</span>
                     <h2 id="h-role-responsibilities">Role &amp; Responsibilities</h2>
 <div class="rich">
-<p>As the Lead Product Designer, I directed all design initiatives end-to-end — from discovery and strategy through to production and post-launch iterations. I led a small team of designers, established design standards, and collaborated with cross-functional partners to align product vision and delivery.</p>
-<p>After the MVP launch, I oversaw multiple enhancement cycles, integrating user feedback and analytics to continuously refine the experience.</p>
+<p>As a Product Design Consultant with McAfee, I designed the Wi-Fi Scan experience in Verizon Digital Secure end to end: the user journey, wireframes, and the high-fidelity flows for scanning, results, VPN protection and trusted networks.</p>
+<p>I worked with McAfee product managers and engineering leads, designed every state from the first education screens to error messages, and built the flows on the Verizon Design System so they matched the rest of the app.</p>
 </div>
                 </section>
                 <section class="chapter reveal" id="user-journey" aria-labelledby="h-user-journey">
@@ -129,13 +136,97 @@
     <button class="zoom" type="button">Zoom ⤢</button>
 </figure>
                 </section>
+                <section class="chapter reveal" id="where-it-lives" aria-labelledby="h-where-it-lives">
+                    <span class="ch-num">07 — Design</span>
+                    <h2 id="h-where-it-lives">Where the scan lives</h2>
+<div class="rich">
+<p>Wi-Fi Scan sits inside the Digital Secure dashboard. A card invites people to scan their network, and when the app detects an unsecure connection, the card changes to a clear warning with one button to act on it. Wi-Fi Scan also appears in the Services list next to Identity Protection, Secure VPN, Safe Browsing and Antivirus.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Secure Wifi Network Scan/Dashboard.jpg">
+    <img src="images/project-ai/case/secure-wifi/dashboard.webp" width="2400" height="1352" loading="lazy" decoding="async" alt="Digital Secure dashboard with a scan your Wi-Fi card, the same card warning that the Wi-Fi connection isn’t secure, and the Services list.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Dashboard scan prompt, unsafe Wi-Fi alert and the Services list</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="education" aria-labelledby="h-education">
+                    <span class="ch-num">08 — Design</span>
+                    <h2 id="h-education">Explaining the scan before asking for access</h2>
+<div class="rich">
+<p>To scan in the background, the app needs location access all the time, which is a big ask. Before the system prompt, short screens explain how the scan works and why it matters: on an unsecure network, people within range can snoop on passwords, emails and banking details. Only then do we ask for permission, with steps to fix it in Settings if someone declines.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Secure Wifi Network Scan/Education.jpg">
+    <img src="images/project-ai/case/secure-wifi/education.webp" width="2400" height="1334" loading="lazy" decoding="async" alt="Four screens: scan your Wi-Fi network security, how the scan works, why scan your Wi-Fi, and turn on location permissions.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Education screens before the location permission request</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="scan" aria-labelledby="h-scan">
+                    <span class="ch-num">09 — Design</span>
+                    <h2 id="h-scan">A scan that feels quick and certain</h2>
+<div class="rich">
+<p>The scan shows its progress with a ring and the network name. The finishing screen holds for a moment so the result never feels abrupt, then shows a clear label: <strong>Safe network</strong> or <strong>Unsafe network</strong>.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Secure Wifi Network Scan/Scan.jpg">
+    <img src="images/project-ai/case/secure-wifi/scan.webp" width="2400" height="1334" loading="lazy" decoding="async" alt="Scan in progress at 10 percent, finishing the scan at 100 percent, scan complete on a safe network and on an unsafe network.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Scan progress and the safe or unsafe result</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="results" aria-labelledby="h-results">
+                    <span class="ch-num">10 — Design</span>
+                    <h2 id="h-results">One clear answer, one next step</h2>
+<div class="rich">
+<p>Each result answers “am I safe?” and offers one next step. On a safe network, people can turn on alerts or add it to their trusted list. On an unsafe network, the main action is to turn on VPN. If a trusted network becomes unsafe later, the app says so plainly and suggests removing it.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Secure Wifi Network Scan/Results.jpg">
+    <img src="images/project-ai/case/secure-wifi/results.webp" width="2400" height="1334" loading="lazy" decoding="async" alt="Results screens: connection is safe with notifications, add this network to your trusted list, turn on VPN on an unsafe network, and a trusted network that is no longer safe.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Results for safe, unsafe and no-longer-safe networks</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="protect" aria-labelledby="h-protect">
+                    <span class="ch-num">11 — Design</span>
+                    <h2 id="h-protect">Staying protected</h2>
+<div class="rich">
+<p>From an unsafe result, Secure VPN connects in a couple of taps, and auto-connect turns it on whenever someone joins a network with weak security. If they would rather leave the network, step-by-step instructions show how to disconnect and forget it, followed by a clear confirmation.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Secure Wifi Network Scan/Protect.jpg">
+    <img src="images/project-ai/case/secure-wifi/protect.webp" width="2400" height="1334" loading="lazy" decoding="async" alt="Secure VPN connected, set up auto-connect, how to disconnect from unsafe Wi-Fi, and successfully disconnected.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>VPN, auto-connect and disconnecting from an unsafe network</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="trusted" aria-labelledby="h-trusted">
+                    <span class="ch-num">12 — Design</span>
+                    <h2 id="h-trusted">Trusted networks and settings</h2>
+<div class="rich">
+<p>A trusted Wi-Fi list keeps track of networks people know are safe. They can add up to 100 networks and give each one a nickname, and they won’t be asked to turn on VPN for them while the scan keeps running in the background. Settings let them turn auto-scan on or off and choose which alerts they get: unsafe networks, networks under attack, or safe networks.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Secure Wifi Network Scan/Manage.jpg">
+    <img src="images/project-ai/case/secure-wifi/manage.webp" width="2400" height="1334" loading="lazy" decoding="async" alt="Trusted Wi-Fi networks list, name this Wi-Fi network, Wi-Fi Scan settings with auto-scan, and notification choices.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Trusted Wi-Fi list, naming a network, scan settings and notifications</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="errors" aria-labelledby="h-errors">
+                    <span class="ch-num">13 — Design</span>
+                    <h2 id="h-errors">When things go wrong</h2>
+<div class="rich">
+<p>We designed the unhappy paths too: a scan that couldn’t finish, no internet connection, and a phone that isn’t on Wi-Fi. Each one explains what happened in plain words and offers a way forward.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Secure Wifi Network Scan/Errors.jpg">
+    <img src="images/project-ai/case/secure-wifi/errors.webp" width="2400" height="1352" loading="lazy" decoding="async" alt="Error states: the scan couldn’t complete, no internet connection, and connect to Wi-Fi.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Error states with a clear way forward</figcaption>
+</figure>
+                </section>
             </div>
         </div>
 
         <nav class="footer-nav wrap" aria-label="More projects">
             <div class="footer-grid">
                 <a class="fn-card" href="index.html#work"><span class="k">← All projects</span><strong>Back to portfolio</strong></a>
-                <a class="fn-card next" href="project-youth-app.html"><span class="k">Next project →</span><strong>e&amp; (Etisalat) — swyp Youth App</strong></a>
+                <a class="fn-card next" href="project-machine-learning.html"><span class="k">Next project →</span><strong>Conquest Planning — AI Financial Dashboard</strong></a>
             </div>
         </nav>
     </main>

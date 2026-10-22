@@ -27,7 +27,7 @@
             <span class="eyebrow">Case Study · Alcumus SafeContractor</span>
             <h1>Alcumus SafeContractor — Document Automation</h1>
             <p class="hero-lede">Automating compliance-critical document management for contractors and hiring clients.</p>
-            <p class="hero-about">Alcumus provides global solutions in risk management, compliance, and certification. ISOQAR—one of the most recognized UKAS-accredited certification bodies—helps businesses achieve and maintain ISO standards to build trust and credibility.</p>
+            <p class="hero-about">Alcumus provides global solutions in risk management, compliance, and certification. SafeContractor is its contractor pre-qualification platform: contractors prove they meet health, safety and insurance requirements so hiring clients can work with them with confidence.</p>
 
             <dl class="glance" aria-label="At a glance">
                 <div class="g g-problem"><dt>Problem</dt><dd>Contractors couldn&#x27;t tell whether their compliance documents had been accepted, so they chased customer care, and internal teams re-checked expiry dates by hand.</dd></div>
@@ -59,8 +59,13 @@
                     <li><a href="#role-responsibilities">Role &amp; Responsibilities</a></li>
                     <li><a href="#research">Research</a></li>
                     <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
+                    <li><a href="#userflow">Mapping the flow</a></li>
+                    <li><a href="#statuses">Statuses</a></li>
                     <li><a href="#wireframes">Wireframes</a></li>
                     <li><a href="#high-fidelity-designs">High-Fidelity Designs</a></li>
+                    <li><a href="#contractor-experience">Contractor experience</a></li>
+                    <li><a href="#internal-review">Internal review</a></li>
+                    <li><a href="#history-emails">History &amp; emails</a></li>
                     <li><a href="#results">Results</a></li>
                 </ol>
             </aside>
@@ -74,6 +79,31 @@
 <blockquote>How might we enable the user to get the benefits of uploading critical documents to their account as quickly as possible?</blockquote>
 </div>
 <div class="rich"><p>How might we eliminate the use of CBX to manage critical documents, and to support contractors with more self services without having to reach out to customer care?</p></div>
+<p>Two groups lived with the same manual process from different sides:</p>
+<div class="persona">
+    <div class="avatar" aria-hidden="true">I</div>
+    <div>
+        <div class="name">Internal employee</div>
+        <div class="role">Operations team, SafeContractor</div>
+        <ul>
+            <li>Requests critical documents from contractors by phone</li>
+            <li>Reaches out to hiring clients to get documents approved</li>
+            <li>Manages it all by hand in CBX, which is slow and error-prone</li>
+        </ul>
+    </div>
+</div>
+<div class="persona">
+    <div class="avatar" aria-hidden="true">C</div>
+    <div>
+        <div class="name">Contractor</div>
+        <div class="role">Needs valid documents to stay qualified with each hiring client</div>
+        <ul>
+            <li>Can only send documents to staff by email</li>
+            <li>Can’t upload or track them in SafeContractor</li>
+            <li>Risks losing a qualification if a document lapses</li>
+        </ul>
+    </div>
+</div>
                 </section>
                 <section class="chapter reveal" id="role-responsibilities" aria-labelledby="h-role-responsibilities">
                     <span class="ch-num">02 — Role</span>
@@ -89,6 +119,20 @@
 <div class="rich">
 <p>I conducted deep discovery to understand the existing manual workflows used by internal teams and contractors, identifying pain points such as high operational effort, delays, and risk of human error. This included mapping current CBX processes, documenting contractor and internal user journeys, and validating business rules around document expiry, qualification status, grace periods, and client-specific acceptance criteria.</p>
 <p>Insights from operations, customer support, and compliance teams directly informed UX decisions, helping prioritize self-service, automation, and clarity around document status and next steps.</p>
+</div>
+<div class="rich">
+<h3>What makes a document “critical”</h3>
+<p>A critical document is a legal document with an expiry date that a contractor needs in order to work with a hiring client, such as a Certificate of Insurance. Discovery surfaced the rules the design had to respect:</p>
+<ul>
+<li>Contractors can upload at any time, but a document is only assessed from 30 days before it expires.</li>
+<li>One document can be linked to several hiring clients, and each client can have different acceptance criteria, so it’s approved per client.</li>
+<li>Every critical document has an expiry date. If it expires, the contractor’s client-specific qualification becomes Disqualified, even if the qualification itself isn’t due.</li>
+<li>Documents tagged Automatic can disqualify a contractor on their own, depending on the grace period the hiring client sets.</li>
+<li>Documents can contain sensitive data, and the feature had to work for legacy and new products.</li>
+</ul>
+<h3>Goal, measure and constraints</h3>
+<p><strong>UX goal:</strong> stop managing critical documents in CBX, and give contractors self-service without contacting support. <strong>How we’d know it worked:</strong> internal teams manage critical documents in SafeContractor instead of CBX.</p>
+<p><strong>Constraints:</strong> the D365 team had to agree on a schema for CBX to send critical document data to D365; critical documents apply only to client-specific qualifications, not accreditation or WCB; and any change to a critical document’s status affects the overall document status.</p>
 </div>
 <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Automation/Research.png">
     <img src="images/project-ai/case/document-management/research.webp" width="2400" height="2489" loading="lazy" decoding="async" alt="Automation Research">
@@ -116,8 +160,50 @@
 <p class="cost"><strong>What it cost:</strong> Extra manual work for the operations team, who kept reviewing those documents by hand at launch, but contractors got self-service sooner.</p>
 </aside>
                 </section>
-                <section class="chapter reveal" id="wireframes" aria-labelledby="h-wireframes">
+                <section class="chapter reveal" id="userflow" aria-labelledby="h-userflow">
                     <span class="ch-num">05 — Design</span>
+                    <h2 id="h-userflow">Mapping the flow</h2>
+<div class="rich">
+<p>Before any screens, I mapped how a critical document moves between the system, the contractor, the internal employee and the hiring client, with the contractor’s qualification status shown next to each document status.</p>
+</div>
+<ol class="flow" aria-label="Critical document flow">
+    <li><b>1</b> Pending, 30 days before expiry</li><li class="arrow" aria-hidden="true">→</li>
+    <li><b>2</b> Contractor uploads</li><li class="arrow" aria-hidden="true">→</li>
+    <li><b>3</b> Review within 72 hours</li><li class="arrow" aria-hidden="true">→</li>
+    <li><b>4</b> Approved, needs revision or analyzing</li>
+</ol>
+<div class="rich">
+<p>The branches mattered most. If a hiring client asks for $5 million of insurance coverage and the contractor can only hold $2 million, the internal employee moves the document to Analyzing and asks the client to reconsider. If the client accepts, it becomes Client approved; if not, the contractor gets a note explaining what to resubmit.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Automation/Userflow.jpg">
+    <img src="images/project-ai/case/document-management/userflow.webp" width="2400" height="1467" loading="lazy" decoding="async" alt="Critical document user flow with a legend for hiring client, contractor, internal employee, document case and qualification status, from the Pending event to approval, revision and analysis branches.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Critical document user flow across every actor</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="statuses" aria-labelledby="h-statuses">
+                    <span class="ch-num">06 — Design</span>
+                    <h2 id="h-statuses">A status for every step</h2>
+<div class="rich">
+<p>Each step needed a clear status, and each role sees only the ones that matter to them:</p>
+<ul>
+<li><strong>Pending:</strong> set automatically 30 days before a document expires, or during qualification maintenance.</li>
+<li><strong>Submitted:</strong> set automatically when the contractor uploads a document.</li>
+<li><strong>Analyzing:</strong> the internal employee is waiting on the hiring client.</li>
+<li><strong>Client approved</strong> and <strong>Approved:</strong> accepted by the hiring client, or by the internal employee.</li>
+<li><strong>Needs revisions:</strong> not accepted, with a note for the contractor.</li>
+<li><strong>Expired:</strong> the document has lapsed.</li>
+</ul>
+<p>Internal employees change the status with a six-option toggle. Hiring clients get a shorter one: Client approved, Needs revisions or Analyzing.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Automation/Statuses.jpg">
+    <img src="images/project-ai/case/document-management/statuses.webp" width="2400" height="1206" loading="lazy" decoding="async" alt="Critical document status icons with the roles that see each one, and the status toggles for internal employees and hiring clients.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Document statuses, who sees them, and the status toggles</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="wireframes" aria-labelledby="h-wireframes">
+                    <span class="ch-num">07 — Design</span>
                     <h2 id="h-wireframes">Wireframes</h2>
 <div class="rich">
 <p>With the business rules mapped, I sketched the happy path in low fidelity: the 30-day expiry reminder, the contractor’s documents list with a status for every document, the upload step and the internal review. Operations, compliance and engineering checked each status and edge case against these before high-fidelity design.</p>
@@ -130,7 +216,7 @@
                 </section>
 
                 <section class="chapter reveal" id="high-fidelity-designs" aria-labelledby="h-high-fidelity-designs">
-                    <span class="ch-num">06 — Design</span>
+                    <span class="ch-num">08 — Design</span>
                     <h2 id="h-high-fidelity-designs">High-Fidelity Designs</h2>
 <div class="rich">
 <p>I designed a comprehensive, high-fidelity experience that enables contractors to upload, track, and manage critical documents independently, while giving internal teams clear visibility and control. The designs introduced clear document statuses, expiry indicators, notifications, and qualification impacts, ensuring users always understood what was required and why.</p>
@@ -141,8 +227,44 @@
     <button class="zoom" type="button">Zoom ⤢</button>
 </figure>
                 </section>
+                <section class="chapter reveal" id="contractor-experience" aria-labelledby="h-contractor-experience">
+                    <span class="ch-num">09 — Design</span>
+                    <h2 id="h-contractor-experience">Contractor experience</h2>
+<div class="rich">
+<p>Thirty days before a document expires, the contractor gets an email and the document is flagged in their Documents tab. They upload the renewed file with its language and an optional note, and the status changes to Submitted right away, so they know it’s in review without calling support.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Automation/Contractor_Flow.jpg">
+    <img src="images/project-ai/case/document-management/contractor-flow.webp" width="2400" height="1753" loading="lazy" decoding="async" alt="Four steps for the contractor: the expiry reminder email, the documents list flagging the expiring document, the file upload form, and the document showing Submitted.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Contractor flow: reminder, documents list, upload and Submitted</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="internal-review" aria-labelledby="h-internal-review">
+                    <span class="ch-num">10 — Design</span>
+                    <h2 id="h-internal-review">Internal review and client approval</h2>
+<div class="rich">
+<p>Internal employees review each submitted document in an expandable Validation panel under the document row. They set the status, add a note when revisions are needed, and set the new expiry date when they approve, which updates the contractor’s qualification. When a hiring client needs to weigh in, the document stays in Analyzing until the client responds.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Automation/Internal_Review.jpg">
+    <img src="images/project-ai/case/document-management/internal-review.webp" width="2400" height="2289" loading="lazy" decoding="async" alt="Internal employee screens: client documents with download and change actions, a document in Analyzing, a client-approved document with the new expiry date, and a needs-revisions note to the contractor.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Internal review: actions, analyzing, client approved and needs revisions</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="history-emails" aria-labelledby="h-history-emails">
+                    <span class="ch-num">11 — Design</span>
+                    <h2 id="h-history-emails">History, emails and expiry</h2>
+<div class="rich">
+<p>Every upload is kept in a document history with its date, the person who uploaded it and its status. Contractors get an email when a document is approved, and an expired document is marked clearly in red so nobody misses it.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Automation/History_Emails.jpg">
+    <img src="images/project-ai/case/document-management/history-emails.webp" width="2400" height="740" loading="lazy" decoding="async" alt="Uploaded documents history table, the critical document approved email, and a document shown as expired.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Document history, approval email and the expired state</figcaption>
+</figure>
+                </section>
                 <section class="chapter reveal" id="results" aria-labelledby="h-results">
-                    <span class="ch-num">07 — Outcome</span>
+                    <span class="ch-num">12 — Outcome</span>
                     <h2 id="h-results">Results</h2>
 <div class="rich">
 <p>Document-related support tickets dropped by 90%, from about 200 to 20 a month, within 3 months of launching automation.</p>

@@ -61,6 +61,13 @@
                     <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
                     <li><a href="#wireframes">Wireframes</a></li>
                     <li><a href="#high-fidelity-designs">High-Fidelity Designs</a></li>
+                    <li><a href="#coach-dashboard">Coach dashboard</a></li>
+                    <li><a href="#pt-dashboard">PT dashboard</a></li>
+                    <li><a href="#pain-uptick">Pain uptick workflow</a></li>
+                    <li><a href="#ml-queue">No response predicted</a></li>
+                    <li><a href="#exercise-therapy">Exercise therapy</a></li>
+                    <li><a href="#action-plans">Action plans</a></li>
+                    <li><a href="#mass-messaging">Mass messaging</a></li>
                     <li><a href="#results">Results</a></li>
                 </ol>
             </aside>
@@ -143,8 +150,126 @@
     <button class="zoom" type="button">Zoom ⤢</button>
 </figure>
                 </section>
+                <section class="chapter reveal" id="coach-dashboard" aria-labelledby="h-coach-dashboard">
+                    <span class="ch-num">07 — Design</span>
+                    <h2 id="h-coach-dashboard">Coach dashboard: one queue for every task</h2>
+<div class="rich">
+<p>The coach dashboard puts every task across a coach’s members into one table, while member-specific details live in the sidebar. After reviews with coaches, neighborhoods and pods, we agreed on the rules that shaped it:</p>
+<ul>
+<li>Every task has a defined due date and time, with a warning before it’s due and an overdue state after, so coaches see urgency without feeling overwhelmed.</li>
+<li>Tasks are sorted by due time. When two are due at the same time, the order is unread messages, health log notes, pain upticks, then surgery-indication outreach.</li>
+<li>A sidebar filters the day’s tasks (All, Unread messages, Tasks, Completed) with live counts.</li>
+<li>Today’s calendar sits on the right and collapses to give the table more room.</li>
+<li>Quick links to Freshdesk and Help Scout stayed on the dashboard as a temporary bridge while those tools were phased out.</li>
+<li>We worked with the coaching team on labels, so coaching, engineering and design use the same names for each task.</li>
+</ul>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Dashboard for Health Professionals/Coach_Dashboard.jpg">
+    <img src="images/project-ai/case/health-dashboard/coach-dashboard.webp" width="2400" height="859" loading="lazy" decoding="async" alt="Coach dashboard showing all tasks sorted by due time with warning and overdue icons, a sidebar filter with counts and today’s calendar; second screen filtered to unread messages.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Coach dashboard: all tasks, and the same view filtered to unread messages</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="pt-dashboard" aria-labelledby="h-pt-dashboard">
+                    <span class="ch-num">08 — Design</span>
+                    <h2 id="h-pt-dashboard">PT dashboard: workflows and encounters</h2>
+<div class="rich">
+<p>Physical therapists plan their day around video visits, so their dashboard splits work into two tabs: <strong>Workflows</strong> (unread messages, clinical workflows and post-visit tasks) and <strong>Encounters</strong> (upcoming video visits and house calls).</p>
+<p>The sidebar groups filters into Communications, Encounters and Clinical workflows, with one filter per workflow: health log notes, pain upticks, DA limit approaching, and discharge and close plan. The calendar drawer is open by default for PTs, collapses into a slim right-hand nav, and has its own loading and error states.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Dashboard for Health Professionals/PT_Dashboard.jpg">
+    <img src="images/project-ai/case/health-dashboard/pt-dashboard.webp" width="2400" height="856" loading="lazy" decoding="async" alt="PT dashboard with the Workflows tab, sidebar filters for communications, encounters and clinical workflows, and the day calendar; second screen showing post video visit tasks.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>PT dashboard: workflows and post video visit tasks, with the calendar drawer open</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="pain-uptick" aria-labelledby="h-pain-uptick">
+                    <span class="ch-num">09 — Workflow</span>
+                    <h2 id="h-pain-uptick">Closing the loop on a pain uptick</h2>
+<div class="rich">
+<p>A pain uptick is triggered when a member’s pain score rises by 30 points or more. We mapped the full flow with a real scenario: Amelia logs a sharp pain in her hip, and her coach, Susie, sees the uptick on her dashboard.</p>
+</div>
+<ol class="flow" aria-label="Pain uptick workflow">
+    <li><b>1</b> Open the pain uptick</li><li class="arrow" aria-hidden="true">→</li>
+    <li><b>2</b> Review and message the member</li><li class="arrow" aria-hidden="true">→</li>
+    <li><b>3</b> Escalate to the PT</li><li class="arrow" aria-hidden="true">→</li>
+    <li><b>4</b> Send the PT’s resources</li><li class="arrow" aria-hidden="true">→</li>
+    <li><b>5</b> Resolve</li>
+</ol>
+<div class="rich">
+<p>The workflow panel lists the actions to take. Each one deep-links to the right part of CareHub or to Freshdesk, where the coach and PT collaborate, and can be checked off. When every action is done, the coach marks the workflow complete.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Dashboard for Health Professionals/Pain_Uptick_Flow.jpg">
+    <img src="images/project-ai/case/health-dashboard/pain-uptick.webp" width="2400" height="642" loading="lazy" decoding="async" alt="Three steps: the coach selects a pain uptick on the dashboard, reviews the health log panel and messages the member, then escalates to the PT in Freshdesk.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Pain uptick flow: dashboard, health log panel and Freshdesk escalation</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="ml-queue" aria-labelledby="h-ml-queue">
+                    <span class="ch-num">10 — Workflow</span>
+                    <h2 id="h-ml-queue">Letting the queue sort itself</h2>
+<div class="rich">
+<p>Many health log notes don’t need a reply, but coaches still had to open each one. Notes that a machine learning model predicts as low priority now move into a separate <strong>No response predicted</strong> list with a 48-hour SLA, so they sit at the back of the main queue.</p>
+<ul>
+<li>Selecting one or more rows turns the table header into an action bar with a bulk Mark Complete.</li>
+<li>Select all works across pages, and the selection persists while the coach pages through.</li>
+<li>Each row has its own Mark Complete action on hover.</li>
+<li>Counts update in real time, and a success alert with Undo hides itself after 7 seconds.</li>
+</ul>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Dashboard for Health Professionals/ML_Queue.jpg">
+    <img src="images/project-ai/case/health-dashboard/ml-queue.webp" width="2400" height="631" loading="lazy" decoding="async" alt="The No response predicted list, the same list with all rows selected and the bulk Mark Complete action, and the success alert with an Undo button.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>No response predicted: list, bulk selection and confirmation</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="exercise-therapy" aria-labelledby="h-exercise-therapy">
+                    <span class="ch-num">11 — Care plan</span>
+                    <h2 id="h-exercise-therapy">Personalizing exercise therapy</h2>
+<div class="rich">
+<p>PTs needed to tailor a member’s exercise therapy without leaving the member record. The care plan now shows the current plan, its rules and difficulty in one place.</p>
+<ul>
+<li>Substitute an exercise straight from the plan, or create a substitution rule in the Rules section.</li>
+<li>When the dropdown isn’t enough, Advanced select opens the full exercise list with sort, filter and search.</li>
+<li>Hovering an exercise expands it and autoplays its video.</li>
+<li>Rules can be edited inline, with a duration from “Never expires” to “Current level +9”.</li>
+<li>Closing a form with unsaved edits asks for confirmation, and a snackbar confirms each new rule.</li>
+</ul>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Dashboard for Health Professionals/Exercise_Therapy.jpg">
+    <img src="images/project-ai/case/health-dashboard/exercise-therapy.webp" width="2400" height="622" loading="lazy" decoding="async" alt="Exercise therapy plan with the create substitution rule popover, the advanced select dialog, and the rules and difficulty sections.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Exercise therapy: substitution, advanced select, rules and difficulty</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="action-plans" aria-labelledby="h-action-plans">
+                    <span class="ch-num">12 — Care plan</span>
+                    <h2 id="h-action-plans">Action plans</h2>
+<div class="rich">
+<p>Coaches build weekly action plans with members: a goal per week, the days to do it, reminders and a habit stack (for example, “after morning coffee”). Only one plan can be active, so adding a new plan closes the previous one in the same form, with a reason for closing.</p>
+<p>We designed every status (active, due for review, review overdue, closed after review, closed without review) along with empty, loading and error states, and a warning before leaving with unsaved changes.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Dashboard for Health Professionals/Action_Plans.jpg">
+    <img src="images/project-ai/case/health-dashboard/action-plans.webp" width="2400" height="845" loading="lazy" decoding="async" alt="Action plans table with an active plan expanded to show goal, days, reminders and habit stack, and the form that closes the previous plan while creating a new one.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Action plans: an active plan, and creating a new plan</figcaption>
+</figure>
+                </section>
+                <section class="chapter reveal" id="mass-messaging" aria-labelledby="h-mass-messaging">
+                    <span class="ch-num">13 — Communications</span>
+                    <h2 id="h-mass-messaging">Mass messaging</h2>
+<div class="rich">
+<p>Care team specialists needed to send one message to many members at once. The composer turns pasted member IDs into chips, flags duplicate and invalid IDs, and lets them choose the channel (SMS or in-app) and the conversation.</p>
+<p>Personalization codes such as First name appear as chips. A mistyped code turns red before the message can be scheduled, and the landing page lists every scheduled and sent message.</p>
+</div>
+<figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Dashboard for Health Professionals/Mass_Messaging.jpg">
+    <img src="images/project-ai/case/health-dashboard/mass-messaging.webp" width="2400" height="681" loading="lazy" decoding="async" alt="Mass messages landing page, the composer with member ID chips and the personalization code menu, and an invalid code highlighted in red.">
+    <button class="zoom" type="button">Zoom ⤢</button>
+    <figcaption>Mass messaging: landing page, composer and validation</figcaption>
+</figure>
+                </section>
                 <section class="chapter reveal" id="results" aria-labelledby="h-results">
-                    <span class="ch-num">07 — Outcome</span>
+                    <span class="ch-num">14 — Outcome</span>
                     <h2 id="h-results">Results</h2>
 <div class="rich">
 <p>CareHub was adopted by 100% of health practitioners (120 clinicians, coaches and trainers), who use it daily to manage their schedules, within 8 weeks of launch.</p>

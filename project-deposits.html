@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First American — Escrow Deposits | Mo Alhamouri</title>
+    <meta name="description" content="Case study: moving incoming wires and deposits out of a legacy system and into ClarityFirst, so escrow teams can receipt, split, transfer and return funds in a few clear steps.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    <style>html,body{margin:0;background:#0a0a0a;color:#fff}</style>
+    <link rel="stylesheet" href="case-study.css">
+</head>
+<body>
+    <div class="bg-gradient"></div>
+    <div class="noise"></div>
+
+    <nav class="nav" aria-label="Case study">
+        <a href="index.html#work" class="back"><span aria-hidden="true">←</span> Back to portfolio</a>
+        <a href="project-wcag-auditor.html" class="next">Next project →</a>
+        <div class="progress" id="progress" aria-hidden="true"></div>
+    </nav>
+
+    <main>
+        <header class="hero wrap">
+            <span class="eyebrow">Case Study · Title Insurance · Escrow Deposits</span>
+            <h1>First American — Escrow Deposits</h1>
+            <p class="hero-lede">Bringing incoming wires and deposits out of a legacy system and into ClarityFirst, so escrow teams can receipt, split, transfer and return funds in a few clear steps.</p>
+            <p class="hero-about">A leading provider of title insurance, settlement services, and risk solutions for real estate and mortgage transactions. The company plays a critical role in ensuring property ownership integrity and enabling secure real estate transactions across the U.S.</p>
+
+            <dl class="glance" aria-label="At a glance">
+                <div class="g g-problem"><dt>Problem</dt><dd>Escrow teams receipted wires in FAST, a legacy system that took six screens per wire, started inside a file instead of at the bank, and had no clear way to split one wire across several orders.</dd></div>
+                <div class="g"><dt>My role</dt><dd>Lead Product Designer, via TheoremOne</dd></div>
+                <div class="g"><dt>Team</dt><dd>A small design team I led, plus product managers and engineers</dd></div>
+                <div class="g"><dt>Timeline</dt><dd>2021, during my First American engagement (Apr 2021 – Sep 2022)</dd></div>
+                <div class="g g-result"><dt>Result</dt><dd>Handoff-ready flows to receipt, split, transfer, return and exclude wires, plus deposit receipts and manual check deposits</dd></div>
+            </dl>
+
+            <dl class="facts">
+                <div class="fact"><dt>Client</dt><dd class="v">First American (via TheoremOne)</dd></div>
+                <div class="fact"><dt>Industry</dt><dd class="v">Financial Services, Title Insurance, Escrow</dd></div>
+                <div class="fact"><dt>Role</dt><dd class="v">Lead Product Designer</dd></div>
+                <div class="fact"><dt>Platform</dt><dd class="v">ClarityFirst web app (escrow accounting)</dd></div>
+                <div class="fact"><dt>Tools</dt><dd class="v">Figma</dd></div>
+            </dl>
+
+            <div class="deliverables">
+                <span class="k">What I designed</span>
+                <a class="pill" href="#receipt-split" style="--c: var(--accent-pink)">Receipt &amp; split</a>
+                <a class="pill" href="#office-wires" style="--c: #8a5cff">Office incoming wires</a>
+                <a class="pill" href="#deposit-receipts" style="--c: #00c8ff">Deposit receipts</a>
+                <a class="pill" href="#manual-deposits" style="--c: #ffb020">Manual deposits</a>
+            </div>
+
+            <div class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Deposits/Hero.png">
+                <img src="images/project-ai/case/deposits/hero.webp" width="2400" height="1500" alt="ClarityFirst screens: adding receipt details for a wire split into three deposits, the office's incoming wires list, and a window showing a deposit receipt ready to view." fetchpriority="high">
+                <button class="zoom" type="button">Zoom ⤢</button>
+            </div>
+        </header>
+
+        <div class="body wrap">
+            <aside class="toc" aria-label="On this page">
+                <span class="k">On this page</span>
+                <ol>
+                    <li><a href="#challenge">The challenge</a></li>
+                    <li><a href="#role">My role</a></li>
+                    <li><a href="#process">Process</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#workshops">Workshops &amp; flows</a></li>
+                    <li><a href="#wireframes">Wireframes</a></li>
+                    <li><a href="#insights-tradeoffs">Research, Options &amp; Trade-offs</a></li>
+                    <li><a href="#hifi">High-fidelity designs</a></li>
+                    <li><a href="#try-receipt">Try receipting a wire</a></li>
+                    <li><a href="#states">Every state</a></li>
+                </ol>
+            </aside>
+
+            <div class="content">
+                <section class="chapter reveal" id="challenge" aria-labelledby="h-challenge">
+                    <span class="ch-num">01 — Challenge</span>
+                    <h2 id="h-challenge">Problem statement</h2>
+                    <div class="hmw">
+                        <span class="k">How might we</span>
+                        <blockquote>…let escrow teams take an incoming wire from the bank to the right file, or to several files, in a few clear steps, with every dollar accounted for?</blockquote>
+                    </div>
+                    <p>Money for a commercial real estate deal arrives as a wire into one of First American's escrow accounts. Someone in the office has to match it to the right order, record who sent it and what it is for, and produce a receipt. In FAST, the legacy system, that took six screens per wire. Splitting one wire across several orders, moving it to another office or sending it back to the bank were separate, hard-to-find tasks.</p>
+                </section>
+
+                <section class="chapter reveal" id="role" aria-labelledby="h-role">
+                    <span class="ch-num">02 — Role</span>
+                    <h2 id="h-role">Role &amp; responsibilities</h2>
+                    <p>As the Lead Product Designer, I led the design of the Deposits workflows in ClarityFirst, First American's commercial title and escrow platform, from discovery workshops to developer handoff. I partnered closely with product managers, engineers and First American's escrow and accounting stakeholders, and presented progress to the project's steering committee.</p>
+                    <p>I led a small team of product designers. I ran a weekly grooming session where I assigned tasks, checked on progress and removed any blockers, and reviewed every flow for consistency with the rest of ClarityFirst before anything shipped.</p>
+                    <ul class="resp">
+                        <li>Owned the deposits experience from discovery workshops to handoff</li>
+                        <li>Partnered with product managers, engineers and escrow stakeholders</li>
+                        <li>Annotated every state and rule in Figma for the engineers</li>
+                    </ul>
+                </section>
+
+                <section class="chapter reveal" id="process" aria-labelledby="h-process">
+                    <span class="ch-num">03 — Process</span>
+                    <h2 id="h-process">From the legacy system to tested flows</h2>
+                    <ol class="process">
+                        <li style="--c: var(--accent-pink)"><strong>Audit</strong><span>Walked through how FAST handles a wire today</span></li>
+                        <li style="--c: #8a5cff"><strong>Workshops</strong><span>Mapped where the money moves and listed every workflow</span></li>
+                        <li style="--c: #00c8ff"><strong>Flow maps</strong><span>Single wire to one order, several orders or a multisite</span></li>
+                        <li style="--c: #ffb020"><strong>Wireframes</strong><span>Agreed the rules with accounting before visual design</span></li>
+                        <li style="--c: var(--accent-green)"><strong>High-fidelity</strong><span>Every state annotated for handoff</span></li>
+                    </ol>
+                </section>
+
+                <section class="chapter reveal" id="research" aria-labelledby="h-research">
+                    <span class="ch-num">04 — Research</span>
+                    <h2 id="h-research">Auditing FAST &amp; listening to escrow teams</h2>
+                    <p>We started with the way a wire is receipted today. In FAST, an escrow officer opens the incoming wires for the business unit, finds the office account for the day, selects the pending record, chooses to receipt it to a file, fills in the required fields and picks what the money represents before saving. We then reviewed our early flows with escrow teams.</p>
+                    <div class="persona">
+                        <div class="avatar" aria-hidden="true">E</div>
+                        <div>
+                            <div class="name">Escrow teams</div>
+                            <div class="role">Escrow officers, managers and accounting staff in First American's commercial offices</div>
+                            <ul>
+                                <li>See every incoming wire, check and ACH for their office, with its status and history</li>
+                                <li>Receipt a deposit into one file, or split it across several</li>
+                                <li>Transfer, return or exclude a wire without leaving the list</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Deposits/Research.png">
+                        <img src="images/project-ai/case/deposits/research.webp" width="2400" height="2301" loading="lazy" decoding="async" alt="Research board: the six FAST screens used to receipt one wire today, and notes from escrow teams about where they start, how they recognise a wire, who sent the money, the data every receipt needs and the statuses a wire can have.">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>FAST audit and what escrow teams told us</figcaption>
+                    </figure>
+                </section>
+
+                <section class="chapter reveal" id="workshops" aria-labelledby="h-workshops">
+                    <span class="ch-num">05 — Research</span>
+                    <h2 id="h-workshops">Workshops &amp; workflow mapping</h2>
+                    <p>In workshops with the product team and First American's accounting stakeholders, we sketched where the money physically moves: from the buyer's bank into a First American trust account, then into an office, then into a file. Each move became a workflow. We sorted them into three groups and agreed the order with the steering committee.</p>
+                    <ol class="phases">
+                        <li style="--c: var(--accent-pink)"><span class="k">Group 1</span><strong>File level</strong></li>
+                        <li style="--c: #8a5cff"><span class="k">Group 2</span><strong>Office level</strong></li>
+                        <li style="--c: var(--accent-green)"><span class="k">Group 3</span><strong>Later discovery</strong></li>
+                    </ol>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Deposits/Workshops.png">
+                        <img src="images/project-ai/case/deposits/workshops.webp" width="2400" height="4067" loading="lazy" decoding="async" alt="Workshop board: a whiteboard of how money moves between bank, office and file, the wire-to-order combinations to support, FAST's file and office screens side by side, and the workflow list grouped into file level, office level, steering committee additions and later discovery.">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>Workshop outputs and workflow priorities</figcaption>
+                    </figure>
+                    <p>For the first workflows I mapped every screen and decision, from the file overview to the generated receipt, with notes on the data each step needs.</p>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Deposits/Flows.png">
+                        <img src="images/project-ai/case/deposits/flows.webp" width="2400" height="1374" loading="lazy" decoding="async" alt="Flow maps for receipting a single wire into a single order, and into multiple orders or a multisite, moving between file-level and office-level screens.">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>Flow maps for single-wire scenarios</figcaption>
+                    </figure>
+                </section>
+
+                <section class="chapter reveal" id="wireframes" aria-labelledby="h-wireframes">
+                    <span class="ch-num">06 — Design</span>
+                    <h2 id="h-wireframes">Wireframes</h2>
+                    <p>The core flow had to be short and predictable, whether someone starts from a file or from the office's incoming wires.</p>
+                    <ol class="flow" aria-label="Receipt a wire flow">
+                        <li><b>1</b> Select the wire</li><li class="arrow" aria-hidden="true">→</li>
+                        <li><b>2</b> Add receipt details</li><li class="arrow" aria-hidden="true">→</li>
+                        <li><b>3</b> Split, if needed</li><li class="arrow" aria-hidden="true">→</li>
+                        <li><b>4</b> Review &amp; confirm</li><li class="arrow" aria-hidden="true">→</li>
+                        <li><b>5</b> Receipt generated</li>
+                    </ol>
+                    <p>For the office-level actions I worked in greyscale first, so we could agree the business rules with accounting before visual design. Only a wire that hasn't been receipted can be returned: if it has, the deposit is cancelled in the file first. A transfer or return goes to an approval queue, and the approver can't be the person who requested it.</p>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Deposits/Wireframes.png">
+                        <img src="images/project-ai/case/deposits/wireframes.webp" width="2400" height="1664" loading="lazy" decoding="async" alt="Greyscale wireframes: the office level view, incoming wires with an actions menu, an exclude confirmation, the return wire page, the transfer to office page and a cancelled deposit in the file.">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>Office-level wireframes</figcaption>
+                    </figure>
+                </section>
+
+                <section class="chapter reveal" id="insights-tradeoffs" aria-labelledby="h-insights-tradeoffs">
+                    <span class="ch-num">07 — Insights</span>
+                    <h2 id="h-insights-tradeoffs">Research, Options &amp; Trade-offs</h2>
+<div class="rich">
+<h3>What research revealed</h3>
+<p>Escrow teams think bank-first, not file-first: when a wire lands, they go looking for it the way they would in their bank. They recognise a wire by its amount, then by the originator, and want the newest at the top.</p>
+<h3>Directions explored</h3>
+<ul>
+<li><strong>Option A:</strong> Start every deposit inside the file, as FAST does. Kept as one way in, but not the only one.</li>
+<li><strong>Option B:</strong> Add an office-level Incoming Wires view, reachable straight from ClarityFirst's top navigation, with amount as the first column and the newest wires first. <strong>Chosen,</strong> alongside the file entry point.</li>
+<li><strong>Running totals:</strong> When a wire is split, people need to see what is left to allocate. I explored five layouts for a sticky bar and chose one line: status first, then total, allocated and remaining, next to the actions.</li>
+</ul>
+<h3>Trade-offs</h3>
+<p>Receipting several wires into one order, and ACH flows, stayed out of the first release. Receipts are generated in the background and saved to the order's documents rather than shown instantly. Transfers and returns hand off to the Disbursements team's approval screen, which was out of our scope.</p>
+</div>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Deposits/Options.png">
+                        <img src="images/project-ai/case/deposits/options.webp" width="2400" height="1883" loading="lazy" decoding="async" alt="Five sticky bar layouts for showing the deposit total, allocated and remaining amounts while splitting a wire, and the chosen one-line layout.">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>Five sticky bar options for the running totals, and the one we chose</figcaption>
+                    </figure>
+<aside class="lead-call" aria-label="Leadership">
+<span class="k">Leadership · Getting stakeholders to agree</span>
+<h3>A workflow list that kept growing</h3>
+<p>Every workshop added workflows: third-party deposits, manual receipts, overdrafts, holds, interest-bearing accounts. Rather than design them all at once, I grouped them into file level, office level and later discovery, and used the steering committee update to agree what came first. We merged editing and adjusting a deposit into one flow, brought it forward, and moved holds, overdrafts and interest-bearing accounts to separate discovery or to the teams that owned them.</p>
+<p class="cost"><strong>What it cost:</strong> Some workflows stakeholders asked for, like multiple wires into one order, waited for a later release.</p>
+</aside>
+                </section>
+
+                <section class="chapter reveal" id="hifi" aria-labelledby="h-hifi">
+                    <span class="ch-num">08 — Design</span>
+                    <h2 id="h-hifi">High-fidelity designs</h2>
+                    <p>In high fidelity, every screen uses ClarityFirst's existing components, colours and text styles, so deposits feel like part of the same product. I reviewed the designs done by the other product designers on the team to keep patterns consistent, and annotated every rule for the engineers: what disables a button and why, where text truncates, when pagination appears.</p>
+                    <p>Every quick action was also tagged for analytics, for example when someone selects Transfer and when they confirm it, so the team could see how often each action is started, completed or abandoned.</p>
+                    <div class="sub-nav">
+                        <a class="pill" href="#receipt-split" style="--c: var(--accent-pink)">Receipt &amp; split</a>
+                        <a class="pill" href="#office-wires" style="--c: #8a5cff">Office incoming wires</a>
+                        <a class="pill" href="#deposit-receipts" style="--c: #00c8ff">Deposit receipts</a>
+                        <a class="pill" href="#manual-deposits" style="--c: #ffb020">Manual deposits</a>
+                    </div>
+
+                    <div class="product" id="receipt-split">
+                        <div class="product-head"><h3>Receipt &amp; split a wire</h3><span class="tag">File level</span></div>
+                        <p>Pick an incoming wire, add who sent it, who it is credited to and what it represents, and split it across orders if needed. The sticky bar keeps the total, allocated and remaining amounts in view, and Confirm only unlocks when every split is complete and the amounts add up.</p>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Deposits/Hifi_Receipt_Split.png">
+                            <img src="images/project-ai/case/deposits/hifi-receipt.webp" width="2400" height="1611" loading="lazy" decoding="async" alt="Six steps to receipt a wire: pick the incoming wire, add receipt details, choose the number of splits, fill each split, review and confirm, and the receipted deposit with related splits.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                        </figure>
+                    </div>
+
+                    <div class="product" id="office-wires">
+                        <div class="product-head"><h3>Office incoming wires</h3><span class="tag">Office level</span></div>
+                        <p>All the wires coming into an office, filtered by month, status and account. Quick actions let teams transfer a wire to another office or account, return it to the sender or exclude it, each with a confirmation and clear feedback.</p>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Deposits/Hifi_Office_Wires.png">
+                            <img src="images/project-ai/case/deposits/hifi-office.webp" width="2400" height="1611" loading="lazy" decoding="async" alt="Office incoming wires: the list with filters, the quick actions menu, an exclude confirmation, the transfer funds page, the return wire page and a success message.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                        </figure>
+                    </div>
+
+                    <div class="product" id="deposit-receipts">
+                        <div class="product-head"><h3>Deposit receipts</h3><span class="tag">Documents</span></div>
+                        <p>Receipts generate in the background in a small window that stacks with document uploads, so people can keep working. When a receipt is ready it opens in a new tab, and it can be shared with contacts on the order.</p>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Deposits/Hifi_Deposit_Receipts.png">
+                            <img src="images/project-ai/case/deposits/hifi-receipts.webp" width="2400" height="1384" loading="lazy" decoding="async" alt="Deposit receipts: view receipt from the deposits table, receipts generating in a corner window, ready to view, stacked with a document upload, sharing with contacts, and a retry when one fails.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                        </figure>
+                    </div>
+
+                    <div class="product" id="manual-deposits">
+                        <div class="product-head"><h3>Manual deposits</h3><span class="tag">Checks &amp; wires</span></div>
+                        <p>Not every deposit arrives as an incoming wire. A manual deposit records a check or wire by hand, with a date picker that accepts typing and fields that change with the fund type.</p>
+                        <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Deposits/Hifi_Manual_Deposits.png">
+                            <img src="images/project-ai/case/deposits/hifi-manual.webp" width="2400" height="1584" loading="lazy" decoding="async" alt="Manual deposit screens: empty receipt details, the date picker, check details, wire details, the receipted deposit and its details page.">
+                            <button class="zoom" type="button">Zoom ⤢</button>
+                        </figure>
+                    </div>
+                </section>
+
+                <section class="chapter reveal" id="try-receipt" aria-labelledby="h-try-receipt">
+                    <span class="ch-num">09 — Interactive</span>
+                    <h2 id="h-try-receipt">Try it: receipt and split a wire</h2>
+                    <p>A working version of the core flow, with sample data. Pick a wire, split it across orders if you like, and watch Confirm unlock once every dollar is allocated.</p>
+                    <div class="dp" aria-label="Interactive demo of receipting an incoming wire">
+                        <ol class="dp-steps" aria-label="Progress">
+                            <li data-s="1" class="is-on" aria-current="step"><b>1</b> Pick a wire</li>
+                            <li data-s="2"><b>2</b> Add details &amp; split</li>
+                            <li data-s="3"><b>3</b> Confirm</li>
+                            <li data-s="4"><b>4</b> Receipt</li>
+                        </ol>
+                        <button type="button" class="dp-restart" data-act="restart" aria-label="Start the demo over">↺ Start over</button>
+                        <div class="dp-win">
+                            <div class="dp-bar">
+                                <span class="dp-logo">clarity<i>first</i></span>
+                                <span class="dp-search" aria-hidden="true">Search by order number, address, person, keyword…</span>
+                            </div>
+                            <div class="dp-order" aria-hidden="true"><b>Order 425616</b><span>Status <em>Open</em></span><span>22 North Sangamon Street, Chicago, IL</span></div>
+                            <div class="dp-body">
+                                <div class="dp-screen is-on" data-screen="wires">
+                                    <p class="dp-crumb">Order 425616 / Deposits / Incoming Wires</p>
+                                    <div class="dp-head"><h3>Select an Incoming Wire to Receipt</h3><span class="dp-small">Newest first · sample data</span></div>
+                                    <div class="dp-table" role="radiogroup" aria-label="Incoming wires">
+                                        <div class="dp-tr dp-th" aria-hidden="true"><span></span><span>Amount</span><span>Originator</span><span>Notes</span><span>Received</span><span>Status</span><span></span></div>
+                                        <div data-bind="wires"></div>
+                                    </div>
+                                    <div class="dp-foot">
+                                        <span class="dp-small">Use ••• to exclude a wire you don't want to process.</span>
+                                        <div class="dp-actions">
+                                            <span class="dp-tipwrap">
+                                                <button type="button" class="dp-btn dp-primary" data-act="pick" disabled aria-describedby="dp-tip1">Receipt Wire</button>
+                                                <span class="dp-tip is-armed" id="dp-tip1" role="tooltip">Select a pending wire first</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dp-screen" data-screen="details">
+                                    <p class="dp-crumb">Order 425616 / Deposits / Incoming Wires / Add Receipt Details</p>
+                                    <h3>Add Receipt Details</h3>
+                                    <div class="dp-card dp-wire">
+                                        <div class="dp-card-h">Wire Details</div>
+                                        <dl class="dp-dl" data-bind="wire"></dl>
+                                    </div>
+                                    <h4 class="dp-sub" data-bind="count">Deposits (1)</h4>
+                                    <div data-bind="splits"></div>
+                                    <div class="dp-sticky">
+                                        <div class="dp-tot"><strong data-bind="ready">0 Deposits Ready to Receipt</strong><span>Deposit Total: <b data-bind="total"></b></span><span>Allocated: <b data-bind="alloc"></b></span><span>Remaining: <b data-bind="remain"></b></span></div>
+                                        <div class="dp-actions">
+                                            <button type="button" class="dp-btn dp-ghost" data-act="add">Add Split</button>
+                                            <span class="dp-tipwrap">
+                                                <button type="button" class="dp-btn dp-primary" data-act="review" disabled aria-describedby="dp-tip2">Confirm</button>
+                                                <span class="dp-tip is-armed" id="dp-tip2" role="tooltip" data-bind="why">Fill in all required fields</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="dp-screen" data-screen="done">
+                                    <p class="dp-crumb">Order 425616 / Deposits</p>
+                                    <div class="dp-head"><h3 data-bind="dcount">Deposits</h3><button type="button" class="dp-btn dp-ghost" data-act="again">Receipt another wire</button></div>
+                                    <div class="dp-table">
+                                        <div class="dp-tr dp-th dp-dep" aria-hidden="true"><span>Amount</span><span>Order</span><span>Payor</span><span>Type</span><span>Status</span><span>Representing</span><span></span></div>
+                                        <div data-bind="deps"></div>
+                                    </div>
+                                </div>
+
+                                <div class="dp-modal" data-modal="confirm" role="dialog" aria-modal="true" aria-labelledby="dp-mc" hidden>
+                                    <div class="dp-dialog">
+                                        <h4 id="dp-mc">Review and confirm</h4>
+                                        <div class="dp-warn">
+                                            <p data-bind="mtext"></p>
+                                            <ul data-bind="mlist"></ul>
+                                        </div>
+                                        <label class="dp-check"><input type="checkbox" data-bind="ack"> I have reviewed and confirm.</label>
+                                        <div class="dp-dfoot"><button type="button" class="dp-btn dp-ghost" data-act="mcancel">Cancel</button><button type="button" class="dp-btn dp-primary" data-act="receipt" disabled>Receipt</button></div>
+                                    </div>
+                                </div>
+                                <div class="dp-modal" data-modal="exclude" role="dialog" aria-modal="true" aria-labelledby="dp-me" hidden>
+                                    <div class="dp-dialog">
+                                        <h4 id="dp-me">Exclude this wire?</h4>
+                                        <p>You are about to exclude this wire from processing. It can be recovered later if it was excluded by mistake.</p>
+                                        <div class="dp-dfoot"><button type="button" class="dp-btn dp-ghost" data-act="xcancel">Cancel</button><button type="button" class="dp-btn dp-primary" data-act="xconfirm">Exclude</button></div>
+                                    </div>
+                                </div>
+
+                                <div class="dp-queue" data-bind="queue" hidden>
+                                    <div class="dp-qh"><strong data-bind="qtitle">Generating Receipts…</strong><span>Once complete, receipts will be available under Documents</span><i class="dp-qbar" aria-hidden="true"></i></div>
+                                    <div data-bind="qlist"></div>
+                                </div>
+                                <div class="dp-toast" role="status" aria-live="polite"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="chapter reveal" id="states" aria-labelledby="h-states">
+                    <span class="ch-num">10 — Edge cases</span>
+                    <h2 id="h-states">Designing every state</h2>
+                    <p>Money workflows need to be explicit about what can go wrong. I designed empty states for deposits, incoming wires and searches, error states for saving, transferring, returning and excluding, and the rules in between: pagination after 10 rows, truncated originators and notes with a tooltip for the full text, and disabled buttons that explain why on hover. Every state was annotated in Figma for the engineers.</p>
+                    <figure class="shot is-zoomable" data-full="images/project-ai/New Sliced Images/Deposits/Every_State.png">
+                        <img src="images/project-ai/case/deposits/states.webp" width="2400" height="1728" loading="lazy" decoding="async" alt="Six states: no deposits yet, no incoming wires, no search results, saving failed, an action failed, and filters with pagination.">
+                        <button class="zoom" type="button">Zoom ⤢</button>
+                        <figcaption>Empty, error and table states from the handoff file</figcaption>
+                    </figure>
+                </section>
+            </div>
+        </div>
+
+        <nav class="footer-nav wrap" aria-label="More projects">
+            <div class="footer-grid">
+                <a class="fn-card" href="index.html#work"><span class="k">← All projects</span><strong>Back to portfolio</strong></a>
+                <a class="fn-card next" href="project-wcag-auditor.html"><span class="k">Next project →</span><strong>WCAG Accessibility Auditor — Figma Plug-in</strong></a>
+            </div>
+        </nav>
+    </main>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Full-size image">
+        <span class="lb-hint">Full resolution · Esc to close</span>
+        <button class="lb-close" type="button" aria-label="Close">✕</button>
+        <img alt="">
+    </div>
+
+    <script src="case-study.js"></script>
+    <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "f709beae58524bc5b46bb1f834878e94"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>

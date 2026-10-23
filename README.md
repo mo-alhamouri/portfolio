@@ -7,6 +7,7 @@ This is the source code for my professional portfolio, featuring a range of high
 - **Automation: Document Management** (SafeContractor)
 - **Machine Learning: FinTech Dashboard** (Conquest Planning)
 - **API Platform for Commercial Real Estate**
+- **Escrow Deposits** (First American)
 - **In-App Messaging** (Hinge Health)
 - **Design Systems** (Hinge Health)
 - **Dashboard for Health Professionals** (CareHub)

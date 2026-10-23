@@ -574,3 +574,257 @@
     } else { seen = true; }
     reset(false);
 })();
+
+// Interactive receipt & split demo (project-deposits.html only). Sample data.
+(function () {
+    var root = document.querySelector('.dp');
+    if (!root) return;
+    var $ = function (s) { return root.querySelector(s); };
+    var bind = function (n) { return root.querySelector('[data-bind="' + n + '"]'); };
+    var WIRES = [
+        { id: 1, amt: 400000, org: 'Prime Housing LLC', notes: 'File Number: NCS-1082018-Chi2 (BB) Property: MOB, Land, OH', rec: '7/20/2021', bank: 'The Oklahoma Stockyards National Bank', ref: '011220743', acct: '3022880000 - Primary Deposit Disbursement Account' },
+        { id: 2, amt: 80000, org: 'ABC Acquisition', notes: 'Earnest money, order 425616', rec: '7/19/2021', bank: 'Premier Blue Bank', ref: '011220518', acct: '3022880000 - Primary Deposit Disbursement Account' },
+        { id: 3, amt: 1241019.72, org: 'International Development Services, Inc.', notes: 'NCS-1072958EO-Chi2 NML 344333', rec: '7/16/2021', bank: 'South Western Bank Inc.', ref: '011219962', acct: 'HI Deposit Disbursement Account' },
+        { id: 4, amt: 2000000, org: 'Ultimate Insurance', notes: 'File Number NCS-1066857-Chi1', rec: '7/15/2021', bank: 'First American Trust', ref: '011219440', acct: 'VA Deposit Disbursement Account' }
+    ];
+    var ORDERS = ['425616, 22 North Sangamon Street', '425633, 102 Sherlock Campus', '425640, 2338 West Bellview'];
+    var FROM = ['Buyer', 'Buyer’s Attorney', 'Buyer’s Broker', 'New Lender', 'Seller', 'Other'];
+    var REP = ['Earnest Money Deposit', 'Initial Deposit', 'Additional Deposit', 'Closing Costs', 'Funds for Closing', 'Loan Proceeds', 'Miscellaneous Deposit'];
+    var CREDIT = ['Buyer', 'Seller', 'Other'];
+    var MAX = 4;
+    var state, toastT, lastFocus, menuOpen = null, qTimer;
+
+    function money(n) { return '$' + (Math.round(n * 100) / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
+    function cents(n) { return Math.round(n * 100); }
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function opts(list, sel) { return '<option value="">Select…</option>' + list.map(function (o) { return '<option' + (o === sel ? ' selected' : '') + '>' + esc(o) + '</option>'; }).join(''); }
+
+    function show(name) {
+        root.querySelectorAll('.dp-screen').forEach(function (s) { s.classList.toggle('is-on', s.getAttribute('data-screen') === name); });
+        var top = root.querySelector('.dp-win').getBoundingClientRect().top;
+        if (top < 0) window.scrollBy(0, top - 90);
+    }
+    function step(n) {
+        root.querySelectorAll('.dp-steps li').forEach(function (li) {
+            var s = +li.getAttribute('data-s');
+            li.classList.toggle('is-on', s === n); li.classList.toggle('is-done', s < n);
+            if (s === n) li.setAttribute('aria-current', 'step'); else li.removeAttribute('aria-current');
+        });
+    }
+    function say(msg, info) {
+        var t = $('.dp-toast'); t.textContent = msg; t.classList.toggle('is-info', !!info); t.classList.add('is-on');
+        clearTimeout(toastT); toastT = setTimeout(function () { t.classList.remove('is-on'); }, 2600);
+    }
+    function modal(name, open) {
+        var m = root.querySelector('[data-modal="' + name + '"]');
+        if (open) {
+            lastFocus = document.activeElement; m.hidden = false;
+            var r = m.querySelector('.dp-dialog').getBoundingClientRect();
+            if (r.top < 70 || r.bottom > window.innerHeight) window.scrollBy(0, r.top - (window.innerHeight - r.height) / 2);
+            var b = m.querySelector('input, .dp-primary'); if (b) b.focus({ preventScroll: true });
+        }
+        else { m.hidden = true; if (lastFocus && lastFocus.focus && document.body.contains(lastFocus)) lastFocus.focus(); }
+    }
+
+    // ----- Screen 1: incoming wires -----
+    function wire() { return WIRES.filter(function (w) { return w.id === state.sel; })[0]; }
+    function renderWires() {
+        bind('wires').innerHTML = WIRES.map(function (w) {
+            var st = state.status[w.id], off = st !== 'pending';
+            var label = { pending: 'Pending', excluded: 'Excluded', receipted: 'Receipted' }[st];
+            return '<div class="dp-tr dp-row' + (state.sel === w.id ? ' is-sel' : '') + (off ? ' is-off' : '') + '" data-wire="' + w.id + '">' +
+                '<span><input type="radio" class="dp-radio" name="dp-wire" value="' + w.id + '" aria-label="' + esc(money(w.amt) + ' from ' + w.org + ', received ' + w.rec + ', ' + label) + '"' + (state.sel === w.id ? ' checked' : '') + (off ? ' disabled' : '') + '></span>' +
+                '<span class="amt">' + money(w.amt) + '</span><span class="trunc" title="' + esc(w.org) + '">' + esc(w.org) + '</span><span class="trunc" title="' + esc(w.notes) + '">' + esc(w.notes) + '</span><span>' + w.rec + '</span>' +
+                '<span><span class="dp-st' + (st === 'pending' ? ' pend' : st === 'receipted' ? ' ok' : '') + '">' + label + '</span></span>' +
+                '<span class="dp-dots"><button type="button" aria-haspopup="true" aria-expanded="false" aria-label="Actions for ' + esc(money(w.amt)) + ' wire" data-menu="' + w.id + '">•••</button></span></div>';
+        }).join('');
+        var ok = state.sel && state.status[state.sel] === 'pending';
+        $('[data-act="pick"]').disabled = !ok;
+        $('#dp-tip1').classList.toggle('is-armed', !ok);
+    }
+    function closeMenu() { if (menuOpen) { menuOpen.remove(); menuOpen = null; root.querySelectorAll('[data-menu][aria-expanded="true"]').forEach(function (b) { b.setAttribute('aria-expanded', 'false'); }); } }
+    function openMenu(btn) {
+        closeMenu();
+        var id = +btn.getAttribute('data-menu'), st = state.status[id];
+        var m = document.createElement('div'); m.className = 'dp-menu'; m.setAttribute('role', 'menu');
+        m.innerHTML = '<button type="button" role="menuitem" data-wact="receipt" data-id="' + id + '"' + (st !== 'pending' ? ' disabled' : '') + '>Receipt to this order</button>' +
+            '<button type="button" role="menuitem" data-wact="' + (st === 'excluded' ? 'recover' : 'exclude') + '" data-id="' + id + '"' + (st === 'receipted' ? ' disabled' : '') + '>' + (st === 'excluded' ? 'Recover' : 'Exclude') + '</button>';
+        btn.parentNode.appendChild(m); btn.setAttribute('aria-expanded', 'true'); menuOpen = m;
+        var first = m.querySelector('button:not([disabled])'); if (first) first.focus();
+    }
+
+    // ----- Screen 2: details & splits -----
+    function blank() { return { order: state.splits.length ? '' : ORDERS[0], amt: '', from: '', payor: wire().org, rep: '', credit: '', touched: false }; }
+    function renderWire() {
+        var w = wire();
+        bind('wire').innerHTML = '<div><dt>Received</dt><dd>' + w.rec + '</dd></div><div><dt>Amount</dt><dd>' + money(w.amt) + '</dd></div><div><dt>Type</dt><dd>Wire</dd></div><div><dt>Ref #</dt><dd>' + w.ref + '</dd></div>' +
+            '<div><dt>Originator</dt><dd>' + esc(w.org) + '</dd></div><div><dt>Sending Bank</dt><dd>' + esc(w.bank) + '</dd></div><div style="grid-column:span 2"><dt>Notes</dt><dd>' + esc(w.notes) + '</dd></div>';
+    }
+    function field(i, key, label, html) {
+        var s = state.splits[i], missing = s.touched && !String(s[key]).trim();
+        return '<label class="dp-f' + (missing ? ' is-err' : '') + '"><span>' + label + ' *</span>' + html + '</label>';
+    }
+    function renderSplits() {
+        var n = state.splits.length;
+        bind('count').textContent = 'Deposits (' + n + ')';
+        bind('splits').innerHTML = state.splits.map(function (s, i) {
+            var id = 'dp-s' + i;
+            return '<div class="dp-card" data-split="' + i + '"><div class="dp-card-h"><span>Deposit Details' + (n > 1 ? ' - Split ' + (i + 1) : '') + '</span>' +
+                (n > 1 ? '<button type="button" class="dp-x" data-act="remove" data-i="' + i + '" aria-label="Remove split ' + (i + 1) + '">✕</button>' : '') + '</div><div class="dp-grid">' +
+                field(i, 'order', 'Order', '<select data-k="order" id="' + id + 'o">' + opts(ORDERS, s.order) + '</select>') +
+                field(i, 'amt', 'Amount', '<input data-k="amt" inputmode="decimal" autocomplete="off" placeholder="$0.00" value="' + esc(s.amt) + '">') +
+                field(i, 'from', 'Received From', '<select data-k="from">' + opts(FROM, s.from) + '</select>') +
+                field(i, 'payor', 'Payor', '<input data-k="payor" autocomplete="off" value="' + esc(s.payor) + '">') +
+                field(i, 'rep', 'Representing', '<select data-k="rep">' + opts(REP, s.rep) + '</select>') +
+                field(i, 'credit', 'For Credit To', '<select data-k="credit">' + opts(CREDIT, s.credit) + '</select>') +
+                '</div></div>';
+        }).join('');
+        $('[data-act="add"]').disabled = n >= MAX;
+        totals();
+    }
+    function num(v) { var x = parseFloat(String(v).replace(/[^0-9.]/g, '')); return isNaN(x) ? 0 : x; }
+    function complete(s) { return ['order', 'amt', 'from', 'payor', 'rep', 'credit'].every(function (k) { return String(s[k]).trim(); }) && num(s.amt) > 0; }
+    function totals() {
+        var w = wire(), alloc = 0, ready = 0;
+        state.splits.forEach(function (s) { alloc += cents(num(s.amt)); if (complete(s)) ready++; });
+        var total = cents(w.amt), rem = total - alloc;
+        bind('total').textContent = money(w.amt);
+        bind('alloc').textContent = money(alloc / 100);
+        var r = bind('remain'); r.textContent = (rem < 0 ? '−' : '') + money(Math.abs(rem) / 100); r.classList.toggle('neg', rem < 0);
+        bind('ready').textContent = ready + (ready === 1 ? ' Deposit' : ' Deposits') + ' Ready to Receipt';
+        var why = '';
+        if (ready < state.splits.length) why = 'Fill in all required fields';
+        else if (rem > 0) why = 'Allocate the remaining ' + money(rem / 100);
+        else if (rem < 0) why = 'Splits add up to more than the wire';
+        var orders = state.splits.map(function (s) { return s.order; });
+        if (!why && orders.some(function (o, i) { return orders.indexOf(o) !== i; })) why = 'Each split needs a different order';
+        $('[data-act="review"]').disabled = !!why;
+        bind('why').textContent = why || 'Review the deposits';
+        bind('why').classList.toggle('is-armed', !!why);
+    }
+
+    // ----- Screen 3 & 4 -----
+    function review() {
+        var n = state.splits.length, w = wire();
+        bind('mtext').textContent = n > 1 ? 'You are about to split this incoming wire into ' + n + ' deposits. Please review and confirm before proceeding.' : 'You are about to receipt this incoming wire into one order. Please review and confirm before proceeding.';
+        bind('mlist').innerHTML = state.splits.map(function (s, i) { return '<li><span>' + (n > 1 ? 'Split ' + (i + 1) + ' - ' : '') + esc(s.order) + '</span><span>' + money(num(s.amt)) + '</span></li>'; }).join('') +
+            '<li class="tot"><span>Wire total</span><span>' + money(w.amt) + '</span></li>';
+        bind('ack').checked = false; $('[data-act="receipt"]').disabled = true;
+        modal('confirm', true); step(3);
+    }
+    function receipt() {
+        var btn = $('[data-act="receipt"]'); btn.classList.add('is-busy'); btn.disabled = true;
+        setTimeout(function () {
+            btn.classList.remove('is-busy'); modal('confirm', false);
+            var w = wire();
+            state.splits.forEach(function (s) { state.deps.unshift({ amt: num(s.amt), order: s.order.split(',')[0], payor: s.payor, rep: s.rep }); });
+            state.status[w.id] = 'receipted';
+            renderDeps(); show('done'); step(4);
+            say(state.splits.length > 1 ? 'Wire receipted as ' + state.splits.length + ' deposits' : 'Deposit receipted');
+            queue(state.splits.length);
+        }, 900);
+    }
+    function renderDeps() {
+        bind('dcount').textContent = 'Deposits (' + state.deps.length + ')';
+        bind('deps').innerHTML = state.deps.map(function (d) {
+            return '<div class="dp-tr dp-dep"><span class="amt">' + money(d.amt) + '</span><span>' + esc(d.order) + '</span><span class="trunc" title="' + esc(d.payor) + '">' + esc(d.payor) + '</span><span>Wire</span><span><span class="dp-st ok">Receipted</span></span><span class="trunc">' + esc(d.rep) + '</span><span></span></div>';
+        }).join('');
+    }
+    function queue(n) {
+        var q = bind('queue'); q.hidden = false; q.classList.remove('is-ready');
+        bind('qtitle').textContent = 'Generating Receipts…';
+        bind('qlist').innerHTML = state.deps.slice(0, n).map(function (d) {
+            return '<div class="dp-qi"><span class="pdf" aria-hidden="true">PDF</span><div><b>' + esc(d.rep) + '</b>Receipt ' + money(d.amt) + '</div><button type="button" data-act="view" disabled title="Available once the receipt is ready">View</button></div>';
+        }).join('');
+        clearTimeout(qTimer);
+        qTimer = setTimeout(function () {
+            q.classList.add('is-ready'); bind('qtitle').textContent = 'Receipts Ready';
+            q.querySelectorAll('[data-act="view"]').forEach(function (b) { b.disabled = false; b.removeAttribute('title'); });
+        }, 2200);
+    }
+
+    function reset(keepDeps) {
+        state = { sel: null, splits: [], status: {}, deps: keepDeps ? state.deps : [] };
+        WIRES.forEach(function (w) { state.status[w.id] = 'pending'; });
+        if (keepDeps) keepDeps.forEach(function (id) { state.status[id] = 'receipted'; });
+        bind('queue').hidden = true; clearTimeout(qTimer);
+        root.querySelectorAll('.dp-modal').forEach(function (m) { m.hidden = true; });
+        closeMenu(); renderWires(); show('wires'); step(1);
+    }
+
+    // ----- Events -----
+    root.addEventListener('click', function (e) {
+        var mb = e.target.closest('[data-menu]');
+        if (mb) { e.stopPropagation(); if (menuOpen && menuOpen.parentNode === mb.parentNode) closeMenu(); else openMenu(mb); return; }
+        var wa = e.target.closest('[data-wact]');
+        if (wa) {
+            var id = +wa.getAttribute('data-id'), a = wa.getAttribute('data-wact'); closeMenu();
+            if (a === 'exclude') { state.pendingX = id; modal('exclude', true); }
+            else if (a === 'recover') { state.status[id] = 'pending'; renderWires(); say('Wire recovered. It is pending again'); }
+            else if (a === 'receipt') { state.sel = id; renderWires(); start(); }
+            return;
+        }
+        if (menuOpen && !e.target.closest('.dp-menu')) closeMenu();
+        var row = e.target.closest('.dp-row');
+        if (row && !row.classList.contains('is-off') && !e.target.closest('.dp-dots')) { state.sel = +row.getAttribute('data-wire'); renderWires(); var r = root.querySelector('.dp-radio[value="' + state.sel + '"]'); if (r) r.focus(); return; }
+        var b = e.target.closest('[data-act]');
+        if (!b) return;
+        var act = b.getAttribute('data-act');
+        if (act === 'pick') start();
+        else if (act === 'add') { if (state.splits.length < MAX) { state.splits.push(blank()); renderSplits(); var c = root.querySelectorAll('[data-split]'); c[c.length - 1].querySelector('select').focus(); } }
+        else if (act === 'remove') { state.splits.splice(+b.getAttribute('data-i'), 1); renderSplits(); say('Split removed', true); $('[data-act="add"]').focus(); }
+        else if (act === 'review') review();
+        else if (act === 'mcancel') { modal('confirm', false); step(2); }
+        else if (act === 'receipt') receipt();
+        else if (act === 'xcancel') modal('exclude', false);
+        else if (act === 'xconfirm') { state.status[state.pendingX] = 'excluded'; if (state.sel === state.pendingX) state.sel = null; modal('exclude', false); renderWires(); say('Wire excluded. Use ••• to recover it'); }
+        else if (act === 'view') say('In ClarityFirst the receipt PDF opens in a new tab', true);
+        else if (act === 'again') { var done = WIRES.filter(function (w) { return state.status[w.id] === 'receipted'; }).map(function (w) { return w.id; }); reset(done); }
+        else if (act === 'restart') { reset(); say('Demo restarted', true); }
+    });
+    function start() {
+        if (!state.sel || state.status[state.sel] !== 'pending') return;
+        state.splits = []; state.splits.push(blank()); renderWire(); renderSplits(); show('details'); step(2);
+        var first = root.querySelector('[data-split] select, [data-split] input'); if (first) first.focus();
+    }
+    root.addEventListener('change', function (e) {
+        if (e.target.name === 'dp-wire') { state.sel = +e.target.value; renderWires(); var r = root.querySelector('.dp-radio[value="' + state.sel + '"]'); if (r) r.focus(); return; }
+        if (e.target === bind('ack')) { $('[data-act="receipt"]').disabled = !e.target.checked; return; }
+        upd(e);
+    });
+    root.addEventListener('input', upd);
+    function upd(e) {
+        var k = e.target.getAttribute && e.target.getAttribute('data-k'); if (!k) return;
+        var card = e.target.closest('[data-split]'); var i = +card.getAttribute('data-split');
+        state.splits[i][k] = e.target.value; totals();
+        var f = e.target.closest('.dp-f'); if (f && e.target.value.trim()) f.classList.remove('is-err');
+    }
+    // Leaving a split card with something filled marks its empty required fields (as in the Figma spec)
+    root.addEventListener('focusout', function (e) {
+        var card = e.target.closest && e.target.closest('[data-split]'); if (!card) return;
+        setTimeout(function () {
+            if (card.contains(document.activeElement)) return;
+            var i = +card.getAttribute('data-split'), s = state.splits[i]; if (!s) return;
+            var any = ['amt', 'from', 'rep', 'credit'].some(function (k) { return String(s[k]).trim(); });
+            if (any && !s.touched) { s.touched = true; card.querySelectorAll('[data-k]').forEach(function (el) { if (!el.value.trim()) el.closest('.dp-f').classList.add('is-err'); }); }
+        }, 0);
+    });
+    root.addEventListener('blur', function (e) {
+        if (e.target.getAttribute && e.target.getAttribute('data-k') === 'amt' && num(e.target.value) > 0) {
+            e.target.value = money(num(e.target.value)).slice(1); var i = +e.target.closest('[data-split]').getAttribute('data-split'); state.splits[i].amt = e.target.value; totals();
+        }
+    }, true);
+    root.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            if (menuOpen) { var b = menuOpen.parentNode.querySelector('[data-menu]'); closeMenu(); b.focus(); return; }
+            var open = root.querySelector('.dp-modal:not([hidden])');
+            if (open) { var n = open.getAttribute('data-modal'); modal(n, false); if (n === 'confirm') step(2); }
+        }
+        if (menuOpen && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+            var items = [].slice.call(menuOpen.querySelectorAll('button:not([disabled])')); var i = items.indexOf(document.activeElement);
+            if (items.length) { e.preventDefault(); items[(i + (e.key === 'ArrowDown' ? 1 : items.length - 1)) % items.length].focus(); }
+        }
+    });
+    document.addEventListener('click', function (e) { if (menuOpen && !root.contains(e.target)) closeMenu(); });
+    reset();
+})();

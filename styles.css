@@ -882,7 +882,7 @@ body {
 .pcard:hover .pcard-cta span { transform: translateX(4px); }
 .empty-note { color: rgba(255,255,255,0.5); padding: 24px 0; }
 
-/* Earlier visual work (Behance) */
+/* More projects row */
 .visual-work { margin-top: 72px; }
 .visual-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
 .visual-head h3 { font-size: 1.375rem; font-weight: 600; }

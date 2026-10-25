@@ -397,68 +397,12 @@ body {
     box-shadow: 0 15px 40px rgba(0,255,136,0.3);
 }
 
-/* Captcha Styles */
-.captcha-container {
-    margin-bottom: 24px;
-    padding: 24px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-}
 
-.captcha-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 16px;
-}
 
-.captcha-label {
-    font-size: 12px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: rgba(255, 255, 255, 0.5);
-}
 
-.captcha-box {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-}
 
-.captcha-code {
-    background: rgba(24, 160, 251, 0.1);
-    color: var(--accent-pink);
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-family: monospace;
-    font-size: 20px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    border: 1px solid rgba(24, 160, 251, 0.2);
-    user-select: none;
-}
 
-.captcha-input {
-    flex: 1;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 12px 20px;
-    color: #fff;
-    font-family: inherit;
-    font-weight: 600;
-    font-size: 16px;
-    outline: none;
-    transition: all 0.3s;
-    width: 100%;
-}
 
-.captcha-input:focus {
-    border-color: var(--accent-pink);
-    background: rgba(255, 255, 255, 0.08);
-}
 
 /* Social Cards */
 
@@ -1087,7 +1031,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
 .form-card .contact-form { max-width: none; margin: 0; }
 .form-card .form-row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .form-card .form-input, .form-card .form-textarea { min-width: 0; width: 100%; }
-.form-card .captcha-input { min-width: 0; }
 @media (max-width: 1024px) { .form-card .form-row { grid-template-columns: minmax(0, 1fr); } }
 .form-card h3 { font-size: 1.375rem; font-weight: 600; margin-bottom: 28px; }
 .form-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-top: 8px; }
@@ -1186,3 +1129,42 @@ a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visib
     .hero-v2 .hero-subtitle, .hv-pill { animation: none; opacity: 1; }
     .hv-blob, .hv-blob::before, .hv-blob-line { animation: none; }
 }
+
+
+/* =====================================================================
+   Oct 2026: equal spacing between homepage sections + human check
+   ===================================================================== */
+/* Every section gets the same top and bottom padding, so the gap between any two sections is identical */
+.section { padding-top: 80px; padding-bottom: 80px; }
+.hero.hero-v2 { padding-bottom: 80px; }
+/* The hero fills the screen, so About needs a little extra top space to match the 160px gap below the scroll cue */
+#about.section { padding-top: 116px; }
+.section-intro .section-header, .section > .section-header { margin-bottom: 24px; }
+.section-intro { margin-bottom: 48px; }
+.v2-title { margin-top: 0; }
+@media (max-width: 600px) {
+    .section { padding-top: 56px; padding-bottom: 56px; }
+    .hero.hero-v2 { padding-bottom: 52px; }
+    #about.section { padding-top: 56px; }
+}
+
+/* Human check (replaces the old typed code) */
+.human-check { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin: 4px 0 24px; padding: 14px 16px; border: 1px solid rgba(255,255,255,0.12); border-radius: 14px; background: rgba(255,255,255,0.03); transition: border-color .25s ease, background .25s ease; }
+.hc-box { display: inline-flex; align-items: center; gap: 12px; background: none; border: 0; padding: 4px 4px 4px 0; color: #fff; font: inherit; font-size: 15px; font-weight: 500; cursor: pointer; border-radius: 8px; }
+.hc-box:focus-visible { outline: 2px solid var(--accent-green); outline-offset: 4px; }
+.hc-tick { position: relative; width: 26px; height: 26px; flex: none; border-radius: 7px; border: 2px solid rgba(255,255,255,0.35); background: rgba(255,255,255,0.04); display: grid; place-items: center; transition: border-color .2s ease, background .2s ease, transform .2s ease; }
+.hc-box:hover .hc-tick { border-color: rgba(255,255,255,0.7); }
+.hc-tick svg { position: absolute; width: 18px; height: 18px; opacity: 0; transition: opacity .2s ease, transform .3s ease; }
+.hc-spin { color: var(--accent-green); }
+.hc-ok { color: #0a0a0a; transform: scale(.4); }
+.hc-brand { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; letter-spacing: .02em; color: rgba(255,255,255,0.45); }
+.hc-brand svg { width: 16px; height: 16px; }
+.human-check.is-checking .hc-tick { border-color: transparent; background: transparent; }
+.human-check.is-checking .hc-spin { opacity: 1; animation: hcSpin .8s linear infinite; }
+.human-check.is-verified { border-color: rgba(0,255,136,0.45); background: rgba(0,255,136,0.06); }
+.human-check.is-verified .hc-tick { border-color: var(--accent-green); background: var(--accent-green); }
+.human-check.is-verified .hc-ok { opacity: 1; transform: scale(1); }
+.human-check.is-verified .hc-brand { color: var(--accent-green); }
+.human-check.is-error { border-color: rgba(255,70,110,0.6); }
+@keyframes hcSpin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .human-check.is-checking .hc-spin { animation: none; } .hc-tick svg { transition: none; } }

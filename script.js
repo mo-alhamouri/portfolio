@@ -137,30 +137,45 @@ window.addEventListener('scroll', () => {
     });
 })();
 
-// Contact form: captcha check, then send to Formspree without leaving the page
+// Contact form: human check (time on page, real interaction, honeypot), then send to Formspree without leaving the page
 (function () {
-    const codeEl = document.getElementById('captchaCode');
-    const input = document.getElementById('captchaInput');
     const form = document.getElementById('contactForm');
     if (!form) return;
     const status = document.getElementById('formStatus');
     const btn = document.getElementById('submitBtn');
-    let current = '';
-    function gen() {
-        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-        current = Array.from({ length: 4 }, () => chars[Math.floor(Math.random() * chars.length)]).join('');
-        codeEl.textContent = current;
-    }
+    const box = document.getElementById('hcBox');
+    const wrap = document.getElementById('humanCheck');
+    const hp = form.querySelector('.hp-field');
+    const loadedAt = Date.now();
+    let interacted = false, verified = false;
+    ['pointerdown', 'keydown', 'touchstart'].forEach(ev => form.addEventListener(ev, () => { interacted = true; }, { passive: true }));
     function setStatus(msg, type) {
         status.textContent = msg;
         status.className = 'form-status' + (type ? ' is-' + type : '');
     }
-    gen();
+    function setState(state) {
+        wrap.classList.remove('is-checking', 'is-verified', 'is-error');
+        if (state) wrap.classList.add('is-' + state);
+        verified = state === 'verified';
+        box.setAttribute('aria-checked', verified ? 'true' : 'false');
+        box.querySelector('.hc-text').textContent = state === 'checking' ? 'Verifying…' : verified ? 'Verified' : "I'm human";
+    }
+    box.addEventListener('click', () => {
+        if (verified || wrap.classList.contains('is-checking')) return;
+        interacted = true;
+        setState('checking');
+        const wait = Math.max(900, 2500 - (Date.now() - loadedAt));
+        setTimeout(() => {
+            if (hp && hp.value) { setState('error'); return; }
+            setState('verified');
+            if (status.classList.contains('is-error')) setStatus('');
+        }, wait);
+    });
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        if (input.value.trim().toUpperCase() !== current) {
-            setStatus('Incorrect security code. Please try the new one.', 'error');
-            gen(); input.value = ''; input.focus();
+        if (!verified || !interacted || (hp && hp.value)) {
+            setStatus("Please tick “I'm human” before sending.", 'error');
+            wrap.classList.add('is-error'); box.focus();
             return;
         }
         btn.disabled = true; btn.textContent = 'Sending…';
@@ -169,7 +184,7 @@ window.addEventListener('scroll', () => {
             const data = new FormData(form);
             const res = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
             if (res.ok) {
-                form.reset(); gen();
+                form.reset(); setState(null);
                 setStatus("Thanks! Your message has been sent. I'll get back to you soon.", 'success');
             } else {
                 const body = await res.json().catch(() => ({}));
